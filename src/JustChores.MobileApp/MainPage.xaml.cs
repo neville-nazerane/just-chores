@@ -12,11 +12,11 @@ namespace JustChores.MobileApp
 
             try
             {
-                
+                hello.Text = Stuff.PhoneOk();
             }
             catch (Exception ex)
             {
-                hello.Text = ex.Message;
+
             }
         }
 
