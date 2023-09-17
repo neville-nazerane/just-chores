@@ -1,13 +1,14 @@
 using JustChores.MobileApp.ViewModels;
+using JustChores.MobileApp.Pages;
+
 
 namespace JustChores.MobileApp.Generated;
 
 public static class GeneratedUtils 
 {
-    // Generate em
     
     public static IServiceCollection AddPagesAndViewModels(this IServiceCollection services)
-        => services.AddTransient<HomeViewModel>();
-
+        => services.AddTransient<HomePage>()
+                   .AddTransient<HomeViewModel>();
 
 }

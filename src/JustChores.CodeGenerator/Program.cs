@@ -30,7 +30,7 @@ Console.WriteLine($"View Model path: {viewModelPath}");
 
 var pageNames = new DirectoryInfo(pagesPath)
                             .GetFiles()
-                            .Where(p => p.Name.EndsWith("Page.cs"))
+                            .Where(p => p.Name.EndsWith("Page.xaml"))
                             .Select(p => p.Name.StripFileName())
                             .ToArray();
 
@@ -48,14 +48,14 @@ var viewModelNames = new DirectoryInfo(viewModelPath)
 
 string utilClass = @$"
 using {mobileProject}.ViewModels;
+using {mobileProject}.Pages;
+
 
 namespace {mobileProject}.Generated;
 
 public static class GeneratedUtils 
 {{
-    // Generate em
     {GeneratePageAndViewModelInjections()}
-
 }}
 
 
@@ -73,7 +73,7 @@ string GeneratePageAndViewModelInjections()
 
     var function = $@"
     public static IServiceCollection AddPagesAndViewModels(this IServiceCollection services)
-        => services{string.Join('\n', injectPieces)};
+        => services{string.Join("\n                   ", injectPieces)};
 ";
 
 
