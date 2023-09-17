@@ -5,10 +5,12 @@ string mobileProject = "JustChores.MobileApp";
 
 var projName = typeof(Program).Assembly.GetName().Name;
 var parentDir = Directory.GetCurrentDirectory()
-                         .Split(projName)
+                         .Split(new[] { projName, mobileProject }, StringSplitOptions.TrimEntries)
                          .First()
                          .Split(mobileProject)
                          .First();
+
+
 Console.WriteLine(parentDir);
 
 var mobileProjectPath = Path.Combine(parentDir, mobileProject);

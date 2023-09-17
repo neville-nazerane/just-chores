@@ -11,6 +11,9 @@ namespace JustChores.MobileApp
 
 
             var builder = MauiApp.CreateBuilder();
+
+            var services = builder.Services;
+
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()

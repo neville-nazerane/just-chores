@@ -69,8 +69,9 @@
 	  <Folder Include="Pages\" />
 	</ItemGroup>
 
+
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-	  <Exec Command="dotnet run --project ../JustChores.GeneratorLogic" />
+	  <Exec Command="dotnet run --project ../JustChores.CodeGenerator" />
 	</Target>
 
 </Project>
