@@ -31,5 +31,19 @@ namespace JustChores.CodeGenerator
             return info.Name[..^info.Extension.Length];
         }
 
+        internal static string TrimPage(this string pageName)
+        {
+            if (pageName.EndsWith("Page"))
+                return pageName[..^4];
+            else return pageName;
+        }
+
+        internal static string TrimViewModel(this string vmName)
+        {
+            if (vmName.EndsWith("ViewModel"))
+                return vmName[..^9];
+            else return vmName;
+        }
+
     }
 }

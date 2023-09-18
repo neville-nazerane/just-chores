@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace JustChores.MobileApp.ViewModels
 {
-
-    public partial class HomeViewModel : ViewModelBase
+    public class ViewModelBase : ObservableObject
     {
 
-        
+        public virtual Task OnAppearingAsync() => Task.CompletedTask;
 
     }
 }

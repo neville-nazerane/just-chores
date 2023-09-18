@@ -64,9 +64,15 @@ public static class GeneratedUtils
 
 ";
 
-
 await File.WriteAllTextAsync(generatedPath.Combine("GeneratedUtils.g.cs"), utilClass.Trim());
 
+foreach (var name in pageNames)
+{
+    string file = generatedPath.Combine($"{name}.g.cs");
+    string code = GeneratePageCode(name);
+    if (code is not null)
+        await File.WriteAllTextAsync(file, code);
+}
 
 string GeneratePageAndViewModelInjections()
 {
@@ -81,5 +87,32 @@ string GeneratePageAndViewModelInjections()
 
 
     return function;
+}
+
+
+string GeneratePageCode(string pageName)
+{
+    var viewModel = viewModelNames
+                        .SingleOrDefault(v => v.TrimViewModel() == pageName.TrimPage());
+
+    if (viewModel is not null)
+    {
+        var code = @$"
+using {mobileProject}.ViewModels;
+
+namespace {mobileProject}.Pages;
+
+public partial class {pageName} 
+{{
+
+    public {viewModel} ViewModel => null;
+
+}}
+
+";
+
+        return code;    
+    }
+    return null;
 }
 
