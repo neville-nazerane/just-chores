@@ -10,7 +10,7 @@ namespace JustChores.MobileApp.ViewModels
     public class ViewModelBase : ObservableObject
     {
 
-        public virtual Task OnAppearingAsync() => Task.CompletedTask;
+        public virtual Task OnNavigatedToAsync() => Task.CompletedTask;
 
     }
 }

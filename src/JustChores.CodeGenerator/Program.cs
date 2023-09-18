@@ -105,13 +105,22 @@ namespace {mobileProject}.Pages;
 public partial class {pageName} 
 {{
 
-    public {viewModel} ViewModel => null;
+    {viewModel} viewModel;
+    public {viewModel} ViewModel 
+        => viewModel ??= Shell.Current.Handler.MauiContext.Services.GetService<{viewModel}>();
+
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
+    {{
+        base.OnNavigatedTo(args);
+        BindingContext = viewModel;
+        await viewModel.OnNavigatedToAsync();
+    }}
 
 }}
 
 ";
 
-        return code;    
+        return code.Trim();    
     }
     return null;
 }
