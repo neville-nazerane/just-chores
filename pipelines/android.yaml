@@ -20,7 +20,7 @@ variables:
   minorVersion: 0
 
   projectPath: src/JustChores.MobileApp
-  apkName: com.justchores.app.apk
+  apkName: com.justchores.app-Signed.apk
   keyStoreFile: internet.jks
   appCenterSlug: live.neville-live.com/Just-Chores
   appCenterGroup: 2e886b21-d6c9-46e7-bfde-b9ed1af77ae3
