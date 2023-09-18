@@ -9,15 +9,6 @@ namespace JustChores.MobileApp
         public MainPage()
         {
             InitializeComponent();
-
-            try
-            {
-                hello.Text = Stuff.PhoneOk();
-            }
-            catch (Exception ex)
-            {
-
-            }
         }
 
         private void OnCounterClicked(object sender, EventArgs e)

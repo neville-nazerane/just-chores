@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JustChores.MobileApp", "Jus
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JustChores.CodeGenerator", "JustChores.CodeGenerator\JustChores.CodeGenerator.csproj", "{A85D6C99-2AD9-4EA1-B8B6-8B6E388649F0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DD4EB22F-14D6-4E77-B1A9-2CAFF695C6D1}"
+	ProjectSection(SolutionItems) = preProject
+		ReleaseNotes.txt = ReleaseNotes.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

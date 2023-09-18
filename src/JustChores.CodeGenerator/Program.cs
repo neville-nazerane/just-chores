@@ -16,10 +16,13 @@ string fullMobilePath = mobileProject.ToFullPath(otherProjects);
 
 string viewModelPath = fullMobilePath.Combine("ViewModels");
 string pagesPath = fullMobilePath.Combine("Pages");
-string generatedPath = fullMobilePath.Combine("Generated"); 
+string generatedPath = fullMobilePath.Combine("Generated");
 
-if (!Directory.Exists(generatedPath))
-    Directory.CreateDirectory(generatedPath);
+
+
+if (Directory.Exists(generatedPath))
+    Directory.Delete(generatedPath, true);
+Directory.CreateDirectory(generatedPath);
 
 #endregion
 
