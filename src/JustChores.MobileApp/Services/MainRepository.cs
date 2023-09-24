@@ -10,10 +10,11 @@ namespace JustChores.MobileApp.Services
 {
     public class MainRepository
     {
-        string FilePath => $"{FileSystem.Current.AppDataDirectory}/main.db";
+        static string FilePath => $"{FileSystem.Current.AppDataDirectory}/main.db";
 
         public int? InsertChore(Chore newChore)
         {
+            newChore.CreatedOn = DateTime.UtcNow;
             using var db = new LiteDatabase(FilePath);
             var collection = db.GetCollection<Chore>();
             return collection.Insert(newChore);
@@ -27,6 +28,7 @@ namespace JustChores.MobileApp.Services
 
         public bool UpdateChore(Chore updatedChore)
         {
+            updatedChore.UpdatedOn = DateTime.UtcNow;
             using var db = new LiteDatabase(FilePath);
             var collection = db.GetCollection<Chore>();
             return collection.Update(updatedChore);
