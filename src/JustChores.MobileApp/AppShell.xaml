@@ -16,4 +16,9 @@
         ContentTemplate="{DataTemplate pages:AddChorePage}"
         Route="add" />
 
+    <ShellContent
+        Title="List Chores"
+        ContentTemplate="{DataTemplate pages:ListChoresPage}"
+        Route="chores" />
+
 </Shell>

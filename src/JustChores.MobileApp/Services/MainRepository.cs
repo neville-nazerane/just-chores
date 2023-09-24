@@ -23,7 +23,7 @@ namespace JustChores.MobileApp.Services
         public IEnumerable<Chore> GetChores()
         {
             using var db = new LiteDatabase(FilePath);
-            return db.GetCollection<Chore>().FindAll();
+            return db.GetCollection<Chore>().FindAll().ToArray();
         }
 
         public bool UpdateChore(Chore updatedChore)

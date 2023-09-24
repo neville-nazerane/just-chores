@@ -23,7 +23,10 @@ namespace JustChores.MobileApp.ViewModels
         }
 
         [RelayCommand]
-        void Refresh() => Chores = _repository.GetChores();
+        void Refresh()
+        {
+            Chores = _repository.GetChores();
+        }
 
         public override void OnNavigatedTo() => Refresh();
 
