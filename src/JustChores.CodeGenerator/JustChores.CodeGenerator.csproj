@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CodeGeneratorHelpers.Maui" Version="0.1.2460" />
+  </ItemGroup>
+
 </Project>
