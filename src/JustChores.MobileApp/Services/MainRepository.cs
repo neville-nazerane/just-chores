@@ -12,11 +12,11 @@ namespace JustChores.MobileApp.Services
     {
         string FilePath => $"{FileSystem.Current.AppDataDirectory}/main.db";
 
-        public bool InsertChore(Chore newChore)
+        public int? InsertChore(Chore newChore)
         {
             using var db = new LiteDatabase(FilePath);
             var collection = db.GetCollection<Chore>();
-            return collection.Insert(newChore) != null;
+            return collection.Insert(newChore);
         }
 
         public IEnumerable<Chore> GetChores()

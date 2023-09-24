@@ -13,7 +13,9 @@ namespace JustChores.MobileApp.Models
 
         public string Title { get; set; }
 
+        public int Frequency { get; set; }
 
+        public FrequencyType FrequencyType { get; set; }
 
     }
 }
