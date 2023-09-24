@@ -1,6 +1,10 @@
-﻿using Maui.CodeGeneratorHelpers;
+﻿using CodeGeneratorHelpers.Maui.Models;
+using Maui.CodeGeneratorHelpers;
 
 
-await GenerationBuilder.WithNewInstance()
-                        .WithMobileProjectName("JustChores.MobileApp")
-                        .GenerateAsync();
+await CodeGenerationBuilder.WithNewInstance()
+                           .WithMobileProjectName("JustChores.MobileApp")
+
+                           .AddPageToViewModelEvent(PageEventType.OnNavigatedTo, "OnNavigatedToAsync", true)
+
+                          .GenerateAsync();

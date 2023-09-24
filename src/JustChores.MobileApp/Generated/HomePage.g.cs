@@ -3,21 +3,47 @@ using JustChores.MobileApp.ViewModels;
 
 namespace JustChores.MobileApp.Pages;
 
-public partial class HomePage {
-
+public partial class HomePage 
+{
+    
     private HomeViewModel viewModel = null;
 
-    public HomeViewModel ViewModel => viewModel ??= Shell.Current.Handler.MauiContext.Services.GetService<HomeViewModel>();
-   
-
-    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
+    public HomeViewModel ViewModel
     {
-        BindingContext = ViewModel;
-        await ViewModel.OnNavigatedToAsync(args);
-        OnNavigatedToInternal(args);
+        get
+        {
+            SetupViewModelIfNotAlready();
+            return viewModel;
+        }
+    }
+
+    private void SetupViewModelIfNotAlready()
+    {
+        if (viewModel is null)
+        {
+            viewModel = Shell.Current.Handler.MauiContext.Services.GetService<HomeViewModel>();
+            BindingContext = viewModel;
+        }
+    }
+
+
+    protected override async void OnNavigatedTo(Microsoft.Maui.Controls.NavigatedToEventArgs args)
+    {
+        await ViewModel.OnNavigatedToAsync();
+
         base.OnNavigatedTo(args);
     }
 
-    protected virtual void OnNavigatedToInternal(NavigatedToEventArgs args) { }
+
+    protected override void OnAppearing()
+    {
+        SetupViewModelIfNotAlready();
+        OnAppearingInternal();
+
+        base.OnAppearing();
+    }
+
+    partial void OnAppearingInternal();
+
 
 }
