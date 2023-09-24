@@ -13,8 +13,7 @@ namespace JustChores.MobileApp
 
             var builder = MauiApp.CreateBuilder();
 
-            builder.Services
-                        .AddPagesAndViewModels();
+            builder.Services.AddGeneratedInjections();
 
             builder
                 .UseMauiApp<App>()
