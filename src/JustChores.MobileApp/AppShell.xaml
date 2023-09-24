@@ -9,6 +9,11 @@
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate pages:HomePage}"
-        Route="Home" />
+        Route="home" />
+
+    <ShellContent
+        Title="Add Chore"
+        ContentTemplate="{DataTemplate pages:AddChorePage}"
+        Route="add" />
 
 </Shell>

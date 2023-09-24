@@ -11,6 +11,10 @@ namespace JustChores.MobileApp.ViewModels
     {
 
         public virtual Task OnNavigatedToAsync() => Task.CompletedTask;
+        public virtual void OnNavigatedTo() { }
+
+        protected static Task DisplayAlertAsync(string title, string body, string cancelLbl)
+            => Shell.Current.DisplayAlert(title, body, cancelLbl);
 
     }
 }
