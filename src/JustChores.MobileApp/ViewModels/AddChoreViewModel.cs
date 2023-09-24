@@ -34,5 +34,7 @@ namespace JustChores.MobileApp.ViewModels
             _repository.InsertChore(Model);
         }
 
+
+
     }
 }
