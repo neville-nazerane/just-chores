@@ -21,5 +21,15 @@ namespace JustChores.MobileApp.Models
 
         public FrequencyType FrequencyType { get; set; }
 
+
+        public string GetFrequencyTypeToDisplay()
+        {
+            var display = FrequencyType.ToString().ToLower();
+            if (Frequency > 1)
+                display += "s";
+
+            return display;
+        }
+
     }
 }

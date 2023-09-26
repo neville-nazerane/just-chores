@@ -16,7 +16,7 @@ namespace JustChores.MobileApp.ValueConverters
                 }
 
                 string suffix = GetOrdinalSuffix(chore.Frequency);
-                string frequencyTypeString = chore.FrequencyType.ToString().ToLower();
+                string frequencyTypeString = chore.GetFrequencyTypeToDisplay();
 
                 return $"this will execute every {chore.Frequency}{suffix} {frequencyTypeString}";
             }

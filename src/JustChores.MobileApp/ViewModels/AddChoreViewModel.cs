@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using JustChores.MobileApp.Models;
 using JustChores.MobileApp.Services;
+using Microsoft.UI.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,18 @@ namespace JustChores.MobileApp.ViewModels
 
         [ObservableProperty]
         Chore model;
+
+        [ObservableProperty]
+        int frequency;
+
+        [ObservableProperty]
+        FrequencyType frequencyType;
+
+        [ObservableProperty]
+        int frequencyIndex;
+
+        [ObservableProperty]
+        Dictionary<FrequencyType, string> listedFrequencies;
 
         public AddChoreViewModel(MainRepository repository)
         {
@@ -34,7 +47,26 @@ namespace JustChores.MobileApp.ViewModels
             _repository.InsertChore(Model);
         }
 
+        partial void OnFrequencyChanged(int value)
+        {
+            Model.Frequency = value;
+            if (value > 1)
+                ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => $"{f.ToString()}s");
+            else
+                ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
+            UpdateFrequencyIndex();
+        }
 
+        partial void OnFrequencyTypeChanged(FrequencyType value)
+        {
+            Model.FrequencyType = value;
+
+        }
+
+        private void UpdateFrequencyIndex()
+        {
+            FrequencyIndex = ListedFrequencies.ToList().FindIndex(l => l.Key == Model.FrequencyType);
+        }
 
     }
 }
