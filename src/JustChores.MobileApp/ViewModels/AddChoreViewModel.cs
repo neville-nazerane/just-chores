@@ -47,20 +47,27 @@ namespace JustChores.MobileApp.ViewModels
             _repository.InsertChore(Model);
         }
 
-        partial void OnFrequencyChanged(int value)
+        partial void OnFrequencyChanged(int oldValue, int newValue)
         {
-            Model.Frequency = value;
-            if (value > 1)
-                ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => $"{f.ToString()}s");
-            else
-                ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
-            UpdateFrequencyIndex();
+            Model.Frequency = newValue;
+            if (oldValue == 1 ^ newValue == 1)
+            {
+                if (newValue > 1)
+                    ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => $"{f.ToString()}s");
+                else
+                    ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
+                UpdateFrequencyIndex();
+            }
         }
 
         partial void OnFrequencyTypeChanged(FrequencyType value)
         {
             Model.FrequencyType = value;
+        }
 
+        partial void OnFrequencyIndexChanged(int value)
+        {
+            Model.FrequencyType = ListedFrequencies.ElementAt(value).Key;
         }
 
         private void UpdateFrequencyIndex()
