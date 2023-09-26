@@ -22,10 +22,10 @@ namespace JustChores.MobileApp.ViewModels
         int frequency;
 
         [ObservableProperty]
-        FrequencyType frequencyType;
+        int frequencyIndex;
 
         [ObservableProperty]
-        int frequencyIndex;
+        string summary;
 
         [ObservableProperty]
         Dictionary<FrequencyType, string> listedFrequencies;
@@ -49,6 +49,11 @@ namespace JustChores.MobileApp.ViewModels
 
         partial void OnFrequencyChanged(int oldValue, int newValue)
         {
+            if (newValue < 1)
+            {
+                Frequency = 1;
+                return;
+            }
             Model.Frequency = newValue;
             if (oldValue == 1 ^ newValue == 1)
             {
@@ -58,21 +63,38 @@ namespace JustChores.MobileApp.ViewModels
                     ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
                 UpdateFrequencyIndex();
             }
-        }
-
-        partial void OnFrequencyTypeChanged(FrequencyType value)
-        {
-            Model.FrequencyType = value;
+            UpdateStatus();
         }
 
         partial void OnFrequencyIndexChanged(int value)
         {
             Model.FrequencyType = ListedFrequencies.ElementAt(value).Key;
+            UpdateStatus();
         }
 
         private void UpdateFrequencyIndex()
         {
             FrequencyIndex = ListedFrequencies.ToList().FindIndex(l => l.Key == Model.FrequencyType);
+            UpdateStatus();
+        }
+
+        private void UpdateStatus()
+        {
+            Summary = $"This would be every {Model.Frequency}{GetOrdinalSuffix(Model.Frequency)} {Model.FrequencyType.ToString().ToLower()}{(Model.Frequency == 1 ? null : "s")}";
+        }
+
+        private static string GetOrdinalSuffix(int number)
+        {
+            if (number % 100 >= 11 && number % 100 <= 13)
+                return "th";
+
+            return (number % 10) switch
+            {
+                1 => "st",
+                2 => "nd",
+                3 => "rd",
+                _ => "th",
+            };
         }
 
     }
