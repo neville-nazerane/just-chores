@@ -28,6 +28,13 @@ namespace JustChores.MobileApp.ViewModels
             Chores = _repository.GetChores();
         }
 
+        [RelayCommand]
+        void Delete(int id)
+        {
+            _repository.DeleteChore(id);
+            Refresh();
+        }
+
         public override void OnNavigatedTo() => Refresh();
 
     }

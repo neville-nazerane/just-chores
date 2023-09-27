@@ -27,6 +27,9 @@ namespace JustChores.MobileApp.ViewModels
         string summary;
 
         [ObservableProperty]
+        DateTime dueOn;
+
+        [ObservableProperty]
         Dictionary<FrequencyType, string> listedFrequencies;
 
         public AddChoreViewModel(MainRepository repository)
@@ -40,10 +43,10 @@ namespace JustChores.MobileApp.ViewModels
             Model = new()
             {
                 FrequencyType = FrequencyType.Day,
-                DueOn = DateTime.UtcNow
             };
             Frequency = 1;
             FrequencyIndex = 0;
+            DueOn = DateTime.Now;
         }
 
         [RelayCommand]
@@ -57,6 +60,12 @@ namespace JustChores.MobileApp.ViewModels
             _repository.InsertChore(Model);
             Reset();
             await RedirectToAsync("chores");
+        }
+
+        partial void OnDueOnChanged(DateTime value)
+        {
+            Model.DueOn = value.ToUniversalTime();
+            UpdateSummary();
         }
 
         partial void OnFrequencyChanged(int oldValue, int newValue)
@@ -76,19 +85,30 @@ namespace JustChores.MobileApp.ViewModels
                     ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
                 FrequencyIndex = oldIndex;
             }
-            UpdateStatus();
+            UpdateSummary();
         }
 
         partial void OnFrequencyIndexChanged(int value)
         {
             Model.FrequencyType = ListedFrequencies.ElementAtOrDefault(value).Key;
-            UpdateStatus();
+            UpdateSummary();
         }
 
-        private void UpdateStatus()
+        private void UpdateSummary()
         {
-            Summary = $"This would be every {Model.Frequency}{GetOrdinalSuffix(Model.Frequency)} {Model.FrequencyType.ToString().ToLower()}{(Model.Frequency == 1 ? null : "s")}";
+            var dueOn = Model.DueOn ?? DateTime.Now;
+
+            Summary = Model.FrequencyType switch
+            {
+                FrequencyType.Day => "This would be everyday",
+                FrequencyType.Week => $"This would be every {dueOn.DayOfWeek.ToString().ToLowerInvariant()}",
+                FrequencyType.Month => $"This would be on the {GetWithOrdinal(dueOn.Day)} of each month",
+                FrequencyType.Year => $"This would be on the {GetWithOrdinal(dueOn.Day)} of every {dueOn:MMMM}",
+                _ => null,
+            };
         }
+
+        private static string GetWithOrdinal(int number) => $"{number}{GetOrdinalSuffix(number)}";
 
         private static string GetOrdinalSuffix(int number)
         {

@@ -34,7 +34,7 @@
 
             <Grid ColumnDefinitions="auto, *">
                 <Label Text="Due On" />
-                <DatePicker Date="{Binding Model.CreatedOn}"
+                <DatePicker Date="{Binding DueOn}"
                             Grid.Column="1" />
             </Grid>
 
