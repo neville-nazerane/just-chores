@@ -36,6 +36,7 @@ namespace JustChores.MobileApp.ViewModels
             {
                 FrequencyType = FrequencyType.Day
             };
+            Frequency = 1;
             FrequencyIndex = 0;
         }
 
