@@ -15,6 +15,8 @@ namespace JustChores.MobileApp.Models
 
         public int Frequency { get; set; }
 
+        public DateTime? DueOn { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime? UpdatedOn { get; set; }

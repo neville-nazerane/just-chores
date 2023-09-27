@@ -32,9 +32,15 @@ namespace JustChores.MobileApp.ViewModels
         public AddChoreViewModel(MainRepository repository)
         {
             _repository = repository;
-            model = new()
+            Reset();
+        }
+
+        private void Reset()
+        {
+            Model = new()
             {
-                FrequencyType = FrequencyType.Day
+                FrequencyType = FrequencyType.Day,
+                DueOn = DateTime.UtcNow
             };
             Frequency = 1;
             FrequencyIndex = 0;
@@ -49,6 +55,8 @@ namespace JustChores.MobileApp.ViewModels
                 return;
             }
             _repository.InsertChore(Model);
+            Reset();
+            await RedirectToAsync("chores");
         }
 
         partial void OnFrequencyChanged(int oldValue, int newValue)
@@ -67,7 +75,6 @@ namespace JustChores.MobileApp.ViewModels
                 else
                     ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
                 FrequencyIndex = oldIndex;
-                UpdateFrequencyIndex();
             }
             UpdateStatus();
         }
@@ -76,12 +83,6 @@ namespace JustChores.MobileApp.ViewModels
         {
             Model.FrequencyType = ListedFrequencies.ElementAtOrDefault(value).Key;
             UpdateStatus();
-        }
-
-        private void UpdateFrequencyIndex()
-        {
-            //FrequencyIndex = ListedFrequencies.ToList().FindIndex(l => l.Key == Model.FrequencyType);
-            //UpdateStatus();
         }
 
         private void UpdateStatus()

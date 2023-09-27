@@ -32,6 +32,12 @@
             <Picker ItemsSource="{Binding ListedFrequencies, Converter={x:StaticResource dictonaryToValues}}"
                     SelectedIndex="{Binding FrequencyIndex}" />
 
+            <Grid ColumnDefinitions="auto, *">
+                <Label Text="Due On" />
+                <DatePicker Date="{Binding Model.CreatedOn}"
+                            Grid.Column="1" />
+            </Grid>
+
             <Label Text="{Binding Summary}" />
 
         </VerticalStackLayout>

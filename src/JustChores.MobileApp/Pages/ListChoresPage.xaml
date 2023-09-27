@@ -9,6 +9,12 @@
 
     <CollectionView ItemsSource="{Binding Chores}">
 
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical"
+                             VerticalItemSpacing="10"
+                             Span="2" />
+        </CollectionView.ItemsLayout>
+
         <CollectionView.EmptyViewTemplate>
             <DataTemplate>
                 <Label Text="You have no chores for you" />
@@ -18,8 +24,32 @@
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="m:Chore">
                 <HorizontalStackLayout>
-                    <Label Text="{Binding Title}" />
-                    <Label FontAttributes="Bold" Text="{Binding Frequency}" />
+                    <Grid BackgroundColor="LightGray"
+                          RowDefinitions="auto, 50, 50"
+                          Padding="5"
+                          Margin="5"
+                          ColumnDefinitions="auto, *, 40" >
+                        
+                        <Label Text="{Binding Title}" 
+                               FontAttributes="Bold"
+                               FontSize="Large" />
+
+                        <Label Grid.Row="1" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{Binding Frequency}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding FrequencyType}" />
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Grid.Row="2" Text="{Binding DueOn, StringFormat='Due on: {0:dd-MM-yy}'}" />
+
+
+                    </Grid>
                 </HorizontalStackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
