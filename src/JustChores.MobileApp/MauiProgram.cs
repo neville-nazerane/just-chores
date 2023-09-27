@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Markup;
 using JustChores.MobileApp.Generated;
+using JustChores.MobileApp.Services;
 using Microsoft.Extensions.Logging;
 
 namespace JustChores.MobileApp
@@ -13,7 +14,8 @@ namespace JustChores.MobileApp
 
             var builder = MauiApp.CreateBuilder();
 
-            builder.Services.AddGeneratedInjections();
+            builder.Services.AddGeneratedInjections()
+                            .AddSingleton<MainRepository>();
 
             builder
                 .UseMauiApp<App>()
