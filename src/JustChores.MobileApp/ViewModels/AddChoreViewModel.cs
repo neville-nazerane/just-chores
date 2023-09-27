@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using JustChores.MobileApp.Models;
 using JustChores.MobileApp.Services;
-using Microsoft.UI.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +32,11 @@ namespace JustChores.MobileApp.ViewModels
         public AddChoreViewModel(MainRepository repository)
         {
             _repository = repository;
-            model = new();
+            model = new()
+            {
+                FrequencyType = FrequencyType.Day
+            };
+            FrequencyIndex = 0;
         }
 
         [RelayCommand]
@@ -55,12 +58,14 @@ namespace JustChores.MobileApp.ViewModels
                 return;
             }
             Model.Frequency = newValue;
-            if (oldValue == 1 ^ newValue == 1)
+            if (true || oldValue == 1 ^ newValue == 1)
             {
+                var oldIndex = FrequencyIndex;
                 if (newValue > 1)
                     ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => $"{f.ToString()}s");
                 else
                     ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
+                FrequencyIndex = oldIndex;
                 UpdateFrequencyIndex();
             }
             UpdateStatus();
@@ -68,14 +73,14 @@ namespace JustChores.MobileApp.ViewModels
 
         partial void OnFrequencyIndexChanged(int value)
         {
-            Model.FrequencyType = ListedFrequencies.ElementAt(value).Key;
+            Model.FrequencyType = ListedFrequencies.ElementAtOrDefault(value).Key;
             UpdateStatus();
         }
 
         private void UpdateFrequencyIndex()
         {
-            FrequencyIndex = ListedFrequencies.ToList().FindIndex(l => l.Key == Model.FrequencyType);
-            UpdateStatus();
+            //FrequencyIndex = ListedFrequencies.ToList().FindIndex(l => l.Key == Model.FrequencyType);
+            //UpdateStatus();
         }
 
         private void UpdateStatus()

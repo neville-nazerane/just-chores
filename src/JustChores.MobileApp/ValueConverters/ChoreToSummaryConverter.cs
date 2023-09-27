@@ -10,7 +10,7 @@ namespace JustChores.MobileApp.ValueConverters
         {
             if (value is Chore chore)
             {
-                if (chore.FrequencyType == FrequencyType.None || chore.Frequency <= 0)
+                if (chore.Frequency <= 0)
                 {
                     return string.Empty;
                 }

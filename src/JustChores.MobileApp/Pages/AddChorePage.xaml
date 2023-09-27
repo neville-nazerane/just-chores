@@ -9,8 +9,11 @@
 
     <ContentPage.Resources>
 
-        <conv:ChoreToSummaryConverter x:Key="choreToSummary" />
-        <conv:ChoreToFrequencyTypeDisplayConverter x:Key="choreToFrequencyTypeDisplay" />
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="10" />
+        </Style>
+
+        <conv:DictionaryToValuesConverter x:Key="dictonaryToValues" />
 
     </ContentPage.Resources>
 
@@ -24,13 +27,12 @@
 
             <Entry Placeholder="Frequency"
                 Keyboard="Numeric"
-                Text="{Binding Model.Frequency}" />
+                Text="{Binding Frequency}" />
 
-            <Picker Title="{Binding Model, Converter={x:StaticResource choreToFrequencyTypeDisplay}}"
-                    ItemsSource="{Binding ListedFrequencies}"
-                    
-                    />
+            <Picker ItemsSource="{Binding ListedFrequencies, Converter={x:StaticResource dictonaryToValues}}"
+                    SelectedIndex="{Binding FrequencyIndex}" />
 
+            <Label Text="{Binding Summary}" />
 
         </VerticalStackLayout>
 
