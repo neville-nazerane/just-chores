@@ -64,7 +64,7 @@ namespace JustChores.MobileApp.ViewModels
 
         partial void OnDueOnChanged(DateTime value)
         {
-            Model.DueOn = value.ToUniversalTime();
+            Model.DueOn = value.Date;
             UpdateSummary();
         }
 
@@ -112,8 +112,7 @@ namespace JustChores.MobileApp.ViewModels
 
         private static string GetOrdinalSuffix(int number)
         {
-            if (number % 100 >= 11 && number % 100 <= 13)
-                return "th";
+            if (number % 100 >= 11 && number % 100 <= 13) return "th";
 
             return (number % 10) switch
             {
