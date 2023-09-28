@@ -23,10 +23,9 @@ namespace JustChores.MobileApp.ViewModels
         }
 
         [RelayCommand]
-        Task RefreshAsync()
+        void Refresh()
         {
             Chores = _repository.GetChores();
-            return Task.CompletedTask;
         }
 
         [RelayCommand]

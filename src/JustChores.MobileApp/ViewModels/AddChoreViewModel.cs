@@ -59,7 +59,7 @@ namespace JustChores.MobileApp.ViewModels
             }
             _repository.InsertChore(Model);
             Reset();
-            await RedirectToAsync("chores");
+            await RedirectToAsync("//chores");
         }
 
         partial void OnDueOnChanged(DateTime value)
