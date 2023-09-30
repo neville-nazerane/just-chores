@@ -20,6 +20,7 @@ variables:
   minorVersion: 0
 
   projectPath: src/JustChores.MobileApp
+  projectName: JustChores.MobileApp
   apkName: com.justchores.app-Signed.apk
   keyStoreFile: internet.jks
   appCenterSlug: live.neville-live.com/Just-Chores
@@ -48,19 +49,19 @@ stages:
               versionName: $(Build.BuildNumber)
               printFile: true
 
-          # - script: |
-          #     cat <<EOL > MauiProgram.configs.cs
-          #     namespace SmartHome.MobileApp;
-          #     public static partial class MauiProgram
-          #       {
-          #         static MauiProgram()
-          #         {
-          #             appcenterSecret = "$(appcenterSecret)";
-          #         }
-          #       }
-          #     EOL
-          #   displayName: Setting up configs
-          #   workingDirectory: $(projectPath)
+          - script: |
+              cat <<EOL > MauiProgram.configs.cs
+              namespace $(projectName);
+              public static partial class MauiProgram
+                {
+                  static MauiProgram()
+                  {
+                      appcenterSecret = "$(appcenterSecret)";
+                  }
+                }
+              EOL
+            displayName: Setting up configs
+            workingDirectory: $(projectPath)
 
           - script: dotnet publish -c release -f net7.0-android -o $(compileLocation)
             displayName: Compile MAUI android
