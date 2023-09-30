@@ -2,28 +2,103 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:JustChores.MobileApp.ViewModels"
+             xmlns:conv="clr-namespace:JustChores.MobileApp.ValueConverters"
              xmlns:m="clr-namespace:JustChores.MobileApp.Models"
              x:Class="JustChores.MobileApp.Pages.ListChoresPage"
              x:DataType="vm:ListChoresViewModel"
              Title="ListChoresPage">
 
-    <CollectionView ItemsSource="{Binding Chores}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+                     Command="{Binding AddCommand}" />
+    </ContentPage.ToolbarItems>
 
-        <CollectionView.EmptyViewTemplate>
-            <DataTemplate>
-                <Label Text="You have no chores for you" />
-            </DataTemplate>
-        </CollectionView.EmptyViewTemplate>
+    <ContentPage.Resources>
 
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="m:Chore">
-                <HorizontalStackLayout>
-                    <Label Text="{Binding Title}" />
-                    <Label FontAttributes="Bold" Text="{Binding Frequency}" />
-                </HorizontalStackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-        
-    </CollectionView>
+        <conv:DueDateToBoolConverter x:Key="due" />
+
+    </ContentPage.Resources>
     
+    <RefreshView Command="{Binding RefreshCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+        <CollectionView ItemsSource="{Binding Chores}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                            VerticalItemSpacing="10"
+                            Span="{OnIdiom Phone=1, Tablet=2}" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.EmptyViewTemplate>
+                <DataTemplate>
+                    <Label Text="You have no chores for you" />
+                </DataTemplate>
+            </CollectionView.EmptyViewTemplate>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:Chore">
+                    <Grid BackgroundColor="LightGray"
+                        RowDefinitions="auto, 50, 30, 40"
+                        Padding="5"
+                        Margin="5"
+                        ColumnDefinitions="*" >
+
+                        <Label Text="{Binding Title}" 
+                            FontAttributes="Bold"
+                            FontSize="Large" />
+
+                        <Label Grid.Row="1" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{Binding Frequency}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding FrequencyType}" />
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Grid Grid.Row="2"
+                                ColumnDefinitions="auto, *">
+                            <Label Text="{Binding DueOn, StringFormat='Due on: {0:dd-MM-yy}'}" />
+                            <Label Text="Due" 
+                                    IsVisible="{Binding DueOn, Converter={x:StaticResource due}}"
+                                    TextColor="White"
+                                    BackgroundColor="Red"
+                                    Grid.Column="1" />
+                        </Grid>
+
+
+                        <Grid Grid.Row="3"
+                                ColumnDefinitions="*, *, *"
+                                RowSpacing="6">
+                            <Button Text="Delete"
+                                BackgroundColor="IndianRed"
+                                Command="{Binding DeleteCommand, 
+                                                    Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                CommandParameter="{Binding Id}"  />
+
+                            <Button Text="Edit"
+                                    Grid.Column="1"
+                                BackgroundColor="YellowGreen"
+                                Command="{Binding EditCommand, 
+                                                    Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                CommandParameter="{Binding Id}"  />
+
+                            <Button Text="Complete"
+                                    Grid.Column="2"
+                                    BackgroundColor="ForestGreen"
+                                    Command="{Binding CompleteCommand, 
+                                                        Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}" 
+                                    CommandParameter="{Binding Id}" />
+                        </Grid>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </RefreshView>
+
 </ContentPage>

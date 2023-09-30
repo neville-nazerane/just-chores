@@ -4,21 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:JustChores.MobileApp.Pages"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate pages:HomePage}"
-        Route="home" />
-
-    <ShellContent
-        Title="Add Chore"
-        ContentTemplate="{DataTemplate pages:AddChorePage}"
-        Route="add" />
+        Route="home" />-->
 
     <ShellContent
         Title="List Chores"
         ContentTemplate="{DataTemplate pages:ListChoresPage}"
         Route="chores" />
+
+    <ShellContent
+        Title="Chore"
+        FlyoutItemIsVisible="False"
+        ContentTemplate="{DataTemplate pages:AddChorePage}"
+        Route="editor" />
 
 </Shell>

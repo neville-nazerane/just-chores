@@ -29,11 +29,14 @@ public partial class HomePage
 
     protected override async void OnNavigatedTo(Microsoft.Maui.Controls.NavigatedToEventArgs args)
     {
+        OnNavigatedToInternal();
          ViewModel.OnNavigatedTo();
         await ViewModel.OnNavigatedToAsync();
 
         base.OnNavigatedTo(args);
     }
+
+    partial void OnNavigatedToInternal();
 
 
     protected override void OnAppearing()

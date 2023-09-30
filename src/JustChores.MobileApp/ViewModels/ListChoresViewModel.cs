@@ -17,6 +17,9 @@ namespace JustChores.MobileApp.ViewModels
         [ObservableProperty]
         IEnumerable<Chore> chores = Array.Empty<Chore>();
 
+        [ObservableProperty]
+        bool isRefreshing;
+
         public ListChoresViewModel(MainRepository repository)
         {
             _repository = repository;
@@ -25,8 +28,37 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         void Refresh()
         {
-            Chores = _repository.GetChores();
+            IsRefreshing = true;
+
+            try
+            {
+                Chores = _repository.GetChores();
+            }
+            finally
+            {
+                IsRefreshing = false;
+            }
         }
+
+        [RelayCommand]
+        void Delete(int id)
+        {
+            _repository.DeleteChore(id);
+            Refresh();
+        }
+
+        [RelayCommand]
+        void Complete(int id)
+        {
+            _repository.Completed(id);
+            Refresh();
+        }
+
+        [RelayCommand]
+        Task EditAsync(int id) => RedirectToAsync($"//editor?id={id}");
+
+        [RelayCommand]
+        Task AddAsync() => RedirectToAsync($"//editor?id=null");
 
         public override void OnNavigatedTo() => Refresh();
 

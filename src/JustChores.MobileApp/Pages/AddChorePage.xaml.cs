@@ -2,8 +2,10 @@ namespace JustChores.MobileApp.Pages;
 
 public partial class AddChorePage : ContentPage
 {
-	public AddChorePage()
+
+    public AddChorePage()
 	{
 		InitializeComponent();
 	}
+
 }

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using JustChores.MobileApp.Models;
 using JustChores.MobileApp.Services;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,12 @@ using System.Threading.Tasks;
 
 namespace JustChores.MobileApp.ViewModels
 {
-    public partial class AddChoreViewModel : ViewModelBase
+    public partial class AddChoreViewModel : ViewModelBase, IQueryAttributable
     {
         private readonly MainRepository _repository;
+
+        [ObservableProperty]
+        int? choreId;
 
         [ObservableProperty]
         Chore model;
@@ -27,28 +31,75 @@ namespace JustChores.MobileApp.ViewModels
         string summary;
 
         [ObservableProperty]
+        DateTime dueOn;
+
+        [ObservableProperty]
+        string submitText;
+
+        [ObservableProperty]
+        string title;
+
+        [ObservableProperty]
         Dictionary<FrequencyType, string> listedFrequencies;
 
         public AddChoreViewModel(MainRepository repository)
         {
             _repository = repository;
-            model = new()
+            Reset();
+        }
+
+        private void Reset()
+        {
+            if (ChoreId is not null)
             {
-                FrequencyType = FrequencyType.Day
-            };
-            Frequency = 1;
-            FrequencyIndex = 0;
+                Title = "Update Chore";
+                SubmitText = "Update";
+                Model = _repository.GetChore(ChoreId.Value);
+                FrequencyIndex = Enum.GetValues<FrequencyType>().ToList().IndexOf(Model.FrequencyType);
+                Frequency = Model.Frequency;
+                DueOn = Model.DueOn ?? DateTime.Now.Date;
+            }
+            else
+            {
+                Title = "Create a Chore";
+                SubmitText = "Add";
+                Model = new()
+                {
+                    FrequencyType = FrequencyType.Day,
+                };
+                Frequency = 1;
+                FrequencyIndex = 0;
+                DueOn = DateTime.Now;
+            }
         }
 
         [RelayCommand]
-        async Task AddAsync()
+        async Task SubmitAsync()
         {
             if (string.IsNullOrEmpty(Model.Title))
             {
                 await DisplayAlertAsync("Failed to add", "You need to provide a title", "OK");
                 return;
             }
-            _repository.InsertChore(Model);
+            if (ChoreId is null)
+                _repository.InsertChore(Model);
+            else _repository.UpdateChore(Model);
+            Reset();
+            await RedirectToAsync("//chores");
+        }
+
+        [RelayCommand]
+        Task ToListAsync() => RedirectToAsync("//chores");
+
+        partial void OnChoreIdChanged(int? value)
+        {
+            ChoreId = value;
+            Reset();
+        }
+        partial void OnDueOnChanged(DateTime value)
+        {
+            Model.DueOn = value.Date;
+            UpdateSummary();
         }
 
         partial void OnFrequencyChanged(int oldValue, int newValue)
@@ -67,32 +118,35 @@ namespace JustChores.MobileApp.ViewModels
                 else
                     ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
                 FrequencyIndex = oldIndex;
-                UpdateFrequencyIndex();
             }
-            UpdateStatus();
+            UpdateSummary();
         }
 
         partial void OnFrequencyIndexChanged(int value)
         {
             Model.FrequencyType = ListedFrequencies.ElementAtOrDefault(value).Key;
-            UpdateStatus();
+            UpdateSummary();
         }
 
-        private void UpdateFrequencyIndex()
+        private void UpdateSummary()
         {
-            //FrequencyIndex = ListedFrequencies.ToList().FindIndex(l => l.Key == Model.FrequencyType);
-            //UpdateStatus();
+            var dueOn = Model.DueOn ?? DateTime.Now;
+
+            Summary = Model.FrequencyType switch
+            {
+                FrequencyType.Day => "This would be everyday",
+                FrequencyType.Week => $"This would be every {dueOn.DayOfWeek.ToString().ToLowerInvariant()}",
+                FrequencyType.Month => $"This would be on the {GetWithOrdinal(dueOn.Day)} of each month",
+                FrequencyType.Year => $"This would be on the {GetWithOrdinal(dueOn.Day)} of every {dueOn:MMMM}",
+                _ => null,
+            };
         }
 
-        private void UpdateStatus()
-        {
-            Summary = $"This would be every {Model.Frequency}{GetOrdinalSuffix(Model.Frequency)} {Model.FrequencyType.ToString().ToLower()}{(Model.Frequency == 1 ? null : "s")}";
-        }
+        private static string GetWithOrdinal(int number) => $"{number}{GetOrdinalSuffix(number)}";
 
         private static string GetOrdinalSuffix(int number)
         {
-            if (number % 100 >= 11 && number % 100 <= 13)
-                return "th";
+            if (number % 100 >= 11 && number % 100 <= 13) return "th";
 
             return (number % 10) switch
             {
@@ -103,5 +157,11 @@ namespace JustChores.MobileApp.ViewModels
             };
         }
 
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (query.TryGetValue("id", out var val) && int.TryParse(val.ToString(), out int id))
+                ChoreId = id;
+            else ChoreId = null;
+        }
     }
 }

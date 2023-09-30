@@ -5,8 +5,13 @@
              xmlns:conv="clr-namespace:JustChores.MobileApp.ValueConverters"
              x:Class="JustChores.MobileApp.Pages.AddChorePage"
              x:DataType="vm:AddChoreViewModel"
-             Title="Add Chore">
+             Title="{Binding Title}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="View All"
+                     Command="{Binding ToListCommand}" />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Resources>
 
         <Style TargetType="Label">
@@ -32,12 +37,18 @@
             <Picker ItemsSource="{Binding ListedFrequencies, Converter={x:StaticResource dictonaryToValues}}"
                     SelectedIndex="{Binding FrequencyIndex}" />
 
+            <Grid ColumnDefinitions="auto, *">
+                <Label Text="Due On" />
+                <DatePicker Date="{Binding DueOn}"
+                            Grid.Column="1" />
+            </Grid>
+
             <Label Text="{Binding Summary}" />
 
         </VerticalStackLayout>
 
-        <Button Text="Add Chore"
-                Command="{Binding AddCommand}"
+        <Button Text="{Binding SubmitText}"
+                Command="{Binding SubmitCommand}"
                 Grid.Row="2" />
     </Grid>
 </ContentPage>
