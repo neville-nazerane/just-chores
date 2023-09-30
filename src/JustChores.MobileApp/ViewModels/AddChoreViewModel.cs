@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace JustChores.MobileApp.ViewModels
 {
-    public partial class AddChoreViewModel : ViewModelBase
+    public partial class AddChoreViewModel : ViewModelBase, IQueryAttributable
     {
         private readonly MainRepository _repository;
 
@@ -74,7 +74,10 @@ namespace JustChores.MobileApp.ViewModels
         partial void OnChoreIdChanged(int? value)
         {
             if (value is not null)
+            {
                 ChoreId = value;
+                Reset();
+            }
         }
         partial void OnDueOnChanged(DateTime value)
         {
@@ -137,5 +140,10 @@ namespace JustChores.MobileApp.ViewModels
             };
         }
 
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (query.TryGetValue("id", out var val) && int.TryParse(val.ToString(), out int id))
+                ChoreId = id;
+        }
     }
 }
