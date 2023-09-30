@@ -31,65 +31,64 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:Chore">
-                    <HorizontalStackLayout>
-                        <Grid BackgroundColor="LightGray"
-                         RowDefinitions="auto, 50, 30, 40"
-                         Padding="5"
-                         Margin="5"
-                         ColumnDefinitions="*" >
+                    <Grid BackgroundColor="LightGray"
+                        RowDefinitions="auto, 50, 30, 40"
+                        Padding="5"
+                        Margin="5"
+                        ColumnDefinitions="*" >
 
-                            <Label Text="{Binding Title}" 
-                              FontAttributes="Bold"
-                              FontSize="Large" />
+                        <Label Text="{Binding Title}" 
+                            FontAttributes="Bold"
+                            FontSize="Large" />
 
-                            <Label Grid.Row="1" >
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <FormattedString.Spans>
-                                            <Span Text="{Binding Frequency}" />
-                                            <Span Text=" " />
-                                            <Span Text="{Binding FrequencyType}" />
-                                        </FormattedString.Spans>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                        <Label Grid.Row="1" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{Binding Frequency}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding FrequencyType}" />
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
 
-                            <Grid Grid.Row="2"
-                                  ColumnDefinitions="auto, *">
-                                <Label Text="{Binding DueOn, StringFormat='Due on: {0:dd-MM-yy}'}" />
-                                <Label Text="Due" 
-                                       IsVisible="{Binding DueOn, Converter={x:StaticResource due}}"
-                                       TextColor="White"
-                                       BackgroundColor="Red"
-                                       Grid.Column="1" />
-                            </Grid>
-                            
-
-                            <Grid Grid.Row="3"
-                                  ColumnDefinitions="*, *"
-                                  RowSpacing="6">
-                                <Button Text="Delete"
-                                   BackgroundColor="IndianRed"
-                                   Command="{Binding DeleteCommand, 
-                                                     Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
-                                   CommandParameter="{Binding Id}"  />
-
-                                <Button Text="Edit"
-                                   BackgroundColor="YellowGreen"
-                                   Command="{Binding EditCommand, 
-                                                     Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
-                                   CommandParameter="{Binding Id}"  />
-                                
-                                <Button Text="Complete"
-                                        Grid.Column="1"
-                                       BackgroundColor="ForestGreen"
-                                       Command="{Binding CompleteCommand, 
-                                                         Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}" 
-                                        CommandParameter="{Binding Id}" />
-                            </Grid>
-
+                        <Grid Grid.Row="2"
+                                ColumnDefinitions="auto, *">
+                            <Label Text="{Binding DueOn, StringFormat='Due on: {0:dd-MM-yy}'}" />
+                            <Label Text="Due" 
+                                    IsVisible="{Binding DueOn, Converter={x:StaticResource due}}"
+                                    TextColor="White"
+                                    BackgroundColor="Red"
+                                    Grid.Column="1" />
                         </Grid>
-                    </HorizontalStackLayout>
+
+
+                        <Grid Grid.Row="3"
+                                ColumnDefinitions="*, *, *"
+                                RowSpacing="6">
+                            <Button Text="Delete"
+                                BackgroundColor="IndianRed"
+                                Command="{Binding DeleteCommand, 
+                                                    Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                CommandParameter="{Binding Id}"  />
+
+                            <Button Text="Edit"
+                                    Grid.Column="1"
+                                BackgroundColor="YellowGreen"
+                                Command="{Binding EditCommand, 
+                                                    Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                CommandParameter="{Binding Id}"  />
+
+                            <Button Text="Complete"
+                                    Grid.Column="2"
+                                    BackgroundColor="ForestGreen"
+                                    Command="{Binding CompleteCommand, 
+                                                        Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}" 
+                                    CommandParameter="{Binding Id}" />
+                        </Grid>
+
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 

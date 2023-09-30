@@ -19,7 +19,7 @@ namespace JustChores.MobileApp.ValueConverters
                 date = (DateTime?)value;
 
             if (date is not null)
-                return date.Value.Date =< DateTime.Now.Date;
+                return date.Value.Date <= DateTime.Now.Date;
 
             return false;
         }

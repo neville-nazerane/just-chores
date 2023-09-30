@@ -73,7 +73,8 @@ namespace JustChores.MobileApp.ViewModels
 
         partial void OnChoreIdChanged(int? value)
         {
-            ChoreId = value;
+            if (value is not null)
+                ChoreId = value;
         }
         partial void OnDueOnChanged(DateTime value)
         {
