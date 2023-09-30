@@ -45,7 +45,12 @@ namespace JustChores.MobileApp.ViewModels
         private void Reset()
         {
             if (ChoreId is not null)
+            {
                 Model = _repository.GetChore(ChoreId.Value);
+                FrequencyIndex = Enum.GetValues<FrequencyType>().ToList().IndexOf(Model.FrequencyType);
+                Frequency = Model.Frequency;
+                DueOn = Model.DueOn ?? DateTime.Now.Date;
+            }
             else
             {
                 Model = new()
@@ -66,18 +71,17 @@ namespace JustChores.MobileApp.ViewModels
                 await DisplayAlertAsync("Failed to add", "You need to provide a title", "OK");
                 return;
             }
-            _repository.InsertChore(Model);
+            if (ChoreId is null)
+                _repository.InsertChore(Model);
+            else _repository.UpdateChore(Model);
             Reset();
             await RedirectToAsync("//chores");
         }
 
         partial void OnChoreIdChanged(int? value)
         {
-            if (value is not null)
-            {
-                ChoreId = value;
-                Reset();
-            }
+            ChoreId = value;
+            Reset();
         }
         partial void OnDueOnChanged(DateTime value)
         {

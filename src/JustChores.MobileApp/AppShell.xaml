@@ -13,6 +13,7 @@
 
     <ShellContent
         Title="Add Chore"
+        FlyoutItemIsVisible="False"
         ContentTemplate="{DataTemplate pages:AddChorePage}"
         Route="editor" />
 
