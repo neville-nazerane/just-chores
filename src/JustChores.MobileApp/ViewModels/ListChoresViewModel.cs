@@ -17,6 +17,9 @@ namespace JustChores.MobileApp.ViewModels
         [ObservableProperty]
         IEnumerable<Chore> chores = Array.Empty<Chore>();
 
+        [ObservableProperty]
+        bool isRefreshing;
+
         public ListChoresViewModel(MainRepository repository)
         {
             _repository = repository;
@@ -25,7 +28,16 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         void Refresh()
         {
-            Chores = _repository.GetChores();
+            IsRefreshing = true;
+
+            try
+            {
+                Chores = _repository.GetChores();
+            }
+            finally
+            {
+                IsRefreshing = false;
+            }
         }
 
         [RelayCommand]

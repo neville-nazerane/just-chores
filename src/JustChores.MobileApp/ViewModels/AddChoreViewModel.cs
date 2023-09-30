@@ -34,6 +34,12 @@ namespace JustChores.MobileApp.ViewModels
         DateTime dueOn;
 
         [ObservableProperty]
+        string submitText;
+
+        [ObservableProperty]
+        string title;
+
+        [ObservableProperty]
         Dictionary<FrequencyType, string> listedFrequencies;
 
         public AddChoreViewModel(MainRepository repository)
@@ -46,6 +52,8 @@ namespace JustChores.MobileApp.ViewModels
         {
             if (ChoreId is not null)
             {
+                Title = "Update Chore";
+                SubmitText = "Update";
                 Model = _repository.GetChore(ChoreId.Value);
                 FrequencyIndex = Enum.GetValues<FrequencyType>().ToList().IndexOf(Model.FrequencyType);
                 Frequency = Model.Frequency;
@@ -53,6 +61,8 @@ namespace JustChores.MobileApp.ViewModels
             }
             else
             {
+                Title = "Create a Chore";
+                SubmitText = "Add";
                 Model = new()
                 {
                     FrequencyType = FrequencyType.Day,
@@ -64,7 +74,7 @@ namespace JustChores.MobileApp.ViewModels
         }
 
         [RelayCommand]
-        async Task AddAsync()
+        async Task SubmitAsync()
         {
             if (string.IsNullOrEmpty(Model.Title))
             {
@@ -77,6 +87,9 @@ namespace JustChores.MobileApp.ViewModels
             Reset();
             await RedirectToAsync("//chores");
         }
+
+        [RelayCommand]
+        Task ToListAsync() => RedirectToAsync("//chores");
 
         partial void OnChoreIdChanged(int? value)
         {

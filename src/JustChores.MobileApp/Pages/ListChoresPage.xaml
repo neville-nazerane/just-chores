@@ -19,7 +19,8 @@
 
     </ContentPage.Resources>
     
-    <RefreshView Command="{Binding RefreshCommand}">
+    <RefreshView Command="{Binding RefreshCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
         <CollectionView ItemsSource="{Binding Chores}">
 
             <CollectionView.ItemsLayout>

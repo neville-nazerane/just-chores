@@ -5,8 +5,13 @@
              xmlns:conv="clr-namespace:JustChores.MobileApp.ValueConverters"
              x:Class="JustChores.MobileApp.Pages.AddChorePage"
              x:DataType="vm:AddChoreViewModel"
-             Title="Add Chore">
+             Title="{Binding Title}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="View All"
+                     Command="{Binding ToListCommand}" />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Resources>
 
         <Style TargetType="Label">
@@ -42,8 +47,8 @@
 
         </VerticalStackLayout>
 
-        <Button Text="Add Chore"
-                Command="{Binding AddCommand}"
+        <Button Text="{Binding SubmitText}"
+                Command="{Binding SubmitCommand}"
                 Grid.Row="2" />
     </Grid>
 </ContentPage>
