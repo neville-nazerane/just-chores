@@ -12,7 +12,7 @@ namespace JustChores.MobileApp
     public static partial class MauiProgram
     {
 
-        private static string appcenterSecret;
+        private static readonly string appcenterSecret;
 
         public static MauiApp CreateMauiApp()
         {
