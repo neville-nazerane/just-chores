@@ -8,6 +8,11 @@
              x:DataType="vm:ListChoresViewModel"
              Title="ListChoresPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+                     Command="{Binding AddCommand}" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Resources>
 
         <conv:DueDateToBoolConverter x:Key="due" />

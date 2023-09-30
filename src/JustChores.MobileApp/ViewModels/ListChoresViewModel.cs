@@ -45,6 +45,9 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         Task EditAsync(int id) => RedirectToAsync($"//editor?id={id}");
 
+        [RelayCommand]
+        Task AddAsync() => RedirectToAsync($"//editor?id=null");
+
         public override void OnNavigatedTo() => Refresh();
 
     }

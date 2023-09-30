@@ -144,6 +144,7 @@ namespace JustChores.MobileApp.ViewModels
         {
             if (query.TryGetValue("id", out var val) && int.TryParse(val.ToString(), out int id))
                 ChoreId = id;
+            else ChoreId = null;
         }
     }
 }
