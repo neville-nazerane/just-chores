@@ -14,7 +14,7 @@
     <ShellContent
         Title="Add Chore"
         ContentTemplate="{DataTemplate pages:AddChorePage}"
-        Route="add" />
+        Route="editor" />
 
     <ShellContent
         Title="List Chores"

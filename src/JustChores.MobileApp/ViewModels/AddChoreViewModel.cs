@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using JustChores.MobileApp.Models;
 using JustChores.MobileApp.Services;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace JustChores.MobileApp.ViewModels
     public partial class AddChoreViewModel : ViewModelBase
     {
         private readonly MainRepository _repository;
+
+        [ObservableProperty]
+        int? choreId;
 
         [ObservableProperty]
         Chore model;
@@ -40,13 +44,18 @@ namespace JustChores.MobileApp.ViewModels
 
         private void Reset()
         {
-            Model = new()
+            if (ChoreId is not null)
+                Model = _repository.GetChore(ChoreId.Value);
+            else
             {
-                FrequencyType = FrequencyType.Day,
-            };
-            Frequency = 1;
-            FrequencyIndex = 0;
-            DueOn = DateTime.Now;
+                Model = new()
+                {
+                    FrequencyType = FrequencyType.Day,
+                };
+                Frequency = 1;
+                FrequencyIndex = 0;
+                DueOn = DateTime.Now;
+            }
         }
 
         [RelayCommand]
@@ -62,6 +71,10 @@ namespace JustChores.MobileApp.ViewModels
             await RedirectToAsync("//chores");
         }
 
+        partial void OnChoreIdChanged(int? value)
+        {
+            ChoreId = value;
+        }
         partial void OnDueOnChanged(DateTime value)
         {
             Model.DueOn = value.Date;

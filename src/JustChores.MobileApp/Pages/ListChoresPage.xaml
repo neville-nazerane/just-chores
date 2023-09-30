@@ -2,11 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:JustChores.MobileApp.ViewModels"
+             xmlns:conv="clr-namespace:JustChores.MobileApp.ValueConverters"
              xmlns:m="clr-namespace:JustChores.MobileApp.Models"
              x:Class="JustChores.MobileApp.Pages.ListChoresPage"
              x:DataType="vm:ListChoresViewModel"
              Title="ListChoresPage">
 
+    <ContentPage.Resources>
+
+        <conv:DueDateToBoolConverter x:Key="due" />
+
+    </ContentPage.Resources>
+    
     <RefreshView Command="{Binding RefreshCommand}">
         <CollectionView ItemsSource="{Binding Chores}">
 
@@ -47,7 +54,16 @@
                                 </Label.FormattedText>
                             </Label>
 
-                            <Label Grid.Row="2" Text="{Binding DueOn, StringFormat='Due on: {0:dd-MM-yy}'}" />
+                            <Grid Grid.Row="2"
+                                  ColumnDefinitions="auto, *">
+                                <Label Text="{Binding DueOn, StringFormat='Due on: {0:dd-MM-yy}'}" />
+                                <Label Text="Due" 
+                                       IsVisible="{Binding DueOn, Converter={x:StaticResource due}}"
+                                       TextColor="White"
+                                       BackgroundColor="Red"
+                                       Grid.Column="1" />
+                            </Grid>
+                            
 
                             <Grid Grid.Row="3"
                                   ColumnDefinitions="*, *"
@@ -55,12 +71,21 @@
                                 <Button Text="Delete"
                                    BackgroundColor="IndianRed"
                                    Command="{Binding DeleteCommand, 
-                                                     Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}" />
+                                                     Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                   CommandParameter="{Binding Id}"  />
+
+                                <Button Text="Edit"
+                                   BackgroundColor="YellowGreen"
+                                   Command="{Binding EditCommand, 
+                                                     Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                   CommandParameter="{Binding Id}"  />
+                                
                                 <Button Text="Complete"
                                         Grid.Column="1"
                                        BackgroundColor="ForestGreen"
                                        Command="{Binding CompleteCommand, 
-                                                         Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}" />
+                                                         Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}" 
+                                        CommandParameter="{Binding Id}" />
                             </Grid>
 
                         </Grid>

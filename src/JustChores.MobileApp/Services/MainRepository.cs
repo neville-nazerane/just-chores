@@ -26,6 +26,14 @@ namespace JustChores.MobileApp.Services
             return db.GetCollection<Chore>().FindAll().ToArray();
         }
 
+        public Chore GetChore(int id)
+        {
+            using var db = new LiteDatabase(FilePath);
+            var collection = db.GetCollection<Chore>();
+            var item = collection.FindById(id);
+            return item;
+        }
+
         public Chore Completed(int id, DateTime? completedOn = null)
         {
             using var db = new LiteDatabase(FilePath);
