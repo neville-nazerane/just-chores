@@ -60,6 +60,9 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         Task AddAsync() => RedirectToAsync($"//editor?id=null");
 
+        [RelayCommand]
+        Task BackupAsync() => _repository.BackupAsync();
+
         public override void OnNavigatedTo() => Refresh();
 
     }

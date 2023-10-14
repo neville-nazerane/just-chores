@@ -9,8 +9,10 @@
              Title="ListChoresPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add"
-                     Command="{Binding AddCommand}" />
+        <ToolbarItem Text="Add" 
+                     Command="{Binding AddCommand}" />       
+        <ToolbarItem Text="Backup" 
+                     Command="{Binding BackupCommand}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
