@@ -99,19 +99,22 @@ namespace JustChores.MobileApp.Services
             //await FileSaver.save
             await using var stream = File.OpenRead(FilePath);
 
-            var permRead = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            //var permRead = await Permissions.RequestAsync<Permissions.StorageWrite>();
 
-            if (permRead == PermissionStatus.Granted)
-            {
-                var permWrite = await Permissions.RequestAsync<Permissions.StorageWrite>();
-                if (permWrite == PermissionStatus.Granted)
-                {
-                    var res = await FileSaver.Default.SaveAsync("data.db", stream, CancellationToken.None);
+            //if (permRead == PermissionStatus.Granted)
+            //{
+            //    var permWrite = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            //    if (permWrite == PermissionStatus.Granted)
+            //    {
+            //        var res = await FileSaver.Default.SaveAsync("data.db", stream, CancellationToken.None);
 
-                }
-            }
+            //    }
+            //}
+
+            var res = await FileSaver.Default.SaveAsync("data.db", stream, CancellationToken.None);
+
         }
-    
+
     }
 
 }
