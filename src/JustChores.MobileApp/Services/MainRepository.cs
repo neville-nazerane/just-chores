@@ -1,4 +1,6 @@
-﻿using JustChores.MobileApp.Models;
+﻿using Android.Widget;
+using CommunityToolkit.Maui.Storage;
+using JustChores.MobileApp.Models;
 using LiteDB;
 using System;
 using System.Collections.Generic;
@@ -91,6 +93,28 @@ namespace JustChores.MobileApp.Services
             var collection = db.GetCollection<Chore>();
             return collection.Delete(choreId);
         }
+    
+        public async Task BackupAsync()
+        {
+            //await FileSaver.save
+            await using var stream = File.OpenRead(FilePath);
+
+            //var permRead = await Permissions.RequestAsync<Permissions.StorageWrite>();
+
+            //if (permRead == PermissionStatus.Granted)
+            //{
+            //    var permWrite = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            //    if (permWrite == PermissionStatus.Granted)
+            //    {
+            //        var res = await FileSaver.Default.SaveAsync("data.db", stream, CancellationToken.None);
+
+            //    }
+            //}
+
+            var res = await FileSaver.Default.SaveAsync("data.db", stream, CancellationToken.None);
+
+        }
+
     }
 
 }
