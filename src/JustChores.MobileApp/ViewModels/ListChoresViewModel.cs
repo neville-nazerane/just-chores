@@ -42,10 +42,16 @@ namespace JustChores.MobileApp.ViewModels
         }
 
         [RelayCommand]
-        void Delete(int id)
+        async Task Delete(int id)
         {
-            _repository.DeleteChore(id);
-            Refresh();
+            bool isConfirmed = await DisplayConfirmationAsync("Delete Chore",
+                                                              "Are you sure you want to delete?");
+
+            if (isConfirmed)
+            {
+                _repository.DeleteChore(id);
+                Refresh();
+            }
         }
 
         [RelayCommand]

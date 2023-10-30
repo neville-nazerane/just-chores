@@ -17,6 +17,13 @@ namespace JustChores.MobileApp.ViewModels
         protected static Task DisplayAlertAsync(string title, string body, string cancelLbl)
             => Shell.Current.DisplayAlert(title, body, cancelLbl);
 
+
+        protected static Task<bool> DisplayConfirmationAsync(string title,
+                                                string body,
+                                                string yesButton = "Yes",
+                                                string noButton = "No")
+            => Shell.Current.DisplayAlert(title, body, yesButton, noButton);
+
         protected static Task RedirectToAsync(string route)
             => Shell.Current.GoToAsync(route);
 
