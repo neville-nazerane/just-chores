@@ -39,6 +39,17 @@ public partial class AddChorePage
     partial void OnNavigatedToInternal();
 
 
+    protected override async void OnNavigatedFrom(Microsoft.Maui.Controls.NavigatedFromEventArgs args)
+    {
+        OnNavigatedFromInternal();
+        await ViewModel.OnNavigatedFromAsync();
+
+        base.OnNavigatedFrom(args);
+    }
+
+    partial void OnNavigatedFromInternal();
+
+
     protected override void OnAppearing()
     {
         SetupViewModelIfNotAlready();

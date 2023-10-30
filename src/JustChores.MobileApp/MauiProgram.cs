@@ -12,6 +12,8 @@ namespace JustChores.MobileApp
     public static partial class MauiProgram
     {
 
+        public static IServiceProvider ServiceProvider { get; private set; }
+
         private static readonly string appcenterSecret;
 
         public static MauiApp CreateMauiApp()
@@ -38,7 +40,9 @@ namespace JustChores.MobileApp
 		builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+            var app = builder.Build();
+            ServiceProvider = app.Services;
+            return app;
         }
     }
 }
