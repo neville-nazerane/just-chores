@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using JustChores.MobileApp.Models;
 using JustChores.MobileApp.Services;
 using System;
@@ -63,7 +64,22 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         Task BackupAsync() => _repository.BackupAsync();
 
-        public override void OnNavigatedTo() => Refresh();
+        public override void OnNavigatedTo()
+        {
+            WeakReferenceMessenger.Default.Register<BackupRestoredMessage>(this, OnBackupRestored);
+            Refresh();
+        }
+
+        void OnBackupRestored(object source, BackupRestoredMessage message)
+        {
+            Refresh();
+        }
+
+        public override Task OnNavigatedFromAsync()
+        {
+            WeakReferenceMessenger.Default.UnregisterAll(this);
+            return base.OnNavigatedFromAsync();
+        }
 
     }
 }

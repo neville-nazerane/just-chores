@@ -1,5 +1,5 @@
-﻿using Android.Widget;
-using CommunityToolkit.Maui.Storage;
+﻿using CommunityToolkit.Maui.Storage;
+using CommunityToolkit.Mvvm.Messaging;
 using JustChores.MobileApp.Models;
 using LiteDB;
 using System;
@@ -14,23 +14,33 @@ namespace JustChores.MobileApp.Services
     {
         static string FilePath => $"{FileSystem.Current.AppDataDirectory}/main.db";
 
+        static object locker = 0;
+
+        static LiteDatabase GetConnection()
+        {
+            lock (locker)
+            {
+                return new(FilePath);
+            }
+        }
+
         public int? InsertChore(Chore newChore)
         {
             newChore.CreatedOn = DateTime.UtcNow;
-            using var db = new LiteDatabase(FilePath);
+            using var db = GetConnection();
             var collection = db.GetCollection<Chore>();
             return collection.Insert(newChore);
         }
 
         public IEnumerable<Chore> GetChores()
         {
-            using var db = new LiteDatabase(FilePath);
+            using var db = GetConnection();
             return db.GetCollection<Chore>().FindAll().ToArray();
         }
 
         public Chore GetChore(int id)
         {
-            using var db = new LiteDatabase(FilePath);
+            using var db = GetConnection();
             var collection = db.GetCollection<Chore>();
             var item = collection.FindById(id);
             return item;
@@ -38,7 +48,7 @@ namespace JustChores.MobileApp.Services
 
         public Chore Completed(int id, DateTime? completedOn = null)
         {
-            using var db = new LiteDatabase(FilePath);
+            using var db = GetConnection();
             var collection = db.GetCollection<Chore>();
             var item = collection.FindById(id);
             completedOn ??= item.DueOn;
@@ -82,36 +92,40 @@ namespace JustChores.MobileApp.Services
         public bool UpdateChore(Chore updatedChore)
         {
             updatedChore.UpdatedOn = DateTime.UtcNow;
-            using var db = new LiteDatabase(FilePath);
+            using var db = GetConnection();
             var collection = db.GetCollection<Chore>();
             return collection.Update(updatedChore);
         }
 
         public bool DeleteChore(int choreId)
         {
-            using var db = new LiteDatabase(FilePath);
+            using var db = GetConnection();
             var collection = db.GetCollection<Chore>();
             return collection.Delete(choreId);
         }
-    
+
+        public async Task RestoreAsync(Stream stream)
+        {
+
+            using (var writeStream = File.OpenWrite(FilePath))
+                await stream.CopyToAsync(writeStream);
+
+            await Shell.Current.GoToAsync("//chores");
+            WeakReferenceMessenger.Default.Send(new BackupRestoredMessage());
+
+        }
+
         public async Task BackupAsync()
         {
-            //await FileSaver.save
-            await using var stream = File.OpenRead(FilePath);
-
-            //var permRead = await Permissions.RequestAsync<Permissions.StorageWrite>();
-
-            //if (permRead == PermissionStatus.Granted)
-            //{
-            //    var permWrite = await Permissions.RequestAsync<Permissions.StorageWrite>();
-            //    if (permWrite == PermissionStatus.Granted)
-            //    {
-            //        var res = await FileSaver.Default.SaveAsync("data.db", stream, CancellationToken.None);
-
-            //    }
-            //}
-
-            var res = await FileSaver.Default.SaveAsync("data.db", stream, CancellationToken.None);
+            await Share.Default.RequestAsync(new ShareFileRequest
+            {
+                Title = "Chores backup",
+                File = new(FilePath)
+                {
+                    FileName = $"chores backup {DateTime.Now:dd-MM H-mm s}.txt",
+                    ContentType = "text/plain"
+                }
+            });
 
         }
 
