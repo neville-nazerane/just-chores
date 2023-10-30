@@ -1,21 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" 
 		  android:versionCode="1" 
-		  android:versionName="1.0.0"
-		  android:fullBackupContent="@xml/backup_rules">
+		  android:versionName="1.0.0">
 	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
-
-		<!--<activity android:name="com.justchores.app.MainActivity" android:exported="true">
-
-			<intent-filter android:label="Restore from backup">
-				<category android:name="android.intent.category.DEFAULT" />
-				<action android:name="android.intent.action.VIEW" />
-				<action android:name="android.intent.action.EDIT"/>
-				<data android:scheme="content" />
-				<data android:mimeType="text/plain" />
-			</intent-filter>
-		</activity>-->
-
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
