@@ -10,7 +10,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" 
-                     Command="{Binding AddCommand}" />       
+                     Command="{Binding AddCommand}" />
         <ToolbarItem Text="Backup" 
                      Command="{Binding BackupCommand}" />
     </ContentPage.ToolbarItems>
@@ -20,7 +20,7 @@
         <conv:DueDateToBoolConverter x:Key="due" />
 
     </ContentPage.Resources>
-    
+
     <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
         <CollectionView ItemsSource="{Binding Chores}">
@@ -62,13 +62,23 @@
                         </Label>
 
                         <Grid Grid.Row="2"
-                                ColumnDefinitions="auto, *">
+                              ColumnDefinitions="auto, *, 80"
+                              ColumnSpacing="2">
                             <Label Text="{Binding DueOn, StringFormat='Due on: {0:dd-MM-yy}'}" />
                             <Label Text="Due" 
-                                    IsVisible="{Binding DueOn, Converter={x:StaticResource due}}"
+                                    IsVisible="{Binding DueOn, Converter={x:StaticResource due}, ConverterParameter= 'due'}"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="White"
+                                    BackgroundColor="OrangeRed"
+                                    Grid.Column="2" />
+                            <Label Text="Overdue" 
+                                    IsVisible="{Binding DueOn, Converter={x:StaticResource due}, ConverterParameter= 'overdue'}"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"
                                     TextColor="White"
                                     BackgroundColor="Red"
-                                    Grid.Column="1" />
+                                    Grid.Column="2" />
                         </Grid>
 
 
