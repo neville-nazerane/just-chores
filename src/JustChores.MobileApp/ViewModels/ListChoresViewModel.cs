@@ -21,6 +21,9 @@ namespace JustChores.MobileApp.ViewModels
         [ObservableProperty]
         bool isRefreshing;
 
+        [ObservableProperty]
+        bool isDateFocused;
+
         public ListChoresViewModel(MainRepository repository)
         {
             _repository = repository;
@@ -57,7 +60,8 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         void Complete(int id)
         {
-            _repository.Completed(id);
+            IsDateFocused = true;
+            //_repository.Completed(id);
             Refresh();
         }
 

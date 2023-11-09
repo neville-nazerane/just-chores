@@ -31,6 +31,12 @@
                             Span="{OnIdiom Phone=1, Tablet=2}" />
             </CollectionView.ItemsLayout>
 
+            <CollectionView.HeaderTemplate>
+                <DataTemplate>
+                    <DatePicker IsEnabled="False" />
+                </DataTemplate>
+            </CollectionView.HeaderTemplate>
+            
             <CollectionView.EmptyViewTemplate>
                 <DataTemplate>
                     <Label Text="You have no chores for you" />
