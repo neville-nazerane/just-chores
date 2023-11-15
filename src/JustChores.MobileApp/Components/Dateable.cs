@@ -9,17 +9,24 @@ namespace JustChores.MobileApp.Components
 {
     public class Dateable : DatePicker
     {
+
+        public Dateable()
+        {
+            IsVisible = false;
+        }
+
         public static readonly BindableProperty ControlledDateProperty =
             BindableProperty.Create(
                 nameof(ControlledDate),
-                typeof(AsyncBindable<DateOnly>),
+                typeof(AsyncBindable<DateTime>),
                 typeof(Dateable),
                 null,
-                defaultBindingMode: BindingMode.TwoWay);
+                defaultBindingMode: BindingMode.TwoWay,
+                propertyChanged: OnControlledDateChanged);
 
-        public AsyncBindable<DateOnly> ControlledDate
+        public AsyncBindable<DateTime> ControlledDate
         {
-            get => (AsyncBindable<DateOnly>)GetValue(ControlledDateProperty);
+            get => (AsyncBindable<DateTime>)GetValue(ControlledDateProperty);
             set => SetValue(ControlledDateProperty, value);
         }
 
@@ -39,20 +46,19 @@ namespace JustChores.MobileApp.Components
 
         private void OnUnfocused(object sender, FocusEventArgs e)
         {
-            ControlledDate?.NotifyResponse(DateOnly.FromDateTime(Date));
+            ControlledDate?.NotifyResponse(Date);
         }
 
         static void OnControlledDateChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (Dateable)bindable;
-            var oldVal = oldValue as AsyncBindable<DateOnly>;
-            var newVal = newValue as AsyncBindable<DateOnly>;
+            var oldVal = oldValue as AsyncBindable<DateTime>;
+            var newVal = newValue as AsyncBindable<DateTime>;
 
             if (oldVal is not null)
                 oldVal.OnBegin -= control.OnBegin;
             if (newVal is not null)
                 newVal.OnBegin += control.OnBegin;
-
         }
 
     }

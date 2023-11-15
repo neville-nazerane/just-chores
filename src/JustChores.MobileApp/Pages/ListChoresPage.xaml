@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:JustChores.MobileApp.ViewModels"
              xmlns:conv="clr-namespace:JustChores.MobileApp.ValueConverters"
+             xmlns:comp="clr-namespace:JustChores.MobileApp.Components"
              xmlns:m="clr-namespace:JustChores.MobileApp.Models"
              x:Class="JustChores.MobileApp.Pages.ListChoresPage"
              x:DataType="vm:ListChoresViewModel"
@@ -23,7 +24,7 @@
 
     <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
-        <CollectionView ItemsSource="{Binding Chores}">
+        <CollectionView ItemsSource="{Binding Chores}" >
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
@@ -31,12 +32,6 @@
                             Span="{OnIdiom Phone=1, Tablet=2}" />
             </CollectionView.ItemsLayout>
 
-            <CollectionView.HeaderTemplate>
-                <DataTemplate>
-                    <DatePicker IsEnabled="False" />
-                </DataTemplate>
-            </CollectionView.HeaderTemplate>
-            
             <CollectionView.EmptyViewTemplate>
                 <DataTemplate>
                     <Label Text="You have no chores for you" />
@@ -50,6 +45,8 @@
                         Padding="5"
                         Margin="5"
                         ColumnDefinitions="*" >
+                        
+                        <comp:Dateable ControlledDate="{Binding DateControl, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}" />
 
                         <Label Text="{Binding Title}" 
                             FontAttributes="Bold"

@@ -24,7 +24,7 @@ namespace JustChores.MobileApp
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            
             Platform.Init(this, savedInstanceState);
 
             // Get the intent that started this activity

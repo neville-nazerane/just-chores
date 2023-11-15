@@ -22,11 +22,21 @@ namespace JustChores.MobileApp.ViewModels
         bool isRefreshing;
 
         [ObservableProperty]
-        bool isDateFocused;
+        AsyncBindable<DateTime> dateControl;
+
+        //[ObservableProperty]
+        //bool isDateFocused;
 
         public ListChoresViewModel(MainRepository repository)
         {
             _repository = repository;
+        }
+
+        public override void OnNavigatedTo()
+        {
+            DateControl = new();
+            WeakReferenceMessenger.Default.Register<BackupRestoredMessage>(this, OnBackupRestored);
+            Refresh();
         }
 
         [RelayCommand]
@@ -45,7 +55,7 @@ namespace JustChores.MobileApp.ViewModels
         }
 
         [RelayCommand]
-        async Task Delete(int id)
+        async Task DeleteAsync(int id)
         {
             bool isConfirmed = await DisplayConfirmationAsync("Delete Chore",
                                                               "Are you sure you want to delete?");
@@ -58,10 +68,10 @@ namespace JustChores.MobileApp.ViewModels
         }
 
         [RelayCommand]
-        void Complete(int id)
+        async Task CompleteAsync(int id)
         {
-            IsDateFocused = true;
-            //_repository.Completed(id);
+            var completedOn = await DateControl.FetchAsync();
+            _repository.Completed(id, completedOn);
             Refresh();
         }
 
@@ -73,12 +83,6 @@ namespace JustChores.MobileApp.ViewModels
 
         [RelayCommand]
         Task BackupAsync() => _repository.BackupAsync();
-
-        public override void OnNavigatedTo()
-        {
-            WeakReferenceMessenger.Default.Register<BackupRestoredMessage>(this, OnBackupRestored);
-            Refresh();
-        }
 
         void OnBackupRestored(object source, BackupRestoredMessage message)
         {
