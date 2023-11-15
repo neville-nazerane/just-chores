@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using JustChores.MobileApp.Models;
@@ -14,16 +15,18 @@ namespace JustChores.MobileApp.ViewModels
     public partial class ListChoresViewModel : ViewModelBase
     {
         private readonly MainRepository _repository;
-        
+        private readonly IPopupService _popupService;
         [ObservableProperty]
         IEnumerable<Chore> chores = Array.Empty<Chore>();
 
         [ObservableProperty]
         bool isRefreshing;
 
-        public ListChoresViewModel(MainRepository repository)
+        public ListChoresViewModel(MainRepository repository,
+                                   IPopupService popupService)
         {
             _repository = repository;
+            _popupService = popupService;
         }
 
         [RelayCommand]
@@ -55,9 +58,17 @@ namespace JustChores.MobileApp.ViewModels
         }
 
         [RelayCommand]
-        void Complete(int id)
+        async Task Complete(int id)
         {
-            _repository.Completed(id);
+            var res = await _popupService.ShowPopupAsync<DatePickerPopupModel>(vm =>
+            {
+                vm.Date = DateTime.Now;
+                vm.Message = "Mark as Complete?";
+            });
+
+            var date = res as DateTime?;
+            if (date is null) return;
+            _repository.Completed(id, date.Value);
             Refresh();
         }
 

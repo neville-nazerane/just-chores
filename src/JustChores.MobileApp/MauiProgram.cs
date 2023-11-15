@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Markup;
+using JustChores.MobileApp.Components;
 using JustChores.MobileApp.Generated;
 using JustChores.MobileApp.Services;
+using JustChores.MobileApp.ViewModels;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -24,6 +26,9 @@ namespace JustChores.MobileApp
             var builder = MauiApp.CreateBuilder();
 
             builder.Services.AddGeneratedInjections()
+                            
+                            .AddTransientPopup<DatePickerPopup, DatePickerPopupModel>()
+
                             .AddSingleton<MainRepository>();
 
             builder
