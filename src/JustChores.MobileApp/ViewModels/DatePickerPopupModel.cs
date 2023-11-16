@@ -16,6 +16,8 @@ namespace JustChores.MobileApp.ViewModels
         [ObservableProperty]
         private DateTime date;
 
+        [ObservableProperty]
+        private string dateLabel;
 
     }
 }

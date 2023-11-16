@@ -11,13 +11,19 @@
         
         <Label 
             Text="{Binding Message}"
+            FontAttributes="Bold"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             Grid.ColumnSpan="2" />
 
-        <DatePicker Date="{Binding Date}"
-                    Grid.Row="2"
-                    Grid.ColumnSpan="2" />
+        <Grid Grid.Row="2"
+              Grid.ColumnSpan="2"
+              ColumnDefinitions="auto, *" >
+            <Label Text="{Binding DateLabel}"
+                   FontSize="Small" />
+            <DatePicker Date="{Binding Date}"
+                        Grid.Column="1" />
+        </Grid>
 
         <Button Text="Ok"
                 Grid.Row="3"
