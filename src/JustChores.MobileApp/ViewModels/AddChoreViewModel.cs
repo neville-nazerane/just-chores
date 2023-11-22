@@ -134,15 +134,24 @@ namespace JustChores.MobileApp.ViewModels
 
             Summary = Model.FrequencyType switch
             {
-                FrequencyType.Day => "This would be everyday",
-                FrequencyType.Week => $"This would be every {dueOn.DayOfWeek.ToString().ToLowerInvariant()}",
-                FrequencyType.Month => $"This would be on the {GetWithOrdinal(dueOn.Day)} of each month",
-                FrequencyType.Year => $"This would be on the {GetWithOrdinal(dueOn.Day)} of every {dueOn:MMMM}",
+                FrequencyType.Day => $"This would be {GetFrequencyString()}{(Frequency > 1 ? " " : null)}day{(Frequency > 2 ? "s" : null)}",
+                FrequencyType.Week => $"This would be {GetFrequencyString()} {dueOn.DayOfWeek.ToString().ToLowerInvariant()}",
+                FrequencyType.Month => $"This would be on the {GetWithOrdinal(dueOn.Day)} of {GetFrequencyString()} month{GetFrequencyPlural()}",
+                FrequencyType.Year => $"This would be on the {GetWithOrdinal(dueOn.Day)} {dueOn:MMMM} {GetFrequencyString()} year{GetFrequencyPlural()}",
                 _ => null,
             };
         }
 
-        private static string GetWithOrdinal(int number) => $"{number}{GetOrdinalSuffix(number)}";
+        string GetFrequencyString() => Frequency switch
+        {
+            1 => "every",
+            2 => "every other",
+            _ => $"every {(Model.FrequencyType == FrequencyType.Week ? GetWithOrdinal(Frequency) : Frequency)}"
+        };
+
+        string GetFrequencyPlural() => Frequency > 1 ? "s" : null;
+
+        private static string GetWithOrdinal(int number) => $"{number}<sup>{GetOrdinalSuffix(number)}</sup>";
 
         private static string GetOrdinalSuffix(int number)
         {
