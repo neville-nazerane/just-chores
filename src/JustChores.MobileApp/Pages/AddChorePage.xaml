@@ -43,7 +43,8 @@
                             Grid.Column="1" />
             </Grid>
 
-            <Label Text="{Binding Summary}" />
+            <Label Text="{Binding Summary}"
+                   TextType="Html" />
 
         </VerticalStackLayout>
 
