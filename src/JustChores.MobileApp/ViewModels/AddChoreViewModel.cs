@@ -48,6 +48,11 @@ namespace JustChores.MobileApp.ViewModels
             Reset();
         }
 
+        public override void OnNavigatedTo()
+        {
+            Reset();
+        }
+
         private void Reset()
         {
             if (ChoreId is not null)
