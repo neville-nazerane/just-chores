@@ -27,22 +27,14 @@ namespace JustChores.MobileApp
 
             Platform.Init(this, savedInstanceState);
 
-            // Get the intent that started this activity
             Intent intent = Intent;
             Android.Net.Uri data = intent.Data;
 
             if (data != null)
             {
-                // Obtain a stream to the file data
-                using (var stream = ContentResolver.OpenInputStream(data))
-                {
-
-                    var repo = MauiProgram.ServiceProvider.GetService<MainRepository>();
-
-                    await repo.RestoreAsync(stream);
-                    // Now you have a stream of the file's data which you can read from.
-                    // ...
-                }
+                using var stream = ContentResolver.OpenInputStream(data);
+                var repo = MauiProgram.ServiceProvider.GetService<MainRepository>();
+                await repo.RestoreAsync(stream);
             }
         }
 
