@@ -5,12 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <Style TargetType="Page">
-        <Setter Property="Behaviors">
-            <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}" />
-        </Setter>
-    </Style>
-
     <Style TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
     </Style>

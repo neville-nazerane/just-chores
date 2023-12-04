@@ -6,7 +6,9 @@
              xmlns:m="clr-namespace:JustChores.MobileApp.Models"
              x:Class="JustChores.MobileApp.Pages.ListChoresPage"
              x:DataType="vm:ListChoresViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="ListChoresPage">
+
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" 
@@ -39,9 +41,9 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:Chore">
-                    <Grid BackgroundColor="LightGray"
+                    <Grid BackgroundColor="{StaticResource Primary}"
                         RowDefinitions="auto, 50, 30, 40"
-                        Padding="5"
+                        Padding="8"
                         Margin="5"
                         ColumnDefinitions="*" >
 
@@ -70,14 +72,14 @@
                                     HorizontalTextAlignment="Center"
                                     VerticalTextAlignment="Center"
                                     TextColor="White"
-                                    BackgroundColor="OrangeRed"
+                                    BackgroundColor="{StaticResource Warning}"
                                     Grid.Column="2" />
                             <Label Text="Overdue" 
                                     IsVisible="{Binding DueOn, Converter={x:StaticResource due}, ConverterParameter= 'overdue'}"
                                     HorizontalTextAlignment="Center"
                                     VerticalTextAlignment="Center"
                                     TextColor="White"
-                                    BackgroundColor="Red"
+                                    BackgroundColor="{StaticResource Error}"
                                     Grid.Column="2" />
                         </Grid>
 
@@ -86,26 +88,32 @@
                                 ColumnDefinitions="*, *, *"
                                 RowSpacing="6">
                             <Button Text="Delete"
-                                BackgroundColor="IndianRed"
+                                BackgroundColor="{StaticResource Error}"
                                 Command="{Binding DeleteCommand, 
                                                     Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
                                 CommandParameter="{Binding Id}"  />
 
-                            <Button Text="Edit"
+                            <!--<Button Text="Edit"
                                     Grid.Column="1"
                                 BackgroundColor="YellowGreen"
                                 Command="{Binding EditCommand, 
                                                     Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
-                                CommandParameter="{Binding Id}"  />
+                                CommandParameter="{Binding Id}"  />-->
 
                             <Button Text="Complete"
                                     Grid.Column="2"
-                                    BackgroundColor="ForestGreen"
+                                    BackgroundColor="{StaticResource Secondary}"
                                     Command="{Binding CompleteCommand, 
                                                         Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}" 
                                     CommandParameter="{Binding Id}" />
                         </Grid>
 
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditCommand, 
+                                                  Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                                  CommandParameter="{Binding Id}" />
+                        </Grid.GestureRecognizers>
+                        
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

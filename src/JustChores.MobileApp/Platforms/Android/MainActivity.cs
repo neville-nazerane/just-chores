@@ -32,7 +32,7 @@ namespace JustChores.MobileApp
 
             if (data != null)
             {
-                using var stream = ContentResolver.OpenInputStream(data);
+                await using var stream = ContentResolver.OpenInputStream(data);
                 var repo = MauiProgram.ServiceProvider.GetService<MainRepository>();
                 await repo.RestoreAsync(stream);
             }
