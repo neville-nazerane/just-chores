@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Color x:Key="Primary">#77d4fc</Color>
-    <Color x:Key="Secondary">#726da8</Color>
-    <Color x:Key="Tertiary">#C490D1</Color>
+    <Color x:Key="Secondary">#304D6D</Color>
+    <Color x:Key="Text">#191716</Color>
     <Color x:Key="Warning">#d4b483</Color>
     <Color x:Key="Error">#b8336a</Color>
     

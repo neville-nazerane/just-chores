@@ -71,14 +71,12 @@
                                     IsVisible="{Binding DueOn, Converter={x:StaticResource due}, ConverterParameter= 'due'}"
                                     HorizontalTextAlignment="Center"
                                     VerticalTextAlignment="Center"
-                                    TextColor="White"
                                     BackgroundColor="{StaticResource Warning}"
                                     Grid.Column="2" />
                             <Label Text="Overdue" 
                                     IsVisible="{Binding DueOn, Converter={x:StaticResource due}, ConverterParameter= 'overdue'}"
                                     HorizontalTextAlignment="Center"
                                     VerticalTextAlignment="Center"
-                                    TextColor="White"
                                     BackgroundColor="{StaticResource Error}"
                                     Grid.Column="2" />
                         </Grid>
