@@ -55,6 +55,9 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+		<MauiImage Update="Resources\Images\calendar.svg" BaseSize="14,14" />
+		<MauiImage Update="Resources\Images\setting.svg" BaseSize="24,24" />
+		<MauiImage Update="Resources\Images\delete.svg" BaseSize="14,15.77" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
