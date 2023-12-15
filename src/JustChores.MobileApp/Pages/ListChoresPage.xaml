@@ -6,13 +6,10 @@
              xmlns:m="clr-namespace:JustChores.MobileApp.Models"
              x:Class="JustChores.MobileApp.Pages.ListChoresPage"
              x:DataType="vm:ListChoresViewModel"
-             Title="ListChoresPage">
+             Title="Chores">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" 
-                     Command="{Binding AddCommand}" />
-        <ToolbarItem Text="Backup" 
-                     Command="{Binding BackupCommand}" />
+        <ToolbarItem IconImageSource="setting.svg" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
@@ -23,7 +20,8 @@
 
     <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
-        <CollectionView ItemsSource="{Binding Chores}">
+        <CollectionView ItemsSource="{Binding Chores}"
+                        Header="Batman" >
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
@@ -36,6 +34,48 @@
                     <Label Text="You have no chores for you" />
                 </DataTemplate>
             </CollectionView.EmptyViewTemplate>
+
+            <CollectionView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="3*, *"
+                          Margin="10, 10, 10, 5" >
+                        <Label Text="Your Chores"
+                               FontSize="Large"
+                               FontAttributes="Bold" />
+
+                        <AbsoluteLayout Grid.Column="1"
+                                        HeightRequest="40">
+
+
+                            <Button Text="      Add"
+                                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                    AbsoluteLayout.LayoutFlags="SizeProportional"
+                                    Command="{Binding AddCommand}"
+                                    BorderColor="{StaticResource ButtonColor}" 
+                                    TextColor="{StaticResource ButtonColor}"
+                                    BorderWidth="2"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" />
+
+                            <Ellipse Fill="{StaticResource ButtonColor}"
+                                     AbsoluteLayout.LayoutBounds="15, .5, 15, 15"
+                                     AbsoluteLayout.LayoutFlags="YProportional"
+                                     HeightRequest="20"
+                                     WidthRequest="20"/>
+
+                            <Label Text="+" 
+                                   FontSize="Large"
+                                   FontAttributes="Bold"
+                                   Margin="0, -3, 0, 0"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   AbsoluteLayout.LayoutBounds="10, .5, 25, 25"
+                                   AbsoluteLayout.LayoutFlags="YProportional"
+                                   TextColor="{StaticResource White}" />
+
+                        </AbsoluteLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.HeaderTemplate>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:Chore">
