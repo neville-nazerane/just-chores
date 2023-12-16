@@ -21,7 +21,7 @@
     <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
         <CollectionView ItemsSource="{Binding Chores}"
-                        Header="Batman" >
+                        Header="{Binding .}" >
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
@@ -79,6 +79,10 @@
 
                             </Grid>
 
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddCommand}" />
+                            </Border.GestureRecognizers>
+
                         </Border>
 
 
@@ -89,74 +93,38 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:Chore">
-                    <Grid BackgroundColor="LightGray"
-                        RowDefinitions="auto, 50, 30, 40"
-                        Padding="5"
-                        Margin="5"
-                        ColumnDefinitions="*" >
 
-                        <Label Text="{Binding Title}" 
-                            FontAttributes="Bold"
-                            FontSize="Large" />
+                    <Border StrokeShape="RoundRectangle 6"
+                            Margin="10, 5" >
+                        <Grid BackgroundColor="Transparent"
+                              Padding="12"
+                              RowDefinitions="auto, 40, auto, 50"
+                              ColumnDefinitions="auto, *, 30">
 
-                        <Label Grid.Row="1" >
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <FormattedString.Spans>
-                                        <Span Text="{Binding Frequency}" />
-                                        <Span Text=" " />
-                                        <Span Text="{Binding FrequencyType}" />
-                                    </FormattedString.Spans>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                            <Label Text="{Binding Title}"
+                                   Grid.ColumnSpan="2"
+                                   FontSize="Large" />
 
-                        <Grid Grid.Row="2"
-                              ColumnDefinitions="auto, *, 80"
-                              ColumnSpacing="2">
-                            <Label Text="{Binding DueOn, StringFormat='Due on: {0:dd-MM-yy}'}" />
-                            <Label Text="Due" 
-                                    IsVisible="{Binding DueOn, Converter={x:StaticResource due}, ConverterParameter= 'due'}"
-                                    HorizontalTextAlignment="Center"
-                                    VerticalTextAlignment="Center"
-                                    TextColor="White"
-                                    BackgroundColor="OrangeRed"
-                                    Grid.Column="2" />
-                            <Label Text="Overdue" 
-                                    IsVisible="{Binding DueOn, Converter={x:StaticResource due}, ConverterParameter= 'overdue'}"
-                                    HorizontalTextAlignment="Center"
-                                    VerticalTextAlignment="Center"
-                                    TextColor="White"
-                                    BackgroundColor="Red"
-                                    Grid.Column="2" />
+                            <Grid ColumnDefinitions="30, auto, auto"
+                                  Grid.ColumnSpan="2"
+                                  Grid.Row="1">
+                                <Image Source="calendar.svg" />
+                                <Label Text="{Binding DueOn}" />
+                                
+                                
+                                
+                            </Grid>
+
+
+                            <Button Text="Complete" 
+                                    Grid.Row="3" />
+
+                            <ImageButton Source="delete.svg"
+                                         Grid.Row="3" Grid.Column="2" />
+
                         </Grid>
+                    </Border>
 
-
-                        <Grid Grid.Row="3"
-                                ColumnDefinitions="*, *, *"
-                                RowSpacing="6">
-                            <Button Text="Delete"
-                                BackgroundColor="IndianRed"
-                                Command="{Binding DeleteCommand, 
-                                                    Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
-                                CommandParameter="{Binding Id}"  />
-
-                            <Button Text="Edit"
-                                    Grid.Column="1"
-                                BackgroundColor="YellowGreen"
-                                Command="{Binding EditCommand, 
-                                                    Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
-                                CommandParameter="{Binding Id}"  />
-
-                            <Button Text="Complete"
-                                    Grid.Column="2"
-                                    BackgroundColor="ForestGreen"
-                                    Command="{Binding CompleteCommand, 
-                                                        Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}" 
-                                    CommandParameter="{Binding Id}" />
-                        </Grid>
-
-                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
