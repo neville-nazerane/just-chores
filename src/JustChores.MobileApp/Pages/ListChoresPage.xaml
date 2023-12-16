@@ -37,42 +37,52 @@
 
             <CollectionView.HeaderTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="3*, *"
-                          Margin="10, 10, 10, 5" >
+                    <Grid ColumnDefinitions="5*, 2*"
+                              Margin="10, 10, 10, 5" >
+
                         <Label Text="Your Chores"
-                               FontSize="Large"
-                               FontAttributes="Bold" />
-
-                        <AbsoluteLayout Grid.Column="1"
-                                        HeightRequest="40">
-
-
-                            <Button Text="      Add"
-                                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                                    AbsoluteLayout.LayoutFlags="SizeProportional"
-                                    Command="{Binding AddCommand}"
-                                    BorderColor="{StaticResource ButtonColor}" 
-                                    TextColor="{StaticResource ButtonColor}"
-                                    BorderWidth="2"
-                                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" />
-
-                            <Ellipse Fill="{StaticResource ButtonColor}"
-                                     AbsoluteLayout.LayoutBounds="15, .5, 15, 15"
-                                     AbsoluteLayout.LayoutFlags="YProportional"
-                                     HeightRequest="20"
-                                     WidthRequest="20"/>
-
-                            <Label Text="+" 
                                    FontSize="Large"
-                                   FontAttributes="Bold"
-                                   Margin="0, -3, 0, 0"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   AbsoluteLayout.LayoutBounds="10, .5, 25, 25"
-                                   AbsoluteLayout.LayoutFlags="YProportional"
-                                   TextColor="{StaticResource White}" />
+                                   FontAttributes="Bold" />
 
-                        </AbsoluteLayout>
+                        <!--Add Button-->
+
+                        <Border BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" 
+                                Stroke="{StaticResource ButtonColor}"
+                                StrokeShape="RoundRectangle 4"
+                                Grid.Column="1" >
+
+                            <Grid 
+                                Padding="10, 8, 4, 8"
+                                ColumnDefinitions="20, *"
+                                BackgroundColor="Transparent" >
+
+                                <!--<RoundRectangle Stroke="{StaticResource ButtonColor}"
+                                  Grid.ColumnSpan="2"
+                                  CornerRadius="4" />-->
+
+                                <Grid HeightRequest="20">
+                                    <Ellipse Fill="{StaticResource ButtonColor}" />
+                                    <Label Text="+"
+                                             FontAttributes="Bold"
+                                             HorizontalTextAlignment="Center"
+                                             VerticalTextAlignment="Center"
+                                             TextColor="{StaticResource White}" />
+                                </Grid>
+
+                                <Label Text="Add"
+                                         Grid.Column="1"
+                                         VerticalTextAlignment="Center"
+                                         HorizontalTextAlignment="Center"
+                                         TextColor="{StaticResource ButtonColor}" />
+
+
+
+                            </Grid>
+
+                        </Border>
+
+
+
                     </Grid>
                 </DataTemplate>
             </CollectionView.HeaderTemplate>
