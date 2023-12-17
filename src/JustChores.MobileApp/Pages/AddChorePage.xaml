@@ -23,6 +23,9 @@
         </Style>
 
         <conv:DictionaryToValuesConverter x:Key="dictonaryToValues" />
+        <conv:OccuranceToBackgroundColorConverter x:Key="occToBackgroundColor" />
+        <conv:OccuranceToBorderThicknessConverter x:Key="occToBorderThickness" />
+        <conv:OccuranceToFontColorConverter x:Key="occToFontColor" />
 
         <x:Double x:Key="labelHeight">40</x:Double>
         
@@ -81,6 +84,17 @@
         <Label Text="Chore Occurrence"
                Grid.Row="2"
                class="inputLbl" />
+
+        <!--Occurrence Selection-->
+        <Grid ColumnDefinitions="*, *, *, *"
+              ColumnSpacing="4">
+
+            <Border StrokeShape="RoundRectangle 40"
+                    StrokeThickness="{Binding Frequency}">
+                <Label Text="Day" />
+            </Border>
+            
+        </Grid>
 
     </Grid>
     
