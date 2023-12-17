@@ -120,16 +120,17 @@
                                 <Image Source="calendar.svg" />
 
                                 <Label Text="{Binding DueOn, StringFormat='{0:ddd, MMMM dd}'}"
-                                       HorizontalTextAlignment="Center"
+                                      HorizontalTextAlignment="Center"
                                        VerticalTextAlignment="Center"
                                        Grid.Column="1"/>
 
                                 <Border Grid.Column="2"
                                         IsVisible="{Binding DueOn, Converter={StaticResource due}, ConverterParameter='due'}"
-                                        BackgroundColor="{StaticResource SelectionLightBackground}"
+                                        BackgroundColor="{StaticResource ButtonBackground}"
                                         Padding="15, 5"
                                         StrokeShape="RoundRectangle 40">
                                     <Label Text="Due" 
+                                           TextColor="{StaticResource SelectionLightBackground}"
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center" />
                                 </Border>
@@ -140,6 +141,7 @@
                                         Padding="15, 5"
                                         StrokeShape="RoundRectangle 40">
                                     <Label Text="Overdue"
+                                           TextColor="{StaticResource Danger}"
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center" />
                                 </Border>
