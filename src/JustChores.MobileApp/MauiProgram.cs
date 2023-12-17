@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui;
+﻿using Android.Content.Res;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Markup;
 using JustChores.MobileApp.Components;
 using JustChores.MobileApp.Generated;
@@ -20,6 +21,7 @@ namespace JustChores.MobileApp
 
         public static MauiApp CreateMauiApp()
         {
+            SetupUI();
 
             AppCenter.Start(appcenterSecret, typeof(Analytics), typeof(Crashes));
 
@@ -49,5 +51,18 @@ namespace JustChores.MobileApp
             ServiceProvider = app.Services;
             return app;
         }
+    
+        static void SetupUI()
+        {
+            Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
+            {
+#if ANDROID
+                handler.PlatformView.BackgroundTintList = ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
+                //handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.Transparent);
+#endif
+            });
+        }
+
+    
     }
 }

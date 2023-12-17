@@ -14,15 +14,78 @@
     
     <ContentPage.Resources>
 
-        <Style TargetType="Label">
-            <Setter Property="Margin" Value="10" />
+        <Style TargetType="Label"
+               Class="inputLbl">
+            <Setter Property="FontAttributes"
+                    Value="Bold" />
+            <Setter Property="FontSize"
+                    Value="Large" />
         </Style>
 
         <conv:DictionaryToValuesConverter x:Key="dictonaryToValues" />
 
+        <x:Double x:Key="labelHeight">40</x:Double>
+        
+        <x:Double x:Key="inputHeight">50</x:Double>
+
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="auto, *, 50"
+
+    <Grid Margin="20, 30, 20, 0">
+        <Grid.RowDefinitions>
+            
+            <!--Title label-->
+            <RowDefinition Height="{StaticResource labelHeight}" />
+            <!--Title input--> 
+            <RowDefinition Height="{StaticResource inputHeight}" />
+
+            <!--Occurrence label-->
+            <RowDefinition Height="{StaticResource labelHeight}" />
+            <!--Occurrence items--> 
+            <RowDefinition Height="{StaticResource inputHeight}" />
+            
+            <!--Frequency label/input--> 
+            <RowDefinition Height="{StaticResource inputHeight}" />
+            
+            <!--Starting date-->
+            <RowDefinition Height="{StaticResource inputHeight}" />
+
+            <!--Summary--> 
+            <RowDefinition Height="100" />
+            
+            <!--Remaining space-->
+            <RowDefinition Height="*" />
+            
+            <!--Save button-->
+            <RowDefinition Height="100" />
+
+        </Grid.RowDefinitions>
+
+
+        <Label Text="Chore Title"
+               class="inputLbl" />
+
+        <Border Grid.Row="1"
+                StrokeShape="RoundRectangle 8">
+            <Border.Shadow>
+                <Shadow Brush="Gray"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="0.8"/>
+            </Border.Shadow>
+            <Entry Placeholder="Title"
+                   Text="{Binding Model.Title}"/>
+        </Border>
+
+
+        <Label Text="Chore Occurrence"
+               Grid.Row="2"
+               class="inputLbl" />
+
+    </Grid>
+    
+
+    <!--<Grid RowDefinitions="auto, *, 50"
         RowSpacing="20"
         Margin="20, 40, 20, 5">
 
@@ -51,5 +114,6 @@
         <Button Text="{Binding SubmitText}"
                 Command="{Binding SubmitCommand}"
                 Grid.Row="2" />
-    </Grid>
+    </Grid>-->
+    
 </ContentPage>
