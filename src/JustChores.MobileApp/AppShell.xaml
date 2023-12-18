@@ -12,11 +12,13 @@
                                    StatusBarStyle="{AppThemeBinding Light=DarkContent, Dark=LightContent}" />
     </Shell.Behaviors>
 
-    <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate pages:HomePage}"
-        Route="home" />-->
 
+
+    <!--<ShellContent
+      Title="Show"
+      ContentTemplate="{DataTemplate pages:BorderPage}"
+      Route="chores" />-->
+    
     <ShellContent
         Title="List Chores"
         ContentTemplate="{DataTemplate pages:ListChoresPage}"

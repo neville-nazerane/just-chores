@@ -94,7 +94,7 @@
                 <DataTemplate x:DataType="m:Chore">
 
                     <Border StrokeShape="RoundRectangle 6"
-                            StrokeThickness="0"
+                            StrokeThickness="1"
                             Margin="10, 5" >
                         <Border.Shadow>
                             <Shadow Brush="Gray"
@@ -102,7 +102,7 @@
                                     Radius="40"
                                     Opacity="0.8"/>
                         </Border.Shadow>
-                        <Grid BackgroundColor="Transparent"
+                        <Grid BackgroundColor="White"
                               Padding="12"
                               RowSpacing="8"
                               RowDefinitions="auto, 40, auto, 40"

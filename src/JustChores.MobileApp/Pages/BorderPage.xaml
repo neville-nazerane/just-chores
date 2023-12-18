@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JustChores.MobileApp.Pages.BorderPage"
+             Title="BorderPage">
+    <Grid x:Name="grid"
+			  Margin="10,0,10,0"
+			  Padding="0,10,0,0"
+			  RowSpacing="10"
+			  ColumnSpacing="15"
+			  ColumnDefinitions ="*, *">
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Border StrokeThickness="0.4">
+                <Border.Shadow>
+                    <Shadow Opacity="1" Radius="100" Offset="15, 15">
+                        <Shadow.Brush>
+                            <LinearGradientBrush>
+                                <GradientStop Offset="0.1" Color="LightGray" />
+                                <GradientStop Offset="1.0" Color="Gray" />
+                            </LinearGradientBrush>
+                        </Shadow.Brush>
+                    </Shadow>
+                </Border.Shadow>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10, 10, 10, 15" />
+                </Border.StrokeShape>
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <BoxView Grid.Column="0" Color="#41337A" />
+
+                    <StackLayout Grid.Column="1"
+									 Orientation="Horizontal"
+									 Padding="5,0,0,0"
+									 Spacing="5"
+									 BackgroundColor="White">
+                        <Image Source="inbound128.png" WidthRequest="48" HeightRequest="48"/>
+
+                        <Label Text="BATMAN" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Border StrokeThickness="0.4">
+                <Border.Shadow>
+                    <Shadow Opacity="1" Radius="100" Offset="15,15">
+                        <Shadow.Brush>
+                            <LinearGradientBrush>
+                                <GradientStop Offset="0.1" Color="LightGray" />
+                                <GradientStop Offset="1.0" Color="Gray" />
+                            </LinearGradientBrush>
+                        </Shadow.Brush>
+                    </Shadow>
+                </Border.Shadow>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10, 10, 10, 15" />
+                </Border.StrokeShape>
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <BoxView Grid.Column="0" Color="#8E8CD8" />
+
+                    <StackLayout Grid.Column="1"
+									 Orientation="Horizontal"
+									 Padding="5,0,0,0"
+									 Spacing="5"
+									 BackgroundColor="White">
+                        <Image Source="outbound128.png" WidthRequest="48" HeightRequest="48"/>
+                        <Label Text="배송" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Border StrokeThickness="0.4">
+                <Border.Shadow>
+                    <Shadow Opacity="1" Radius="100" Offset="15,15">
+                        <Shadow.Brush>
+                            <LinearGradientBrush>
+                                <GradientStop Offset="0.1" Color="LightGray" />
+                                <GradientStop Offset="1.0" Color="Gray" />
+                            </LinearGradientBrush>
+                        </Shadow.Brush>
+                    </Shadow>
+                </Border.Shadow>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10, 10, 10, 15" />
+                </Border.StrokeShape>
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <BoxView  Grid.Row="0" Grid.Column="0" Color="#EA005E" />
+
+                    <StackLayout Grid.Column="1"
+									 Orientation="Horizontal"
+									 Padding="5,0,0,0"
+									 Spacing="5"
+									 BackgroundColor="White">
+                        <Image Source="pick128.png" WidthRequest="48" HeightRequest="48"/>
+                        <Label Text="검수(피킹)" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+
+            </Border>
+        </Grid>
+
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Border StrokeThickness="0.4">
+                <Border.Shadow>
+                    <Shadow Opacity="1" Radius="100" Offset="15,15">
+                        <Shadow.Brush>
+                            <LinearGradientBrush>
+                                <GradientStop Offset="0.1" Color="LightGray" />
+                                <GradientStop Offset="1.0" Color="Gray" />
+                            </LinearGradientBrush>
+                        </Shadow.Brush>
+                    </Shadow>
+                </Border.Shadow>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10, 10, 10, 15" />
+                </Border.StrokeShape>
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <BoxView Grid.Column="0" Color="#EFB950" />
+
+                    <StackLayout Grid.Column="1"
+									 Orientation="Horizontal"
+									 Padding="5,0,0,0"
+									 Spacing="5"
+									 BackgroundColor="White">
+                        <Image Source="move128.png" WidthRequest="48" HeightRequest="48"/>
+                        <Label Text="재고이동" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Border StrokeThickness="0.4">
+                <Border.Shadow>
+                    <Shadow Opacity="1" Radius="100" Offset="15,15">
+                        <Shadow.Brush>
+                            <LinearGradientBrush>
+                                <GradientStop Offset="0.1" Color="LightGray" />
+                                <GradientStop Offset="1.0" Color="Gray" />
+                            </LinearGradientBrush>
+                        </Shadow.Brush>
+                    </Shadow>
+                </Border.Shadow>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10, 10, 10, 15" />
+                </Border.StrokeShape>
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <BoxView Grid.Column="0" Color="#00CC6A" />
+
+                    <StackLayout Grid.Column="1"
+									 Orientation="Horizontal"
+									 Padding="5,0,0,0"
+									 Spacing="5"
+									 BackgroundColor="White">
+                        <Image Source="kit128.png" WidthRequest="48" HeightRequest="48"/>
+                        <Label Text="세트" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+
+            </Border>
+        </Grid>
+
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Border StrokeThickness="0.4">
+                <Border.Shadow>
+                    <Shadow Opacity="1" Radius="100" Offset="15,15">
+                        <Shadow.Brush>
+                            <LinearGradientBrush>
+                                <GradientStop Offset="0.1" Color="LightGray" />
+                                <GradientStop Offset="1.0" Color="Gray" />
+                            </LinearGradientBrush>
+                        </Shadow.Brush>
+                    </Shadow>
+                </Border.Shadow>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10, 10, 10, 15" />
+                </Border.StrokeShape>
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <BoxView Grid.Column="0" Color="#FF8C00" />
+
+                    <StackLayout Grid.Column="1"
+									 Orientation="Horizontal"
+									 Padding="5,0,0,0"
+									 Spacing="5"
+									 BackgroundColor="White">
+                        <Image Source="replenish128.png" WidthRequest="48" HeightRequest="48"/>
+                        <Label Text="보충" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="0">
+            <Border StrokeThickness="0.4">
+                <Border.Shadow>
+                    <Shadow Opacity="1" Radius="100" Offset="15,15">
+                        <Shadow.Brush>
+                            <LinearGradientBrush>
+                                <GradientStop Offset="0.1" Color="LightGray" />
+                                <GradientStop Offset="1.0" Color="Gray" />
+                            </LinearGradientBrush>
+                        </Shadow.Brush>
+                    </Shadow>
+                </Border.Shadow>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10, 10, 10, 15" />
+                </Border.StrokeShape>
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <BoxView Grid.Column="0" Color="#EF6950" />
+
+                    <StackLayout Grid.Column="1"
+									 Orientation="Horizontal"
+									 Padding="5,0,0,0"
+									 Spacing="5"
+									 BackgroundColor="White">
+                        <Image Source="cyclecount128.png" WidthRequest="48" HeightRequest="48"/>
+                        <Label Text="실사" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+
+            </Border>
+        </Grid>
+
+
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Border StrokeThickness="0.4">
+                <Border.Shadow>
+                    <Shadow Opacity="1" Radius="100" Offset="15,15">
+                        <Shadow.Brush>
+                            <LinearGradientBrush>
+                                <GradientStop Offset="0.1" Color="LightGray" />
+                                <GradientStop Offset="1.0" Color="Gray" />
+                            </LinearGradientBrush>
+                        </Shadow.Brush>
+                    </Shadow>
+                </Border.Shadow>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10, 10, 10, 15" />
+                </Border.StrokeShape>
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <BoxView Grid.Column="0" Color="#50D6EF" />
+
+                    <StackLayout Grid.Column="1"
+									 Orientation="Horizontal"
+									 Padding="5,0,0,0"
+									 Spacing="5"
+									 BackgroundColor="White">
+                        <Image Source="grid128.png" WidthRequest="48" HeightRequest="48"/>
+                        <Label Text="재고" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+        </Grid>
+
+            <Border StrokeThickness="0.4" Grid.Row="4" Grid.Column="0">
+                <!--<Border.Shadow>
+                    <Shadow Opacity="1" Radius="100" Offset="15,15">
+                        <Shadow.Brush>
+                            <LinearGradientBrush>
+                                <GradientStop Offset="0.1" Color="LightGray" />
+                                <GradientStop Offset="1.0" Color="Gray" />
+                            </LinearGradientBrush>
+                        </Shadow.Brush>
+                    </Shadow>
+                </Border.Shadow>-->
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10, 10, 10, 15" />
+                </Border.StrokeShape>
+
+                <Grid ColumnSpacing="0" BackgroundColor="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!--<BoxView Grid.Column="0" Color="Gray" />-->
+
+                    <StackLayout Grid.Column="1"
+									 Orientation="Horizontal"
+									 Padding="5,0,0,0"
+									 Spacing="5"
+									 BackgroundColor="Transparent">
+                        <Image Source="warehouse128.png" WidthRequest="48" HeightRequest="48"/>
+                        <Label Text="BATMAN" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Black"/>
+
+                        <Button Text="Something here" />
+                        <!--<Button Text="else here here" />-->
+                    </StackLayout>
+                </Grid>
+            </Border>
+
+
+        <Grid Grid.Row="4" Grid.Column="1">
+            <Border StrokeThickness="0.4">
+                <Border.Shadow>
+                    <Shadow Opacity="1" Radius="100" Offset="15,15">
+                        <Shadow.Brush>
+                            <LinearGradientBrush>
+                                <GradientStop Offset="0.1" Color="LightGray" />
+                                <GradientStop Offset="1.0" Color="Gray" />
+                            </LinearGradientBrush>
+                        </Shadow.Brush>
+                    </Shadow>
+                </Border.Shadow>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10, 10, 10, 15" />
+                </Border.StrokeShape>
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <BoxView Grid.Column="0" Color="Gray" />
+
+                    <StackLayout Grid.Column="1"
+									 Orientation="Horizontal"
+									 Padding="5,0,0,0"
+									 Spacing="5"
+									 BackgroundColor="White">
+                        <Image Source="logout128.png" WidthRequest="48" HeightRequest="48"/>
+                        <Label Text="로그 아웃" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>
