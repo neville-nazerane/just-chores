@@ -93,74 +93,78 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:Chore">
 
-                    <Border StrokeShape="RoundRectangle 6"
-                            StrokeThickness="1"
-                            Margin="10, 5" >
-                        <Border.Shadow>
+                    <Grid>
+                        <Grid.Shadow>
                             <Shadow Brush="Gray"
-                                    Offset="20,20"
-                                    Radius="40"
-                                    Opacity="0.8"/>
-                        </Border.Shadow>
-                        <Grid BackgroundColor="White"
+                                     Offset="20,20"
+                                     Radius="40"
+                                     Opacity="0.8"/>
+                        </Grid.Shadow>
+                        <Border StrokeShape="RoundRectangle 6"
+                                BackgroundColor="{StaticResource White}"
+                                Margin="10, 5" >
+                            <!--<Border.Shadow>
+                               
+                            </Border.Shadow>-->
+                            <Grid
                               Padding="12"
                               RowSpacing="8"
                               RowDefinitions="auto, 40, auto, 40"
                               ColumnDefinitions="auto, *, 30">
 
-                            <Label Text="{Binding Title}"
+                                <Label Text="{Binding Title}"
                                    FontAttributes="Bold"
                                    Grid.ColumnSpan="2"
                                    FontSize="Large" />
 
-                            <Grid ColumnDefinitions="30, auto, auto"
+                                <Grid ColumnDefinitions="30, auto, auto"
                                   ColumnSpacing="12"
                                   Grid.ColumnSpan="2"
                                   Grid.Row="1">
-                                <Image Source="calendar.svg" />
+                                    <Image Source="calendar.svg" />
 
-                                <Label Text="{Binding DueOn, StringFormat='{0:ddd, MMMM dd}'}"
+                                    <Label Text="{Binding DueOn, StringFormat='{0:ddd, MMMM dd}'}"
                                       HorizontalTextAlignment="Center"
                                        VerticalTextAlignment="Center"
                                        Grid.Column="1"/>
 
-                                <Border Grid.Column="2"
+                                    <Border Grid.Column="2"
                                         IsVisible="{Binding DueOn, Converter={StaticResource due}, ConverterParameter='due'}"
                                         BackgroundColor="{StaticResource ButtonBackground}"
                                         Padding="15, 5"
                                         StrokeShape="RoundRectangle 40">
-                                    <Label Text="Due" 
+                                        <Label Text="Due" 
                                            TextColor="{StaticResource SelectionLightBackground}"
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center" />
-                                </Border>
+                                    </Border>
 
-                                <Border Grid.Column="2"
+                                    <Border Grid.Column="2"
                                         IsVisible="{Binding DueOn, Converter={StaticResource due}, ConverterParameter='overdue'}"
                                         BackgroundColor="{StaticResource DangerBackgroud}"
                                         Padding="15, 5"
                                         StrokeShape="RoundRectangle 40">
-                                    <Label Text="Overdue"
+                                        <Label Text="Overdue"
                                            TextColor="{StaticResource Danger}"
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center" />
-                                </Border>
+                                    </Border>
 
-                            </Grid>
+                                </Grid>
 
-                            <Label Text="{Binding ., Converter={StaticResource summary}}"
+                                <Label Text="{Binding ., Converter={StaticResource summary}}"
                                    Grid.Row="2"
                                    Grid.ColumnSpan="2"/>
 
 
-                            <!--Bottom column-->
-                            <Button Text="Complete"
+                                <!--Bottom column-->
+                                <Button Text="Complete"
                                     CornerRadius="30"
                                     Command="{Binding CompleteCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
                                     CommandParameter="{Binding Id}"
                                     Grid.Row="3" />
 
-                            <ImageButton Source="delete.svg"
+                                <ImageButton Source="delete.svg"
                                          Padding="2"
                                          BackgroundColor="{StaticResource DangerBackgroud}"
                                          Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
@@ -168,14 +172,15 @@
                                          Grid.Row="3" Grid.Column="2" />
 
 
-                        </Grid>
+                            </Grid>
 
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EditCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EditCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
                                                   CommandParameter="{Binding Id}" />
-                        </Border.GestureRecognizers>
+                            </Border.GestureRecognizers>
 
-                    </Border>
+                        </Border>
+                    </Grid>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
