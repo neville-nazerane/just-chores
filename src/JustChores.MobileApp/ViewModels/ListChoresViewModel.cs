@@ -82,6 +82,7 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         Task BackupAsync() => _repository.BackupAsync();
 
+
         public override void OnNavigatedTo()
         {
             WeakReferenceMessenger.Default.Register<BackupRestoredMessage>(this, OnBackupRestored);

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:JustChores.MobileApp.ViewModels"
+             xmlns:m="clr-namespace:JustChores.MobileApp.Models"
              xmlns:conv="clr-namespace:JustChores.MobileApp.ValueConverters"
              x:Class="JustChores.MobileApp.Pages.AddChorePage"
              x:DataType="vm:AddChoreViewModel"
@@ -34,7 +35,8 @@
     </ContentPage.Resources>
 
 
-    <Grid Margin="20, 30, 20, 0">
+    <Grid Margin="20, 30, 20, 0"
+          RowSpacing="20">
         <Grid.RowDefinitions>
             
             <!--Title label-->
@@ -60,7 +62,7 @@
             <RowDefinition Height="*" />
             
             <!--Save button-->
-            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
 
         </Grid.RowDefinitions>
 
@@ -86,16 +88,140 @@
                class="inputLbl" />
 
         <!--Occurrence Selection-->
+
         <Grid Grid.Row="3"
               ColumnDefinitions="*, *, *, *"
               ColumnSpacing="4">
 
             <Border StrokeShape="RoundRectangle 40"
-                    StrokeThickness="{Binding Frequency}">
-                <Label Text="Day" />
+                    StrokeThickness="{Binding FrequencyType, Converter={StaticResource occToBorderThickness}, ConverterParameter='Day'}"
+                    BackgroundColor="{Binding FrequencyType, Converter={StaticResource occToBackgroundColor}, ConverterParameter='Day'}"
+                    Stroke="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Day'}">
+                <Label Text="Day"
+                       TextColor="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Day'}"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center" />
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
+                                          CommandParameter="{x:Static m:FrequencyType.Day}" />
+                </Border.GestureRecognizers>
             </Border>
-            
+
+            <Border StrokeShape="RoundRectangle 40"
+                    Grid.Column="1"
+                    StrokeThickness="{Binding FrequencyType, Converter={StaticResource occToBorderThickness}, ConverterParameter='Week'}"
+                    BackgroundColor="{Binding FrequencyType, Converter={StaticResource occToBackgroundColor}, ConverterParameter='Week'}"
+                    Stroke="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Week'}">
+                <Label Text="Week"
+                       TextColor="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Week'}"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center" />
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
+                                          CommandParameter="{x:Static m:FrequencyType.Week}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 40"
+                    Grid.Column="2"
+                    StrokeThickness="{Binding FrequencyType, Converter={StaticResource occToBorderThickness}, ConverterParameter='Month'}"
+                    BackgroundColor="{Binding FrequencyType, Converter={StaticResource occToBackgroundColor}, ConverterParameter='Month'}"
+                    Stroke="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Month'}">
+                <Label Text="Month"
+                       TextColor="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Month'}"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center" />
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
+                                          CommandParameter="{x:Static m:FrequencyType.Month}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 40"
+                    Grid.Column="3"
+                    StrokeThickness="{Binding FrequencyType, Converter={StaticResource occToBorderThickness}, ConverterParameter='Year'}"
+                    BackgroundColor="{Binding FrequencyType, Converter={StaticResource occToBackgroundColor}, ConverterParameter='Year'}"
+                    Stroke="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Year'}">
+                <Label Text="Year"
+                       TextColor="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Year'}"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center" />
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
+                                          CommandParameter="{x:Static m:FrequencyType.Year}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+
         </Grid>
+
+
+        <!--Frequency--> 
+        <Grid Grid.Row="4"
+              ColumnDefinitions="*, *">
+            <Label Text="Frequency"
+                    class="inputLbl" />
+
+            <Border Grid.Column="1"
+                    StrokeShape="RoundRectangle 8">
+                <Grid ColumnDefinitions="20, * , 20">
+                    <Label Text="-" 
+                           FontAttributes="Bold"
+                           FontSize="Large"
+                           class="centered" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DecreaseFrequencyCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Entry Text="{Binding Frequency}" 
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           Grid.Column="1" />
+
+                    <Label Text="+"
+                           FontAttributes="Bold"
+                           FontSize="Large"
+                           class="centered" 
+                           Grid.Column="2" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IncreaseFrequencyCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Border>
+        </Grid>
+        
+        
+        <!--Date-->
+        <Grid Grid.Row="5"
+              ColumnDefinitions="*, *" >
+            <Label Text="{Binding DateLabel}"
+                   class="inputLbl" />
+
+            <DatePicker Date="{Binding DueOn}"
+                        Grid.Column="1" />
+
+        </Grid>
+        
+        <!--Summary-->
+        <Border Grid.Row="6"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 8"
+                BackgroundColor="#E04B91F1" >
+            <Label Text="{Binding Summary}"
+                   class="centered"
+                   FontAttributes="Bold" />
+        </Border>
+
+
+        <Button Grid.Row="8" 
+                Text="{Binding SubmitText}"
+                Command="{Binding SubmitCommand}" />
 
     </Grid>
     

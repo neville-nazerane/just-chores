@@ -17,6 +17,67 @@
         <VerticalStackLayout
                 Margin="10, 0">
 
+            <Grid>
+
+                <Image Source="dotnet_bot.png"
+                    WidthRequest="250"
+                    HeightRequest="310">
+                    <Image.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="20,20"
+                                Radius="40"
+                                Opacity="0.8" />
+                    </Image.Shadow>
+                </Image>
+            </Grid>
+
+            <Grid Margin="0, 40, 0, 20">
+
+                <Button Text="Hello">
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+                                 Offset="20,20"
+                                 Radius="40"
+                                 Opacity="0.8" />
+                    </Button.Shadow>
+                </Button>
+            </Grid>
+
+            <Grid Margin="0, 40, 0, 20">
+
+                
+                <Border StrokeShape="RoundRectangle 10"
+                        Background="White"
+                        StrokeThickness=".5"
+                        Stroke="Black"
+                        Padding="10, 0">
+                    <Border.Shadow>
+                        <Shadow Brush="Gray"
+                                Offset="10,10"
+                                Opacity="1" />
+                    </Border.Shadow>
+                    <Entry Placeholder="Hello" />  
+                </Border>
+
+            </Grid>
+
+
+            <Grid Margin="0, 40, 0, 20">
+
+                <Border HeightRequest="120"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 6">
+                    <Border.Shadow>
+                        <Shadow Brush="Black"
+                                 Offset="20,20"
+                                 Radius="40"
+                                 Opacity="0.8" />
+                    </Border.Shadow>
+                </Border>
+            </Grid>
+            
+            
+
             <Border StrokeShape="RoundRectangle 6" 
                     StrokeThickness="0" >
 

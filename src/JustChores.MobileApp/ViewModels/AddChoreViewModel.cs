@@ -24,8 +24,8 @@ namespace JustChores.MobileApp.ViewModels
         [ObservableProperty]
         int frequency;
 
-        [ObservableProperty]
-        int frequencyIndex;
+        //[ObservableProperty]
+        //int frequencyIndex;
 
         [ObservableProperty]
         string summary;
@@ -40,7 +40,13 @@ namespace JustChores.MobileApp.ViewModels
         string title;
 
         [ObservableProperty]
-        Dictionary<FrequencyType, string> listedFrequencies;
+        FrequencyType frequencyType;
+
+        [ObservableProperty]
+        string dateLabel;
+
+        //[ObservableProperty]
+        //Dictionary<FrequencyType, string> listedFrequencies;
 
         public AddChoreViewModel(MainRepository repository)
         {
@@ -58,22 +64,24 @@ namespace JustChores.MobileApp.ViewModels
             if (ChoreId is not null)
             {
                 Title = "Update Chore";
+                DateLabel = "Starting Date";
                 SubmitText = "Update";
                 Model = _repository.GetChore(ChoreId.Value);
-                FrequencyIndex = Enum.GetValues<FrequencyType>().ToList().IndexOf(Model.FrequencyType);
+                //FrequencyIndex = Enum.GetValues<FrequencyType>().ToList().IndexOf(Model.FrequencyType);
                 Frequency = Model.Frequency;
                 DueOn = Model.DueOn ?? DateTime.Now.Date;
             }
             else
             {
                 Title = "Create a Chore";
+                DateLabel = "Due Date";
                 SubmitText = "Add";
                 Model = new()
                 {
                     FrequencyType = FrequencyType.Day,
                 };
                 Frequency = 1;
-                FrequencyIndex = 0;
+                //FrequencyIndex = 0;
                 DueOn = DateTime.Now;
             }
         }
@@ -96,6 +104,18 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         Task ToListAsync() => RedirectToAsync("//chores");
 
+        [RelayCommand]
+        void SetFrequencyType(FrequencyType frequencyType) => FrequencyType = frequencyType;
+
+        [RelayCommand]
+        void IncreaseFrequency() => Frequency++;
+
+        [RelayCommand]
+        void DecreaseFrequency()
+        {
+            if (Frequency > 1) Frequency--;
+        }
+
         partial void OnChoreIdChanged(int? value)
         {
             ChoreId = value;
@@ -115,23 +135,28 @@ namespace JustChores.MobileApp.ViewModels
                 return;
             }
             Model.Frequency = newValue;
-            if (true || oldValue == 1 ^ newValue == 1)
-            {
-                var oldIndex = FrequencyIndex;
-                if (newValue > 1)
-                    ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => $"{f.ToString()}s");
-                else
-                    ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
-                FrequencyIndex = oldIndex;
-            }
+            //if (true || oldValue == 1 ^ newValue == 1)
+            //{
+            //    var oldIndex = FrequencyIndex;
+            //    if (newValue > 1)
+            //        ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => $"{f.ToString()}s");
+            //    else
+            //        ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
+            //    FrequencyIndex = oldIndex;
+            //}
             UpdateSummary();
         }
 
-        partial void OnFrequencyIndexChanged(int value)
+        partial void OnFrequencyTypeChanged(FrequencyType oldValue, FrequencyType newValue)
         {
-            Model.FrequencyType = ListedFrequencies.ElementAtOrDefault(value).Key;
-            UpdateSummary();
+            Model.FrequencyType = newValue;
         }
+
+        //partial void OnFrequencyIndexChanged(int value)
+        //{
+        //    Model.FrequencyType = ListedFrequencies.ElementAtOrDefault(value).Key;
+        //    UpdateSummary();
+        //}
 
         private void UpdateSummary()
         {
