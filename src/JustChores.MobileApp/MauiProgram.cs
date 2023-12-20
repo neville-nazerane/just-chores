@@ -58,7 +58,13 @@ namespace JustChores.MobileApp
             {
 #if ANDROID
                 handler.PlatformView.BackgroundTintList = ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
-                //handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.Transparent);
+#endif
+            });
+
+            Microsoft.Maui.Handlers.DatePickerHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
+            {
+#if ANDROID
+                handler.PlatformView.BackgroundTintList = ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
 #endif
             });
         }
