@@ -58,6 +58,12 @@
 		<MauiImage Update="Resources\Images\calendar.svg" BaseSize="14,14" />
 		<MauiImage Update="Resources\Images\setting.svg" BaseSize="24,24" />
 		<MauiImage Update="Resources\Images\delete.svg" BaseSize="14,15.77" />
+		<MauiImage Update="Resources\Images\privacy.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\diagnostic.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\auto_sun.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\sun.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\moon.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\next_arrow.svg" BaseSize="14.51,7.64" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -81,6 +87,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ListChoresPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -10,7 +10,9 @@ public static class GenerationUtils
         => services.AddTransient<AddChorePage>()
                    .AddTransient<BorderPage>()
                    .AddTransient<ListChoresPage>()
+                   .AddTransient<SettingsPage>()
                    .AddTransient<AddChoreViewModel>()
-                   .AddTransient<ListChoresViewModel>();
+                   .AddTransient<ListChoresViewModel>()
+                   .AddTransient<SettingsViewModel>();
 
 }
