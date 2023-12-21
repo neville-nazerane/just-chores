@@ -79,17 +79,25 @@ public partial class ThemeButtonComponent : Border
 
 	void SetIconImage(string image)
 	{
-		icon.Source = ImageSource.FromResource(image);
+		icon.Source = ImageSource.FromFile($"{image}.png");
 	}
 
-    private void SetSelectedTheme(AppTheme newValue)
-    {
-        throw new NotImplementedException();
-    }
+	void SetSelectedTheme(AppTheme _) => Recheck();
 
-    private void SetSelfTheme(AppTheme newValue)
-    {
-        throw new NotImplementedException();
+	void SetSelfTheme(AppTheme _) => Recheck();
+
+	void Recheck()
+	{
+		if (SelfTheme == SelectedTheme)
+		{
+			border.Stroke = Color.FromArgb("#4B91F1");
+			titleLbl.TextColor = Color.FromArgb("#4B91F1");
+        }
+        else
+        {
+            border.Stroke = Colors.Transparent;
+            titleLbl.TextColor = Colors.Black;
+        }
     }
 
 

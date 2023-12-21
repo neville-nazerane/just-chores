@@ -2,13 +2,28 @@
 <Border xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JustChores.MobileApp.Components.ThemeButtonComponent"
+             Stroke="#4B91F1"
+             BackgroundColor="White"
+             StrokeThickness="1"
+             StrokeShape="RoundRectangle 4"
+             Padding="12, 0"
              x:Name="border">
 
-    <Grid ColumnDefinitions="12, auto">
+    <Border.Shadow>
+        <Shadow Radius="90"
+                Offset="-9, -20"
+                Opacity=".2"/>
+    </Border.Shadow>
 
-        <Image x:Name="icon" />
+    <Grid ColumnDefinitions="22, auto"
+          ColumnSpacing="8"
+          Padding="0">
+
+        <Image x:Name="icon"  />
         
         <Label Grid.Column="1" 
+               BackgroundColor="Transparent"
+               class="centered"
                x:Name="titleLbl" />
 
     </Grid>
