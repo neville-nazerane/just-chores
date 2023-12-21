@@ -5,8 +5,12 @@
              xmlns:m="clr-namespace:JustChores.MobileApp.Models"
              xmlns:conv="clr-namespace:JustChores.MobileApp.ValueConverters"
              x:Class="JustChores.MobileApp.Pages.AddChorePage"
-             x:DataType="vm:AddChoreViewModel"
-             Title="{Binding Title}">
+             x:DataType="vm:AddChoreViewModel">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="True"
+                            IsEnabled="True" />
+    </Shell.BackButtonBehavior>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="View All"
@@ -34,227 +38,209 @@
 
     </ContentPage.Resources>
 
+    <Grid class="pageLayout">
 
-    <Grid Margin="20, 30, 20, 0"
-          RowSpacing="20">
-        <Grid.RowDefinitions>
-            
-            <!--Title label-->
-            <RowDefinition Height="{StaticResource labelHeight}" />
-            <!--Title input--> 
-            <RowDefinition Height="{StaticResource inputHeight}" />
+        <Grid class="header">
 
-            <!--Occurrence label-->
-            <RowDefinition Height="{StaticResource labelHeight}" />
-            <!--Occurrence items--> 
-            <RowDefinition Height="{StaticResource inputHeight}" />
-            
-            <!--Frequency label/input--> 
-            <RowDefinition Height="{StaticResource inputHeight}" />
-            
-            <!--Starting date-->
-            <RowDefinition Height="{StaticResource inputHeight}" />
+            <ImageButton Source="back" 
+                         Command="{Binding BackCommand}"
+                         class="toolBtn" />
 
-            <!--Summary--> 
-            <RowDefinition Height="100" />
-            
-            <!--Remaining space-->
-            <RowDefinition Height="*" />
-            
-            <!--Save button-->
-            <RowDefinition Height="50" />
+            <Label Text="{Binding Title}"
+                   class="centered, headerText" />
 
-        </Grid.RowDefinitions>
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              Margin="20, 30, 20, 0"
+              RowSpacing="20">
+            <Grid.RowDefinitions>
+
+                <!--Title label-->
+                <RowDefinition Height="{StaticResource labelHeight}" />
+                <!--Title input-->
+                <RowDefinition Height="{StaticResource inputHeight}" />
+
+                <!--Occurrence label-->
+                <RowDefinition Height="{StaticResource labelHeight}" />
+                <!--Occurrence items-->
+                <RowDefinition Height="{StaticResource inputHeight}" />
+
+                <!--Frequency label/input-->
+                <RowDefinition Height="{StaticResource inputHeight}" />
+
+                <!--Starting date-->
+                <RowDefinition Height="{StaticResource inputHeight}" />
+
+                <!--Summary-->
+                <RowDefinition Height="100" />
+
+                <!--Remaining space-->
+                <RowDefinition Height="*" />
+
+                <!--Save button-->
+                <RowDefinition Height="50" />
+
+            </Grid.RowDefinitions>
 
 
-        <Label Text="Chore Title"
+            <Label Text="Chore Title"
                class="inputLbl" />
 
-        <Border Grid.Row="1"
+            <Border Grid.Row="1"
                 StrokeShape="RoundRectangle 8">
-            <Border.Shadow>
-                <Shadow Brush="Gray"
+                <Border.Shadow>
+                    <Shadow Brush="Gray"
                         Offset="20,20"
                         Radius="40"
                         Opacity="0.8"/>
-            </Border.Shadow>
-            <Entry Placeholder="Title"
+                </Border.Shadow>
+                <Entry Placeholder="Title"
                    Text="{Binding Model.Title}"/>
-        </Border>
+            </Border>
 
 
-        <Label Text="Chore Occurrence"
+            <Label Text="Chore Occurrence"
                Grid.Row="2"
                class="inputLbl" />
 
-        <!--Occurrence Selection-->
+            <!--Occurrence Selection-->
 
-        <Grid Grid.Row="3"
+            <Grid Grid.Row="3"
               ColumnDefinitions="*, *, *, *"
               ColumnSpacing="4">
 
-            <Border StrokeShape="RoundRectangle 40"
+                <Border StrokeShape="RoundRectangle 40"
                     StrokeThickness="{Binding FrequencyType, Converter={StaticResource occToBorderThickness}, ConverterParameter='Day'}"
                     BackgroundColor="{Binding FrequencyType, Converter={StaticResource occToBackgroundColor}, ConverterParameter='Day'}"
                     Stroke="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Day'}">
-                <Label Text="Day"
+                    <Label Text="Day"
                        TextColor="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Day'}"
                         VerticalTextAlignment="Center"
                         HorizontalTextAlignment="Center" />
 
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
                                           CommandParameter="{x:Static m:FrequencyType.Day}" />
-                </Border.GestureRecognizers>
-            </Border>
+                    </Border.GestureRecognizers>
+                </Border>
 
-            <Border StrokeShape="RoundRectangle 40"
+                <Border StrokeShape="RoundRectangle 40"
                     Grid.Column="1"
                     StrokeThickness="{Binding FrequencyType, Converter={StaticResource occToBorderThickness}, ConverterParameter='Week'}"
                     BackgroundColor="{Binding FrequencyType, Converter={StaticResource occToBackgroundColor}, ConverterParameter='Week'}"
                     Stroke="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Week'}">
-                <Label Text="Week"
+                    <Label Text="Week"
                        TextColor="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Week'}"
                         VerticalTextAlignment="Center"
                         HorizontalTextAlignment="Center" />
 
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
                                           CommandParameter="{x:Static m:FrequencyType.Week}" />
-                </Border.GestureRecognizers>
-            </Border>
+                    </Border.GestureRecognizers>
+                </Border>
 
-            <Border StrokeShape="RoundRectangle 40"
+                <Border StrokeShape="RoundRectangle 40"
                     Grid.Column="2"
                     StrokeThickness="{Binding FrequencyType, Converter={StaticResource occToBorderThickness}, ConverterParameter='Month'}"
                     BackgroundColor="{Binding FrequencyType, Converter={StaticResource occToBackgroundColor}, ConverterParameter='Month'}"
                     Stroke="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Month'}">
-                <Label Text="Month"
+                    <Label Text="Month"
                        TextColor="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Month'}"
                         VerticalTextAlignment="Center"
                         HorizontalTextAlignment="Center" />
 
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
                                           CommandParameter="{x:Static m:FrequencyType.Month}" />
-                </Border.GestureRecognizers>
-            </Border>
+                    </Border.GestureRecognizers>
+                </Border>
 
-            <Border StrokeShape="RoundRectangle 40"
+                <Border StrokeShape="RoundRectangle 40"
                     Grid.Column="3"
                     StrokeThickness="{Binding FrequencyType, Converter={StaticResource occToBorderThickness}, ConverterParameter='Year'}"
                     BackgroundColor="{Binding FrequencyType, Converter={StaticResource occToBackgroundColor}, ConverterParameter='Year'}"
                     Stroke="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Year'}">
-                <Label Text="Year"
+                    <Label Text="Year"
                        TextColor="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Year'}"
                         VerticalTextAlignment="Center"
                         HorizontalTextAlignment="Center" />
 
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
                                           CommandParameter="{x:Static m:FrequencyType.Year}" />
-                </Border.GestureRecognizers>
-            </Border>
+                    </Border.GestureRecognizers>
+                </Border>
 
 
-        </Grid>
+            </Grid>
 
 
-        <!--Frequency--> 
-        <Grid Grid.Row="4"
+            <!--Frequency-->
+            <Grid Grid.Row="4"
               ColumnDefinitions="*, *">
-            <Label Text="Frequency"
+                <Label Text="Frequency"
                     class="inputLbl" />
 
-            <Border Grid.Column="1"
+                <Border Grid.Column="1"
                     StrokeShape="RoundRectangle 8">
-                <Grid ColumnDefinitions="20, * , 20">
-                    <Label Text="-" 
+                    <Grid ColumnDefinitions="20, * , 20">
+                        <Label Text="-" 
                            FontAttributes="Bold"
                            FontSize="Large"
                            class="centered" >
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding DecreaseFrequencyCommand}" />
-                        </Label.GestureRecognizers>
-                    </Label>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding DecreaseFrequencyCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
 
-                    <Entry Text="{Binding Frequency}" 
+                        <Entry Text="{Binding Frequency}" 
                            HorizontalTextAlignment="Center"
                            VerticalTextAlignment="Center"
                            Grid.Column="1" />
 
-                    <Label Text="+"
+                        <Label Text="+"
                            FontAttributes="Bold"
                            FontSize="Large"
                            class="centered" 
                            Grid.Column="2" >
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding IncreaseFrequencyCommand}" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                </Grid>
-            </Border>
-        </Grid>
-        
-        
-        <!--Date-->
-        <Grid Grid.Row="5"
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IncreaseFrequencyCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Border>
+            </Grid>
+
+
+            <!--Date-->
+            <Grid Grid.Row="5"
               ColumnDefinitions="*, *" >
-            <Label Text="{Binding DateLabel}"
+                <Label Text="{Binding DateLabel}"
                    class="inputLbl" />
 
-            <DatePicker Date="{Binding DueOn}"
+                <DatePicker Date="{Binding DueOn}"
                         Grid.Column="1" />
 
-        </Grid>
-        
-        <!--Summary-->
-        <Border Grid.Row="6"
+            </Grid>
+
+            <!--Summary-->
+            <Border Grid.Row="6"
                 StrokeThickness="0"
                 StrokeShape="RoundRectangle 8"
                 BackgroundColor="#E04B91F1" >
-            <Label Text="{Binding Summary}"
+                <Label Text="{Binding Summary}"
                    class="centered"
                    FontAttributes="Bold" />
-        </Border>
+            </Border>
 
 
-        <Button Grid.Row="8" 
+            <Button Grid.Row="8" 
                 Text="{Binding SubmitText}"
                 Command="{Binding SubmitCommand}" />
 
+        </Grid>
     </Grid>
-    
-
-    <!--<Grid RowDefinitions="auto, *, 50"
-        RowSpacing="20"
-        Margin="20, 40, 20, 5">
-
-        <VerticalStackLayout>
-            <Entry Placeholder="Title"
-                Text="{Binding Model.Title}" />
-
-            <Entry Placeholder="Frequency"
-                Keyboard="Numeric"
-                Text="{Binding Frequency}" />
-
-            <Picker ItemsSource="{Binding ListedFrequencies, Converter={x:StaticResource dictonaryToValues}}"
-                    SelectedIndex="{Binding FrequencyIndex}" />
-
-            <Grid ColumnDefinitions="auto, *">
-                <Label Text="Due On" />
-                <DatePicker Date="{Binding DueOn}"
-                            Grid.Column="1" />
-            </Grid>
-
-            <Label Text="{Binding Summary}"
-                   TextType="Html" />
-
-        </VerticalStackLayout>
-
-        <Button Text="{Binding SubmitText}"
-                Command="{Binding SubmitCommand}"
-                Grid.Row="2" />
-    </Grid>-->
     
 </ContentPage>

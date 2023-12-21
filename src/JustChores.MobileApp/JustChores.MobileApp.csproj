@@ -64,6 +64,7 @@
 		<MauiImage Update="Resources\Images\sun.svg" BaseSize="20,20" />
 		<MauiImage Update="Resources\Images\moon.svg" BaseSize="20,20" />
 		<MauiImage Update="Resources\Images\next_arrow.svg" BaseSize="14.51,7.64" />
+		<MauiImage Update="Resources\Images\back.svg" BaseSize="12.1,21.72" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />

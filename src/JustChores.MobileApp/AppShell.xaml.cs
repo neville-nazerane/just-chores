@@ -1,4 +1,7 @@
-﻿namespace JustChores.MobileApp
+﻿using Microsoft.Maui.Controls;
+using System.Reflection;
+
+namespace JustChores.MobileApp
 {
     public partial class AppShell : Shell
     {

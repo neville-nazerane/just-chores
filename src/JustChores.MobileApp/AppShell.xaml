@@ -19,12 +19,6 @@
       ContentTemplate="{DataTemplate pages:BorderPage}"
       Route="chores" />-->
 
-
-    <ShellContent
-        Title="Settings"
-        ContentTemplate="{DataTemplate pages:SettingsPage}"
-        Route="chores" />
-
     <ShellContent
         Title="List Chores"
         ContentTemplate="{DataTemplate pages:ListChoresPage}"
@@ -32,8 +26,14 @@
 
     <ShellContent
         Title="Editor"
-        FlyoutItemIsVisible="False"
         ContentTemplate="{DataTemplate pages:AddChorePage}"
         Route="editor" />
+
+    <ShellContent
+        Title="Settings"
+        ContentTemplate="{DataTemplate pages:SettingsPage}"
+        Route="settings" />
+
+
 
 </Shell>

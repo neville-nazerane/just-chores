@@ -80,8 +80,7 @@ namespace JustChores.MobileApp.ViewModels
         Task AddAsync() => RedirectToAsync($"//editor?id=null");
 
         [RelayCommand]
-        Task BackupAsync() => _repository.BackupAsync();
-
+        Task GoToSettingsAsync() => RedirectToAsync("//settings");
 
         public override void OnNavigatedTo()
         {

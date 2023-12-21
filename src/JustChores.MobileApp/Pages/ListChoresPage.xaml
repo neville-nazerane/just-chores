@@ -19,58 +19,74 @@
 
     </ContentPage.Resources>
 
-    <RefreshView Command="{Binding RefreshCommand}"
-                 IsRefreshing="{Binding IsRefreshing}">
-        <CollectionView ItemsSource="{Binding Chores}"
+    <Grid class="pageLayout">
+
+        <Grid class="header"
+              Padding="10, 0">
+
+            <Label class="headerText, centered"
+                   Text="Chores" />
+
+            <ImageButton Grid.Column="2"
+                         Source="setting"
+                         class="toolBtn"
+                         Command="{Binding GoToSettingsCommand}" />
+
+        </Grid>
+        
+        <RefreshView Grid.Row="1" 
+                     Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Chores}"
                         Header="{Binding .}" >
 
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical"
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
                             VerticalItemSpacing="10"
                             Span="{OnIdiom Phone=1, Tablet=2}" />
-            </CollectionView.ItemsLayout>
+                </CollectionView.ItemsLayout>
 
-            <CollectionView.EmptyViewTemplate>
-                <DataTemplate>
-                    <Label Text="You have no chores for you" />
-                </DataTemplate>
-            </CollectionView.EmptyViewTemplate>
+                <CollectionView.EmptyViewTemplate>
+                    <DataTemplate>
+                        <Label Text="You have no chores for you" />
+                    </DataTemplate>
+                </CollectionView.EmptyViewTemplate>
 
-            <CollectionView.HeaderTemplate>
-                <DataTemplate>
-                    <Grid ColumnDefinitions="5*, 2*"
+                <CollectionView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="5*, 2*"
                               Margin="10, 10, 10, 5" >
 
-                        <Label Text="Your Chores"
+                            <Label Text="Your Chores"
                                    FontSize="Large"
                                    FontAttributes="Bold" />
 
-                        <!--Add Button-->
+                            <!--Add Button-->
 
-                        <Border BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" 
+                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" 
                                 Stroke="{StaticResource ButtonColor}"
                                 StrokeShape="RoundRectangle 4"
                                 Grid.Column="1" >
 
-                            <Grid 
+                                <Grid 
                                 Padding="10, 8, 4, 8"
                                 ColumnDefinitions="20, *"
                                 BackgroundColor="Transparent" >
 
-                                <!--<RoundRectangle Stroke="{StaticResource ButtonColor}"
+                                    <!--<RoundRectangle Stroke="{StaticResource ButtonColor}"
                                   Grid.ColumnSpan="2"
                                   CornerRadius="4" />-->
 
-                                <Grid HeightRequest="20">
-                                    <Ellipse Fill="{StaticResource ButtonColor}" />
-                                    <Label Text="+"
+                                    <Grid HeightRequest="20">
+                                        <Ellipse Fill="{StaticResource ButtonColor}" />
+                                        <Label Text="+"
                                              FontAttributes="Bold"
                                              HorizontalTextAlignment="Center"
                                              VerticalTextAlignment="Center"
                                              TextColor="{StaticResource White}" />
-                                </Grid>
+                                    </Grid>
 
-                                <Label Text="Add"
+                                    <Label Text="Add"
                                          Grid.Column="1"
                                          VerticalTextAlignment="Center"
                                          HorizontalTextAlignment="Center"
@@ -78,93 +94,93 @@
 
 
 
-                            </Grid>
+                                </Grid>
 
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding AddCommand}" />
-                            </Border.GestureRecognizers>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddCommand}" />
+                                </Border.GestureRecognizers>
 
-                        </Border>
+                            </Border>
 
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.HeaderTemplate>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.HeaderTemplate>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="m:Chore">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Chore">
 
-                    <Grid>
-                        <Grid.Shadow>
-                            <Shadow Brush="Gray"
+                        <Grid>
+                            <Grid.Shadow>
+                                <Shadow Brush="Gray"
                                      Offset="20,20"
                                      Radius="40"
                                      Opacity="0.8"/>
-                        </Grid.Shadow>
-                        <Border StrokeShape="RoundRectangle 6"
+                            </Grid.Shadow>
+                            <Border StrokeShape="RoundRectangle 6"
                                 BackgroundColor="{StaticResource White}"
                                 Margin="10, 5" >
-                            <!--<Border.Shadow>
+                                <!--<Border.Shadow>
                                
                             </Border.Shadow>-->
-                            <Grid
+                                <Grid
                               Padding="12"
                               RowSpacing="8"
                               RowDefinitions="auto, 40, auto, 40"
                               ColumnDefinitions="auto, *, 30">
 
-                                <Label Text="{Binding Title}"
+                                    <Label Text="{Binding Title}"
                                    FontAttributes="Bold"
                                    Grid.ColumnSpan="2"
                                    FontSize="Large" />
 
-                                <Grid ColumnDefinitions="30, auto, auto"
+                                    <Grid ColumnDefinitions="30, auto, auto"
                                   ColumnSpacing="12"
                                   Grid.ColumnSpan="2"
                                   Grid.Row="1">
-                                    <Image Source="calendar.svg" />
+                                        <Image Source="calendar.svg" />
 
-                                    <Label Text="{Binding DueOn, StringFormat='{0:ddd, MMMM dd}'}"
+                                        <Label Text="{Binding DueOn, StringFormat='{0:ddd, MMMM dd}'}"
                                       HorizontalTextAlignment="Center"
                                        VerticalTextAlignment="Center"
                                        Grid.Column="1"/>
 
-                                    <Border Grid.Column="2"
+                                        <Border Grid.Column="2"
                                         IsVisible="{Binding DueOn, Converter={StaticResource due}, ConverterParameter='due'}"
                                         BackgroundColor="{StaticResource ButtonBackground}"
                                         Padding="15, 5"
                                         StrokeShape="RoundRectangle 40">
-                                        <Label Text="Due" 
+                                            <Label Text="Due" 
                                            TextColor="{StaticResource SelectionLightBackground}"
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center" />
-                                    </Border>
+                                        </Border>
 
-                                    <Border Grid.Column="2"
+                                        <Border Grid.Column="2"
                                         IsVisible="{Binding DueOn, Converter={StaticResource due}, ConverterParameter='overdue'}"
                                         BackgroundColor="{StaticResource DangerBackgroud}"
                                         Padding="15, 5"
                                         StrokeShape="RoundRectangle 40">
-                                        <Label Text="Overdue"
+                                            <Label Text="Overdue"
                                            TextColor="{StaticResource Danger}"
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center" />
-                                    </Border>
+                                        </Border>
 
-                                </Grid>
+                                    </Grid>
 
-                                <Label Text="{Binding ., Converter={StaticResource summary}}"
+                                    <Label Text="{Binding ., Converter={StaticResource summary}}"
                                    Grid.Row="2"
                                    Grid.ColumnSpan="2"/>
 
 
-                                <!--Bottom column-->
-                                <Button Text="Complete"
+                                    <!--Bottom column-->
+                                    <Button Text="Complete"
                                     CornerRadius="30"
                                     Command="{Binding CompleteCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
                                     CommandParameter="{Binding Id}"
                                     Grid.Row="3" />
 
-                                <ImageButton Source="delete.svg"
+                                    <ImageButton Source="delete.svg"
                                          Padding="2"
                                          BackgroundColor="{StaticResource DangerBackgroud}"
                                          Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
@@ -172,20 +188,21 @@
                                          Grid.Row="3" Grid.Column="2" />
 
 
-                            </Grid>
+                                </Grid>
 
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding EditCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding EditCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
                                                   CommandParameter="{Binding Id}" />
-                            </Border.GestureRecognizers>
+                                </Border.GestureRecognizers>
 
-                        </Border>
-                    </Grid>
+                            </Border>
+                        </Grid>
 
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-        </CollectionView>
-    </RefreshView>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
 
 </ContentPage>

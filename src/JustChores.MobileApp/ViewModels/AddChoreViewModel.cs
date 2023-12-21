@@ -102,6 +102,9 @@ namespace JustChores.MobileApp.ViewModels
         }
 
         [RelayCommand]
+        Task BackAsync() => RedirectToAsync("//chores");
+
+        [RelayCommand]
         Task ToListAsync() => RedirectToAsync("//chores");
 
         [RelayCommand]

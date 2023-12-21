@@ -4,7 +4,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-
     <Style TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource ButtonColor}" />
         <Setter Property="TextColor" Value="{StaticResource White}" />
@@ -12,6 +11,8 @@
 
     <Style ApplyToDerivedTypes="True"
            TargetType="Page">
+        <Setter Property="Shell.NavBarIsVisible" Value="False" />
+        
         <Setter Property="Shell.BackgroundColor"
                 Value="{AppThemeBinding Light={StaticResource LightHeader}, Dark={StaticResource DarkHeader}}" />
         <Setter Property="Shell.TitleColor"
@@ -20,6 +21,44 @@
         <Setter Property="BackgroundColor"
                 Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" />
     </Style>
+
+    <!--#region For the Header -->
+    
+    <Style TargetType="Grid"
+           Class="pageLayout">
+        <Setter Property="RowDefinitions"
+                Value="50, *" />
+    </Style>
+
+    <Style TargetType="Grid"
+           Class="header">
+
+        <Setter Property="ColumnDefinitions" Value="30, *, 30" />
+
+        <Setter Property="Padding" Value="10, 0" />
+
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource LightHeader}, Dark={StaticResource DarkHeader}}" />
+    </Style>
+
+    <Style TargetType="ImageButton"
+           Class="toolBtn">
+        <Setter Property="HeightRequest" Value="20" />
+    </Style>
+
+    <Style TargetType="Label"
+           Class="headerText">
+        <Setter Property="FontAttributes" Value="Bold" />
+        
+        <Setter Property="FontSize" Value="Large" />
+
+        <Setter Property="Grid.Column" Value="1" />
+
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+    
+    <!--#endregion-->
 
     <Style TargetType="Label">
         <Setter Property="TextColor"
