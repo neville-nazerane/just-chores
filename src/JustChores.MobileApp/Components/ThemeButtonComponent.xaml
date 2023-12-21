@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Border xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JustChores.MobileApp.Components.ThemeButtonComponent"
+             x:Name="border">
+
+    <Grid ColumnDefinitions="12, auto">
+
+        <Image x:Name="icon" />
+        
+        <Label Grid.Column="1" 
+               x:Name="titleLbl" />
+
+    </Grid>
+    
+</Border>
