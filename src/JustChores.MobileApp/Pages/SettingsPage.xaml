@@ -101,9 +101,14 @@
                     Grid.Column="1"
                     VerticalTextAlignment="Center" />
 
-                    <Switch Grid.Column="2" />
+                    <Switch Grid.Column="2"
+                            IsToggled="{Binding IsDiagnosticsEnabled, Mode=OneWay}" />
 
                 </Grid>
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SwitchDiagnosticsEnabledCommand}" />
+                </Border.GestureRecognizers>
             </Border>
 
             <!--Privacy policy-->
@@ -129,6 +134,10 @@
                            Source="next_arrow" />
 
                 </Grid>
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToPrivacyPolicyCommand}" />
+                </Border.GestureRecognizers>
             </Border>
 
 

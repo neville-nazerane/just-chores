@@ -66,6 +66,12 @@
 
     </Style>
 
+
+    <Style TargetType="Switch">
+        <Setter Property="OnColor" Value="{StaticResource ButtonColor}" />
+        <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+    
     <Style TargetType="Label"
            Class="centered">
         <Setter Property="VerticalTextAlignment"

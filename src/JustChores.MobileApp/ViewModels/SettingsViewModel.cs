@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using JustChores.MobileApp.Services;
+using Microsoft.AppCenter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace JustChores.MobileApp.ViewModels
         [ObservableProperty]
         private AppTheme currentTheme;
 
+        [ObservableProperty]
+        private bool isDiagnosticsEnabled;
 
         [RelayCommand]
         Task BackAsync() => RedirectToAsync("//chores");
@@ -25,10 +28,10 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         Task BackupAsync() => _repository.BackupAsync();
 
-
         public override void OnNavigatedTo()
         {
             CurrentTheme = App.Current.UserAppTheme;
+            IsDiagnosticsEnabled = DiagnosticsUtil.IsEnabled;
             base.OnNavigatedTo();
         }
 
@@ -36,6 +39,17 @@ namespace JustChores.MobileApp.ViewModels
         {
             App.Current.UserAppTheme = newValue;
         }
+
+        [RelayCommand]
+        async Task SwitchDiagnosticsEnabledAsync()
+        {
+            var newVal = !IsDiagnosticsEnabled;
+            await DiagnosticsUtil.SetEnabledAsync(newVal);
+            IsDiagnosticsEnabled = newVal;
+        }
+
+        [RelayCommand]
+        Task GoToPrivacyPolicyAsync() => Browser.OpenAsync("https://nevillenazerane.com");
 
     }
 }

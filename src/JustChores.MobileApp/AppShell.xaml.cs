@@ -1,4 +1,7 @@
-﻿using Microsoft.Maui.Controls;
+﻿using JustChores.MobileApp.Models;
+using JustChores.MobileApp.Services;
+using Microsoft.AppCenter;
+using Microsoft.Maui.Controls;
 using System.Reflection;
 
 namespace JustChores.MobileApp
@@ -10,6 +13,22 @@ namespace JustChores.MobileApp
         public AppShell()
         {
             InitializeComponent();
+        }
+
+        protected override async void OnAppearing()
+        {
+            if (!DiagnosticsUtil.HasUserConfirmedYet())
+            {
+                var confirm = await DisplayAlert("Enable diagnostics",
+                                                   "Can you live with your self with diagnostics enabled?",
+                                                   "YES!",
+                                                   "No");
+
+                await DiagnosticsUtil.SetEnabledAsync(confirm);
+            }
+            else await DiagnosticsUtil.StartIfNeededAsync();
+
+            base.OnAppearing();
         }
 
 

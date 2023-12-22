@@ -1,4 +1,5 @@
 ﻿using Android.Content.Res;
+using AndroidX.Core.View;
 using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Markup;
 using JustChores.MobileApp.Components;
@@ -14,16 +15,19 @@ namespace JustChores.MobileApp
 {
     public static partial class MauiProgram
     {
+        private static readonly string appcenterSecret;
+
 
         public static IServiceProvider ServiceProvider { get; private set; }
 
-        private static readonly string appcenterSecret;
+        public static string AppCenterSecret => appcenterSecret;
+        
 
         public static MauiApp CreateMauiApp()
         {
             SetupUI();
 
-            AppCenter.Start(appcenterSecret, typeof(Analytics), typeof(Crashes));
+            //AppCenter.Start(appcenterSecret, typeof(Analytics), typeof(Crashes));
 
             var builder = MauiApp.CreateBuilder();
 
@@ -51,6 +55,7 @@ namespace JustChores.MobileApp
             ServiceProvider = app.Services;
             return app;
         }
+
     
         static void SetupUI()
         {
