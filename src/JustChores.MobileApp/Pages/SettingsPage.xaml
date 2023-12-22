@@ -7,6 +7,22 @@
              x:DataType="vm:SettingsViewModel"
              Title="Settings">
 
+    <ContentPage.Resources>
+
+        <Style TargetType="Border"
+               Class="panel">
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardDarkBackground}}" />
+            
+            <Setter Property="Padding" Value="15, 5" />
+
+            <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+
+        </Style>
+        
+    </ContentPage.Resources>
+
+
     <Grid class="pageLayout">
 
         <Grid class="header">
@@ -19,10 +35,10 @@
                    class="centered, headerText" />
 
         </Grid>
-        
+
         <Grid Grid.Row="1"
               Padding="12, 30"
-              RowSpacing="20">
+              RowSpacing="24">
 
             <Grid.RowDefinitions>
                 <!--Theme Height-->
@@ -46,81 +62,74 @@
                 <Grid Grid.Column="1" 
                       ColumnSpacing="2"
                       ColumnDefinitions="*, *, *">
-                    
+
                     <comp:ThemeButtonComponent Grid.Column="0"
-                                               IconImage="auto_sun"
-                                               Text="Auto"
-                                               SelectedTheme="{Binding CurrentTheme}"
-                                               SelfTheme="Unspecified" />
-                    
-                    <comp:ThemeButtonComponent Grid.Column="1"
                                                IconImage="sun"
                                                Text="Light"
                                                SelectedTheme="{Binding CurrentTheme}"
                                                SelfTheme="Light" />
 
-                    <comp:ThemeButtonComponent Grid.Column="2" 
+                    <comp:ThemeButtonComponent Grid.Column="1" 
                                                IconImage="moon"
                                                Text="Dark"
                                                SelectedTheme="{Binding CurrentTheme}"
                                                SelfTheme="Dark" />
+                    
+                    <comp:ThemeButtonComponent Grid.Column="2"
+                                               IconImage="auto_sun"
+                                               Text="Auto"
+                                               SelectedTheme="{Binding CurrentTheme}"
+                                               SelfTheme="Unspecified" />
+
                 </Grid>
             </Grid>
 
-            <Grid Grid.Row="1" >
-                <Grid.Shadow>
-                    <Shadow
-                    Opacity=".1"
-                    Offset="-5, 10" />
-                </Grid.Shadow>
-                <Border 
-                StrokeThickness="0"
-                BackgroundColor="White"
-                Padding="15, 5"
-                StrokeShape="RoundRectangle 12">
 
-                    <Grid ColumnDefinitions="30, *, 20"
+            <!--diagnostic-->
+            <Border Grid.Row="1"
+                    class="panel">
+                <Border.Shadow>
+                    <Shadow Opacity=".1"
+                            Offset="-5, 10" />
+                </Border.Shadow>
+
+                <Grid ColumnDefinitions="30, *, 20"
+                    ColumnSpacing="10">
+                    <Image Source="diagnostic" />
+
+                    <Label Text="Diagnostics"
+                    Grid.Column="1"
+                    VerticalTextAlignment="Center" />
+
+                    <Switch Grid.Column="2" />
+
+                </Grid>
+            </Border>
+
+            <!--Privacy policy-->
+
+            <Border Grid.Row="2"
+                    class="panel">
+                <Border.Shadow>
+                    <Shadow Opacity=".1"
+                            Offset="-5, 10" />
+                </Border.Shadow>
+
+
+                <Grid ColumnDefinitions="30, *, 20"
                       ColumnSpacing="10">
-                        <Image Source="diagnostic" />
+                    <Image Source="privacy" />
 
-                        <Label Text="Diagnostics"
+                    <Label Text="Privacy policy"
                        Grid.Column="1"
                        VerticalTextAlignment="Center" />
 
-                        <Switch Grid.Column="2" />
-
-                    </Grid>
-                </Border>
-            </Grid>
-
-
-            <Grid Grid.Row="2" >
-                <Grid.Shadow>
-                    <Shadow
-                    Opacity=".1"
-                    Offset="-5, 10" />
-                </Grid.Shadow>
-                <Border 
-                StrokeThickness="0"
-                BackgroundColor="White"
-                Padding="15, 5"
-                StrokeShape="RoundRectangle 12">
-
-                    <Grid ColumnDefinitions="30, *, 20"
-                      ColumnSpacing="10">
-                        <Image Source="privacy" />
-
-                        <Label Text="Privacy policy"
-                       Grid.Column="1"
-                       VerticalTextAlignment="Center" />
-
-                        <Image Grid.Column="2"
+                    <Image Grid.Column="2"
                            HeightRequest="15"
                            Source="next_arrow" />
 
-                    </Grid>
-                </Border>
-            </Grid>
+                </Grid>
+            </Border>
 
 
 
