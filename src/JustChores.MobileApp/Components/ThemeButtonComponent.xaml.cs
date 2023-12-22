@@ -2,6 +2,7 @@
 
 
 using CommunityToolkit.Maui.Markup;
+using JustChores.MobileApp.Helpers;
 
 namespace JustChores.MobileApp.Components;
 
@@ -81,7 +82,10 @@ public partial class ThemeButtonComponent : Border
 
 	void SetIconImage(string image)
 	{
-		icon.Source = ImageSource.FromFile($"{image}.png");
+		icon.SetAppTheme(Image.SourceProperty,
+						 ImageSource.FromFile($"{image}_dark.png"),
+						 ImageSource.FromFile($"{image}_light.png"));
+		//icon.Source = ImageSource.FromFile($"{image}.png");
 	}
 
 	void SetSelectedTheme(AppTheme _) => Recheck();
@@ -92,11 +96,14 @@ public partial class ThemeButtonComponent : Border
 	{
 		if (SelfTheme == SelectedTheme)
 		{
-			border.Stroke = Color.FromArgb("#4B91F1");
-			titleLbl.TextColor = Color.FromArgb("#4B91F1");
+			var btnColor = MauiUtils.GetResource<Color>("ButtonColor");
+			border.Stroke = btnColor;
+			titleLbl.TextColor = btnColor;
+			icon.Source = ImageSource.FromFile($"{IconImage}_selected.png");
         }
         else
         {
+			SetIconImage(IconImage);
             border.Stroke = Colors.Transparent;
 			titleLbl.AppThemeBinding(Label.TextColorProperty, Colors.Black, Colors.White);
         }
