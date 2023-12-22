@@ -7,11 +7,6 @@
              x:Class="JustChores.MobileApp.Pages.AddChorePage"
              x:DataType="vm:AddChoreViewModel">
 
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="True"
-                            IsEnabled="True" />
-    </Shell.BackButtonBehavior>
-
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="View All"
                      Command="{Binding ToListCommand}" />

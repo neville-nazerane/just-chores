@@ -3,17 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JustChores.MobileApp.Components.ThemeButtonComponent"
              Stroke="#4B91F1"
-             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardDarkBackground}}"
              StrokeThickness="1"
              StrokeShape="RoundRectangle 4"
              Padding="12, 0"
              x:Name="border">
 
-    <Border.Shadow>
-        <Shadow Radius="90"
-                Offset="-9, -20"
-                Opacity=".2"/>
-    </Border.Shadow>
+    <!--<Border.Shadow>
+        <Shadow Radius="40"
+                Opacity="1"/>
+    </Border.Shadow>-->
 
     <Grid ColumnDefinitions="22, auto"
           ColumnSpacing="8"

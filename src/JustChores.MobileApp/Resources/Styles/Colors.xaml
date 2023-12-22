@@ -10,7 +10,7 @@
     <Color x:Key="White">#FFFFFF</Color>
     <Color x:Key="Black">#000000</Color>
 
-    <Color x:Key="DarkBackground">#222222</Color>
+    <Color x:Key="DarkBackground">#0E1013</Color>
     <Color x:Key="CardDarkBackground">#252A33</Color>
     
     <Color x:Key="ButtonColor">#4B91F1</Color>
@@ -22,7 +22,9 @@
     
     <Color x:Key="Danger">#FF5E5E</Color>
     <Color x:Key="DangerBackgroud">#FAECEB</Color>
-    
+
+    <Color x:Key="DarkThumbColor">#666666</Color>
+    <Color x:Key="LightThumbColor">#A8AAAD</Color>
     
     
     <!--<Color x:Key="Primary">#512BD4</Color>

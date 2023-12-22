@@ -69,7 +69,9 @@
 
     <Style TargetType="Switch">
         <Setter Property="OnColor" Value="{StaticResource ButtonColor}" />
-        <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        
+        <Setter Property="ThumbColor" 
+                Value="{AppThemeBinding Light={StaticResource DarkThumbColor}, Dark={StaticResource LightThumbColor}}" />
     </Style>
     
     <Style TargetType="Label"

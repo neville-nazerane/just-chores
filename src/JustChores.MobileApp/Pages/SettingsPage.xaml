@@ -19,6 +19,15 @@
             <Setter Property="StrokeShape" Value="RoundRectangle 12" />
 
         </Style>
+
+        <Style TargetType="comp:ThemeButtonComponent">
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Radius="20"
+                            Opacity=".2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
         
     </ContentPage.Resources>
 
@@ -102,6 +111,7 @@
                     VerticalTextAlignment="Center" />
 
                     <Switch Grid.Column="2"
+                            IsEnabled="False"
                             IsToggled="{Binding IsDiagnosticsEnabled, Mode=OneWay}" />
 
                 </Grid>
