@@ -25,6 +25,10 @@
     <Style TargetType="Border" 
            ApplyToDerivedTypes="True"
            Class="cardShadow">
+
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardDarkBackground}}" />
+
         <Setter Property="Shadow">
             <Setter.Value>
                     <Shadow Radius="20"

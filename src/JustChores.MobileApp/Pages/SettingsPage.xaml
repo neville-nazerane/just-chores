@@ -88,12 +88,6 @@
             <!--diagnostic-->
             <Border Grid.Row="1"
                     class="panel, cardShadow">
-                <!--<Border.Shadow>
-                    --><!--<Shadow Opacity=".1"
-                            Offset="-5, 10" />--><!--
-                    <Shadow Radius="20"
-                            Opacity=".1"/>
-                </Border.Shadow>-->
 
                 <Grid ColumnDefinitions="30, *, 20"
                     ColumnSpacing="10">
