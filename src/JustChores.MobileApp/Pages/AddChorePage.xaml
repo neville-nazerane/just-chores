@@ -85,10 +85,11 @@
             <Border Grid.Row="1"
                     BackgroundColor="{StaticResource White}"
                     Stroke="#CCCCCC"
+                    StrokeThickness="1.5"
                     StrokeShape="RoundRectangle 8">
                 <Border.Shadow>
                     <Shadow Radius="20"
-                            Opacity=".1"/>
+                            Opacity=".2"/>
                 </Border.Shadow>
                 <Entry Placeholder="Title"
                    Text="{Binding Model.Title}"/>
