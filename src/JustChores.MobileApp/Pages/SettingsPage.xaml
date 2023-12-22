@@ -40,20 +40,29 @@
 
             <Grid ColumnDefinitions="*, auto">
 
-                <Label Text="Theme" />
+                <Label Text="Theme"
+                       class="centered"/>
 
                 <Grid Grid.Column="1" 
-                      ColumnSpacing="10"
+                      ColumnSpacing="2"
                       ColumnDefinitions="*, *, *">
-
+                    
+                    <comp:ThemeButtonComponent Grid.Column="0"
+                                               IconImage="auto_sun"
+                                               Text="Auto"
+                                               SelectedTheme="{Binding CurrentTheme}"
+                                               SelfTheme="Unspecified" />
+                    
                     <comp:ThemeButtonComponent Grid.Column="1"
                                                IconImage="sun"
                                                Text="Light"
+                                               SelectedTheme="{Binding CurrentTheme}"
                                                SelfTheme="Light" />
 
                     <comp:ThemeButtonComponent Grid.Column="2" 
                                                IconImage="moon"
                                                Text="Dark"
+                                               SelectedTheme="{Binding CurrentTheme}"
                                                SelfTheme="Dark" />
                 </Grid>
             </Grid>

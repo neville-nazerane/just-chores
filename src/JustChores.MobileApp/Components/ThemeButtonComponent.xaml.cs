@@ -1,6 +1,8 @@
 
 
 
+using CommunityToolkit.Maui.Markup;
+
 namespace JustChores.MobileApp.Components;
 
 public partial class ThemeButtonComponent : Border
@@ -26,7 +28,7 @@ public partial class ThemeButtonComponent : Border
 																						nameof(SelectedTheme),
 																						typeof(AppTheme),
 																						typeof(ThemeButtonComponent),
-																						defaultBindingMode: BindingMode.OneWay,
+																						defaultBindingMode: BindingMode.TwoWay,
 																						propertyChanged: SelectedThemeChanged);
 
 	public static readonly BindableProperty SelfThemeProperty = BindableProperty.Create(
@@ -96,10 +98,14 @@ public partial class ThemeButtonComponent : Border
         else
         {
             border.Stroke = Colors.Transparent;
-            titleLbl.TextColor = Colors.Black;
+			titleLbl.AppThemeBinding(Label.TextColorProperty, Colors.Black, Colors.White);
         }
     }
 
+    private void Tapped(object sender, TappedEventArgs e)
+    {
+		SelectedTheme = SelfTheme;
+    }
 
     #region Changed
 
@@ -113,5 +119,6 @@ public partial class ThemeButtonComponent : Border
 
 
     #endregion
+
 
 }
