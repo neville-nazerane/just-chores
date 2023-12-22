@@ -22,6 +22,17 @@
                 Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" />
     </Style>
 
+    <Style TargetType="Border" 
+           ApplyToDerivedTypes="True"
+           Class="cardShadow">
+        <Setter Property="Shadow">
+            <Setter.Value>
+                    <Shadow Radius="20"
+                            Opacity=".1"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--#region For the Header -->
     
     <Style TargetType="Grid"

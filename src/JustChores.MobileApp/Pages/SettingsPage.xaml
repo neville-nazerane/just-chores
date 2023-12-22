@@ -13,22 +13,13 @@
                Class="panel">
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardDarkBackground}}" />
-            
+
             <Setter Property="Padding" Value="15, 5" />
 
             <Setter Property="StrokeShape" Value="RoundRectangle 12" />
 
         </Style>
 
-        <Style TargetType="comp:ThemeButtonComponent">
-            <Setter Property="Shadow">
-                <Setter.Value>
-                    <Shadow Radius="20"
-                            Opacity=".2"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
     </ContentPage.Resources>
 
 
@@ -96,11 +87,13 @@
 
             <!--diagnostic-->
             <Border Grid.Row="1"
-                    class="panel">
-                <Border.Shadow>
-                    <Shadow Opacity=".1"
-                            Offset="-5, 10" />
-                </Border.Shadow>
+                    class="panel, cardShadow">
+                <!--<Border.Shadow>
+                    --><!--<Shadow Opacity=".1"
+                            Offset="-5, 10" />--><!--
+                    <Shadow Radius="20"
+                            Opacity=".1"/>
+                </Border.Shadow>-->
 
                 <Grid ColumnDefinitions="30, *, 20"
                     ColumnSpacing="10">
@@ -124,11 +117,11 @@
             <!--Privacy policy-->
 
             <Border Grid.Row="2"
-                    class="panel">
-                <Border.Shadow>
+                    class="panel, cardShadow">
+                <!--<Border.Shadow>
                     <Shadow Opacity=".1"
                             Offset="-5, 10" />
-                </Border.Shadow>
+                </Border.Shadow>-->
 
 
                 <Grid ColumnDefinitions="30, *, 20"

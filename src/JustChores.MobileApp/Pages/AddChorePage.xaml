@@ -83,12 +83,12 @@
                class="inputLbl" />
 
             <Border Grid.Row="1"
-                StrokeShape="RoundRectangle 8">
+                    BackgroundColor="{StaticResource White}"
+                    Stroke="#CCCCCC"
+                    StrokeShape="RoundRectangle 8">
                 <Border.Shadow>
-                    <Shadow Brush="Gray"
-                        Offset="20,20"
-                        Radius="40"
-                        Opacity="0.8"/>
+                    <Shadow Radius="20"
+                            Opacity=".1"/>
                 </Border.Shadow>
                 <Entry Placeholder="Title"
                    Text="{Binding Model.Title}"/>

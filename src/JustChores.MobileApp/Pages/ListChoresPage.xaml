@@ -64,14 +64,13 @@
                             <!--Add Button-->
 
                             <Border BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" 
-                                Stroke="{StaticResource Primary}"
-                                StrokeShape="RoundRectangle 4"
-                                Grid.Column="1" >
+                                    Stroke="{StaticResource Primary}"
+                                    StrokeShape="RoundRectangle 4"
+                                    Grid.Column="1" >
 
-                                <Grid 
-                                Padding="10, 8, 4, 8"
-                                ColumnDefinitions="20, *"
-                                BackgroundColor="Transparent" >
+                                <Grid Padding="10, 8, 4, 8"
+                                      ColumnDefinitions="20, *"
+                                      BackgroundColor="Transparent" >
 
                                     <!--<RoundRectangle Stroke="{StaticResource Primary}"
                                   Grid.ColumnSpan="2"
@@ -80,10 +79,10 @@
                                     <Grid HeightRequest="20">
                                         <Ellipse Fill="{StaticResource Primary}" />
                                         <Label Text="+"
-                                             FontAttributes="Bold"
-                                             HorizontalTextAlignment="Center"
-                                             VerticalTextAlignment="Center"
-                                             TextColor="{StaticResource White}" />
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center"
+                                               TextColor="{StaticResource White}" />
                                     </Grid>
 
                                     <Label Text="Add"
@@ -110,17 +109,9 @@
                     <DataTemplate x:DataType="m:Chore">
 
                         <Grid>
-                            <Grid.Shadow>
-                                <Shadow Offset="20,20"
-                                        Radius="40"
-                                        Opacity="0.8"/>
-                            </Grid.Shadow>
                             <Border StrokeShape="RoundRectangle 6"
                                 BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardDarkBackground}}"
                                 Margin="10, 5" >
-                                <!--<Border.Shadow>
-                               
-                            </Border.Shadow>-->
                                 <Grid Padding="12"
                                       RowSpacing="8"
                                       RowDefinitions="auto, 40, auto, 40"

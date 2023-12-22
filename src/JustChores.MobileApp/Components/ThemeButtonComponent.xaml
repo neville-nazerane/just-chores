@@ -7,6 +7,7 @@
              StrokeThickness="1"
              StrokeShape="RoundRectangle 4"
              Padding="12, 0"
+             class="cardShadow"
              x:Name="border">
 
     <!--<Border.Shadow>
