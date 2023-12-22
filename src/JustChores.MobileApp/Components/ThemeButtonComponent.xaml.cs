@@ -96,7 +96,7 @@ public partial class ThemeButtonComponent : Border
 	{
 		if (SelfTheme == SelectedTheme)
 		{
-			var btnColor = MauiUtils.GetResource<Color>("ButtonColor");
+			var btnColor = MauiUtils.GetResource<Color>("Primary");
 			border.Stroke = btnColor;
 			titleLbl.TextColor = btnColor;
 			icon.Source = ImageSource.FromFile($"{IconImage}_selected.png");

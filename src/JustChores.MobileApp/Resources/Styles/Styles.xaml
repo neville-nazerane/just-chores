@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Style TargetType="Button">
-        <Setter Property="BackgroundColor" Value="{StaticResource ButtonColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
         <Setter Property="TextColor" Value="{StaticResource White}" />
     </Style>
 
@@ -68,7 +68,7 @@
 
 
     <Style TargetType="Switch">
-        <Setter Property="OnColor" Value="{StaticResource ButtonColor}" />
+        <Setter Property="OnColor" Value="{StaticResource Primary}" />
         
         <Setter Property="ThumbColor" 
                 Value="{AppThemeBinding Light={StaticResource DarkThumbColor}, Dark={StaticResource LightThumbColor}}" />

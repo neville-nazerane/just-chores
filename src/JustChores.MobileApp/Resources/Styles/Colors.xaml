@@ -4,6 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <Color x:Key="Primary">#4B91F1</Color>
+    
     <Color x:Key="LightHeader">#ECF4FF</Color>
     <Color x:Key="DarkHeader">#252A33</Color>
 
@@ -13,7 +15,6 @@
     <Color x:Key="DarkBackground">#0E1013</Color>
     <Color x:Key="CardDarkBackground">#252A33</Color>
     
-    <Color x:Key="ButtonColor">#4B91F1</Color>
     <Color x:Key="ButtonBackground">#DDE7FB</Color>
 
     <Color x:Key="DescriptionText">#969696</Color>

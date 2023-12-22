@@ -64,7 +64,7 @@
                             <!--Add Button-->
 
                             <Border BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" 
-                                Stroke="{StaticResource ButtonColor}"
+                                Stroke="{StaticResource Primary}"
                                 StrokeShape="RoundRectangle 4"
                                 Grid.Column="1" >
 
@@ -73,12 +73,12 @@
                                 ColumnDefinitions="20, *"
                                 BackgroundColor="Transparent" >
 
-                                    <!--<RoundRectangle Stroke="{StaticResource ButtonColor}"
+                                    <!--<RoundRectangle Stroke="{StaticResource Primary}"
                                   Grid.ColumnSpan="2"
                                   CornerRadius="4" />-->
 
                                     <Grid HeightRequest="20">
-                                        <Ellipse Fill="{StaticResource ButtonColor}" />
+                                        <Ellipse Fill="{StaticResource Primary}" />
                                         <Label Text="+"
                                              FontAttributes="Bold"
                                              HorizontalTextAlignment="Center"
@@ -90,7 +90,7 @@
                                          Grid.Column="1"
                                          VerticalTextAlignment="Center"
                                          HorizontalTextAlignment="Center"
-                                         TextColor="{StaticResource ButtonColor}" />
+                                         TextColor="{StaticResource Primary}" />
 
 
 
