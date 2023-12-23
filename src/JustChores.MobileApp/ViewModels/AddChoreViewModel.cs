@@ -69,6 +69,7 @@ namespace JustChores.MobileApp.ViewModels
                 Model = _repository.GetChore(ChoreId.Value);
                 //FrequencyIndex = Enum.GetValues<FrequencyType>().ToList().IndexOf(Model.FrequencyType);
                 Frequency = Model.Frequency;
+                FrequencyType = Model.FrequencyType;
                 DueOn = Model.DueOn ?? DateTime.Now.Date;
             }
             else
@@ -82,6 +83,7 @@ namespace JustChores.MobileApp.ViewModels
                 };
                 Frequency = 1;
                 //FrequencyIndex = 0;
+                FrequencyType = FrequencyType.Day;
                 DueOn = DateTime.Now;
             }
         }

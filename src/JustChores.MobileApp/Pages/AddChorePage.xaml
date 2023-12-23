@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:JustChores.MobileApp.ViewModels"
              xmlns:m="clr-namespace:JustChores.MobileApp.Models"
+             xmlns:comp="clr-namespace:JustChores.MobileApp.Components"
              xmlns:conv="clr-namespace:JustChores.MobileApp.ValueConverters"
              x:Class="JustChores.MobileApp.Pages.AddChorePage"
              x:DataType="vm:AddChoreViewModel">
@@ -58,7 +59,7 @@
                 <!--Occurrence label-->
                 <RowDefinition Height="{StaticResource labelHeight}" />
                 <!--Occurrence items-->
-                <RowDefinition Height="{StaticResource inputHeight}" />
+                <RowDefinition Height="40" />
 
                 <!--Frequency label/input-->
                 <RowDefinition Height="{StaticResource inputHeight}" />
@@ -102,10 +103,25 @@
             <!--Occurrence Selection-->
 
             <Grid Grid.Row="3"
-              ColumnDefinitions="*, *, *, *"
-              ColumnSpacing="4">
+                  ColumnDefinitions="*, *, *, *"
+                  ColumnSpacing="4">
 
-                <Border StrokeShape="RoundRectangle 40"
+                <comp:FrequencySelectionComponent SelfFrequency="Day"
+                                                  SelectedFrequency="{Binding FrequencyType}" />
+
+                <comp:FrequencySelectionComponent Grid.Column="1"
+                                                  SelfFrequency="Week"
+                                                  SelectedFrequency="{Binding FrequencyType}" />
+
+                <comp:FrequencySelectionComponent Grid.Column="2"
+                                                  SelfFrequency="Month"
+                                                  SelectedFrequency="{Binding FrequencyType}" />
+
+                <comp:FrequencySelectionComponent Grid.Column="3"
+                                                  SelfFrequency="Year"
+                                                  SelectedFrequency="{Binding FrequencyType}" />
+
+                <!--<Border StrokeShape="RoundRectangle 40"
                     StrokeThickness="{Binding FrequencyType, Converter={StaticResource occToBorderThickness}, ConverterParameter='Day'}"
                     BackgroundColor="{Binding FrequencyType, Converter={StaticResource occToBackgroundColor}, ConverterParameter='Day'}"
                     Stroke="{Binding FrequencyType, Converter={StaticResource occToFontColor}, ConverterParameter='Day'}">
@@ -166,7 +182,7 @@
                         <TapGestureRecognizer Command="{Binding SetFrequencyTypeCommand}"
                                           CommandParameter="{x:Static m:FrequencyType.Year}" />
                     </Border.GestureRecognizers>
-                </Border>
+                </Border>-->
 
 
             </Grid>

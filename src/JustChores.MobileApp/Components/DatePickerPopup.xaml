@@ -1,39 +1,79 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:JustChores.MobileApp.ViewModels"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:DataType="vm:DatePickerPopupModel"
-             x:Class="JustChores.MobileApp.Components.DatePickerPopup"
-               Size="200, 300">
-    <Grid RowDefinitions="30, *, 50, 40"
-          ColumnDefinitions="*, *" >
-        
-        <Label 
-            Text="{Binding Message}"
-            FontAttributes="Bold"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            Grid.ColumnSpan="2" />
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:vm="clr-namespace:JustChores.MobileApp.ViewModels"
+               xmlns:ext="clr-namespace:JustChores.MobileApp.Extensions"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:DataType="vm:DatePickerPopupModel"
+               x:Class="JustChores.MobileApp.Components.DatePickerPopup"
+               Size="{ext:RelativeSize Height=400, WidthOffSet=30 }"
+               Color="Transparent">
 
-        <Grid Grid.Row="2"
+    <!--<toolkit:Popup.Size>
+        
+    </toolkit:Popup.Size>-->
+
+    <Border StrokeShape="RoundRectangle 12"
+            BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}">
+
+        <Grid RowDefinitions="auto, *, 50"
+              ColumnDefinitions="*, *">
+
+            <Label Text="{Binding Message}"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   Grid.ColumnSpan="2" />
+
+
+            <Grid Grid.Row="2"
+                  Grid.ColumnSpan="2"
+                  ColumnDefinitions="auto, *" >
+                <Label Text="{Binding DateLabel}"
+               FontSize="Small" />
+                <DatePicker Date="{Binding Date}"
+                    Grid.Column="1" />
+            </Grid>
+
+            <Button Text="Cancel"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Clicked="CanceledClicked"/>
+            
+            <Button Text="Confirm"
+                    Grid.Row="3"
+                    Clicked="OkClicked" />
+
+        </Grid>
+        
+        <!--<Grid RowDefinitions="30, *, 50, 40"
+          ColumnDefinitions="*, *" >
+
+            <Label Text="{Binding Message}"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   Grid.ColumnSpan="2" />
+
+            <Grid Grid.Row="2"
               Grid.ColumnSpan="2"
               ColumnDefinitions="auto, *" >
-            <Label Text="{Binding DateLabel}"
+                <Label Text="{Binding DateLabel}"
                    FontSize="Small" />
-            <DatePicker Date="{Binding Date}"
+                <DatePicker Date="{Binding Date}"
                         Grid.Column="1" />
-        </Grid>
+            </Grid>
 
-        <Button Text="Ok"
+            <Button Text="Ok"
                 Grid.Row="3"
                 Clicked="OkClicked" />
 
 
-        <Button Text="Cancel"
+            <Button Text="Cancel"
                 Grid.Row="3"
                 Grid.Column="1"
                 Clicked="CanceledClicked"/>
 
-    </Grid>
+        </Grid>-->
+    </Border>
 </toolkit:Popup>

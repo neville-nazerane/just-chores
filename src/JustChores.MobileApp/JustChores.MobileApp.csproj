@@ -92,6 +92,9 @@
 	  <MauiXaml Update="Components\DatePickerPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Components\FrequencySelectionComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\ThemeButtonComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

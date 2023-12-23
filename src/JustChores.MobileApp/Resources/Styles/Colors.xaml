@@ -18,6 +18,7 @@
     <Color x:Key="ButtonBackground">#EEF9FE</Color>
 
     <Color x:Key="DescriptionText">#969696</Color>
+    <Color x:Key="DescriptionTextDark">#677587</Color>
 
     <Color x:Key="SelectionLightBackground">#77D4FC</Color>
     
