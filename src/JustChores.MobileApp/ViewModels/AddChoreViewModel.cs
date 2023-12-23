@@ -24,9 +24,6 @@ namespace JustChores.MobileApp.ViewModels
         [ObservableProperty]
         int frequency;
 
-        //[ObservableProperty]
-        //int frequencyIndex;
-
         [ObservableProperty]
         string summary;
 
@@ -44,9 +41,6 @@ namespace JustChores.MobileApp.ViewModels
 
         [ObservableProperty]
         string dateLabel;
-
-        //[ObservableProperty]
-        //Dictionary<FrequencyType, string> listedFrequencies;
 
         public AddChoreViewModel(MainRepository repository)
         {
@@ -67,7 +61,6 @@ namespace JustChores.MobileApp.ViewModels
                 DateLabel = "Starting Date";
                 SubmitText = "Update";
                 Model = _repository.GetChore(ChoreId.Value);
-                //FrequencyIndex = Enum.GetValues<FrequencyType>().ToList().IndexOf(Model.FrequencyType);
                 Frequency = Model.Frequency;
                 FrequencyType = Model.FrequencyType;
                 DueOn = Model.DueOn ?? DateTime.Now.Date;
@@ -82,7 +75,6 @@ namespace JustChores.MobileApp.ViewModels
                     FrequencyType = FrequencyType.Day,
                 };
                 Frequency = 1;
-                //FrequencyIndex = 0;
                 FrequencyType = FrequencyType.Day;
                 DueOn = DateTime.Now;
             }
@@ -140,15 +132,6 @@ namespace JustChores.MobileApp.ViewModels
                 return;
             }
             Model.Frequency = newValue;
-            //if (true || oldValue == 1 ^ newValue == 1)
-            //{
-            //    var oldIndex = FrequencyIndex;
-            //    if (newValue > 1)
-            //        ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => $"{f.ToString()}s");
-            //    else
-            //        ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
-            //    FrequencyIndex = oldIndex;
-            //}
             UpdateSummary();
         }
 
@@ -156,12 +139,6 @@ namespace JustChores.MobileApp.ViewModels
         {
             Model.FrequencyType = newValue;
         }
-
-        //partial void OnFrequencyIndexChanged(int value)
-        //{
-        //    Model.FrequencyType = ListedFrequencies.ElementAtOrDefault(value).Key;
-        //    UpdateSummary();
-        //}
 
         private void UpdateSummary()
         {
