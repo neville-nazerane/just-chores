@@ -37,9 +37,8 @@
 
         <Grid class="header">
 
-            <ImageButton Source="back" 
-                         Command="{Binding BackCommand}"
-                         class="toolBtn" />
+            <ImageButton Command="{Binding BackCommand}"
+                         class="toolBtn, backBtn" />
 
             <Label Text="{Binding Title}"
                    class="centered, headerText" />

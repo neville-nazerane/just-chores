@@ -60,8 +60,12 @@
 		<MauiImage Update="Resources\Images\delete.svg" BaseSize="14,15.77" />
 		<MauiImage Update="Resources\Images\privacy.svg" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\diagnostic.svg" BaseSize="28,28" />
+    
 		<MauiImage Update="Resources\Images\next_arrow.svg" BaseSize="14.51,7.64" />
+		<MauiImage Update="Resources\Images\next_arrow_light.svg" BaseSize="14.51,7.64" />
+    
 		<MauiImage Update="Resources\Images\back.svg" BaseSize="12.1,21.72" />
+		<MauiImage Update="Resources\Images\back_light.svg" BaseSize="12.1,21.72" />
 
     <MauiImage Update="Resources\Images\auto_sun_dark.svg" BaseSize="20,20" />
 		<MauiImage Update="Resources\Images\auto_sun_light.svg" BaseSize="20,20" />

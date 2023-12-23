@@ -14,8 +14,8 @@
 
     <Color x:Key="DarkBackground">#0E1013</Color>
     <Color x:Key="CardDarkBackground">#252A33</Color>
-    
-    <Color x:Key="ButtonBackground">#DDE7FB</Color>
+
+    <Color x:Key="ButtonBackground">#EEF9FE</Color>
 
     <Color x:Key="DescriptionText">#969696</Color>
 

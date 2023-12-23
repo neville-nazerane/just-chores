@@ -27,8 +27,7 @@
 
         <Grid class="header">
 
-            <ImageButton Source="back"
-                         class="toolBtn"
+            <ImageButton class="toolBtn, backBtn"
                          Command="{Binding BackCommand}" />
 
             <Label Text="Settings"
@@ -128,7 +127,7 @@
 
                     <Image Grid.Column="2"
                            HeightRequest="15"
-                           Source="next_arrow" />
+                           Source="{AppThemeBinding Light='next_arrow', Dark='next_arrow_light'}" />
 
                 </Grid>
 

@@ -37,6 +37,12 @@
         </Setter>
     </Style>
 
+    <Style TargetType="ImageButton"
+           Class="backBtn">
+        <Setter Property="Source"
+                Value="{AppThemeBinding Light='back', Dark='back_light'}" />
+    </Style>
+
     <!--#region For the Header -->
     
     <Style TargetType="Grid"
