@@ -42,6 +42,15 @@ namespace JustChores.MobileApp.ViewModels
         [ObservableProperty]
         string dateLabel;
 
+        [ObservableProperty]
+        string selectedInputKey;
+
+        [ObservableProperty]
+        bool titleIsFocused;
+
+        [ObservableProperty]
+        bool isInitialized;
+
         public AddChoreViewModel(MainRepository repository)
         {
             _repository = repository;
@@ -55,6 +64,7 @@ namespace JustChores.MobileApp.ViewModels
 
         private void Reset()
         {
+            IsInitialized = false;
             if (ChoreId is not null)
             {
                 Title = "Update Chore";
@@ -78,6 +88,7 @@ namespace JustChores.MobileApp.ViewModels
                 FrequencyType = FrequencyType.Day;
                 DueOn = DateTime.Now;
             }
+            IsInitialized = true;
         }
 
         [RelayCommand]
@@ -101,16 +112,37 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         Task ToListAsync() => RedirectToAsync("//chores");
 
-        [RelayCommand]
-        void SetFrequencyType(FrequencyType frequencyType) => FrequencyType = frequencyType;
+        //[RelayCommand]
+        //void SetFrequencyType(FrequencyType frequencyType)
+        //{
+        //    FrequencyType = frequencyType;
+        //    SelectedInputKey = "FrequencyType";
+        //}
 
         [RelayCommand]
-        void IncreaseFrequency() => Frequency++;
+        void IncreaseFrequency()
+        {
+            Frequency++;
+            SelectedInputKey = "Frequency";
+        }
 
         [RelayCommand]
         void DecreaseFrequency()
         {
             if (Frequency > 1) Frequency--;
+            SelectedInputKey = "Frequency";
+        }
+
+        [RelayCommand]
+        void TitleSelected() => SelectedInputKey = "Title";
+
+        [RelayCommand]
+        void DueOnSelected() => SelectedInputKey = "DueOn";
+
+        partial void OnTitleIsFocusedChanged(bool value)
+        {
+            if (value)
+                SelectedInputKey = "Title";
         }
 
         partial void OnChoreIdChanged(int? value)
@@ -122,6 +154,8 @@ namespace JustChores.MobileApp.ViewModels
         {
             Model.DueOn = value.Date;
             UpdateSummary();
+            if (IsInitialized)
+                SelectedInputKey = "DueOn";
         }
 
         partial void OnFrequencyChanged(int oldValue, int newValue)
@@ -138,12 +172,14 @@ namespace JustChores.MobileApp.ViewModels
         partial void OnFrequencyTypeChanged(FrequencyType oldValue, FrequencyType newValue)
         {
             Model.FrequencyType = newValue;
+            SelectedInputKey = "FrequencyType";
+            UpdateSummary();
         }
 
         private void UpdateSummary()
         {
             var dueOn = Model.DueOn ?? DateTime.Now;
-
+            
             Summary = Model.FrequencyType switch
             {
                 FrequencyType.Day => $"This would be {GetFrequencyString()}{(Frequency > 1 ? " " : null)}day{(Frequency > 2 ? "s" : null)}",

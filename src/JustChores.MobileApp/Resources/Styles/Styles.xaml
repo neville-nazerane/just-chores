@@ -42,6 +42,8 @@
         <Setter Property="Source"
                 Value="{AppThemeBinding Light='back', Dark='back_light'}" />
     </Style>
+    
+    
 
     <!--#region For the Header -->
     
@@ -87,6 +89,16 @@
 
     </Style>
 
+    <Style TargetType="Entry">
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+
+    <Style TargetType="DatePicker">
+         <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+
 
     <Style TargetType="Switch">
         <Setter Property="OnColor" Value="{StaticResource Primary}" />
@@ -102,6 +114,71 @@
         <Setter Property="HorizontalTextAlignment"
                 Value="Center" />
     </Style>
+
+
+    <!--#region Inputs -->
+    
+    <Style TargetType="Border"
+           Class="inputShadow" >
+
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardDarkBackground}}" />
+
+        <Setter Property="Stroke"
+                Value="{AppThemeBinding Light={StaticResource InputBorderLight}, Dark={StaticResource InputBorderDark}}" />
+
+        <Setter Property="StrokeThickness" Value="1.5" />
+
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Selected">
+                        <VisualState.Setters>
+
+                            <Setter Property="Shadow">
+                                <Setter.Value>
+                                    <Shadow Radius="20" 
+                                            Opacity=".2"/>
+                                </Setter.Value>
+                            </Setter>
+
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+        
+       
+        
+    </Style>
+
+    
+    
+    <!--#endregion-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!--<Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />

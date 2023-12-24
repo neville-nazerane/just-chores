@@ -27,7 +27,15 @@
 
     <Color x:Key="DarkThumbColor">#666666</Color>
     <Color x:Key="LightThumbColor">#A8AAAD</Color>
-    
+
+    <Color x:Key="InputBorderLight">#CCCCCC</Color>
+    <Color x:Key="InputBorderDark">#51555C</Color>
+
+    <Color x:Key="InputPlaceholderLight">#999999</Color>
+    <Color x:Key="InputPlaceholderDark">#A8AAAD</Color>
+
+    <Color x:Key="SummaryBackgroundLight">#E5EDF9</Color>
+    <Color x:Key="SummaryBackgroundDark">#151F2E</Color>
     
     <!--<Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="Secondary">#DFD8F7</Color>

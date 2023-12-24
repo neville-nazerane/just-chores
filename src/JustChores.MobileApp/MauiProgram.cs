@@ -27,6 +27,11 @@ namespace JustChores.MobileApp
         {
             SetupUI();
 
+            Entry e;
+            DatePicker d;
+
+            
+
             //AppCenter.Start(appcenterSecret, typeof(Analytics), typeof(Crashes));
 
             var builder = MauiApp.CreateBuilder();

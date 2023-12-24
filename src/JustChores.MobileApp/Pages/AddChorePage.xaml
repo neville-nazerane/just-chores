@@ -2,9 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:JustChores.MobileApp.ViewModels"
+             xmlns:ext="clr-namespace:JustChores.MobileApp.Extensions"
              xmlns:m="clr-namespace:JustChores.MobileApp.Models"
              xmlns:comp="clr-namespace:JustChores.MobileApp.Components"
              xmlns:conv="clr-namespace:JustChores.MobileApp.ValueConverters"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="JustChores.MobileApp.Pages.AddChorePage"
              x:DataType="vm:AddChoreViewModel">
 
@@ -22,11 +24,6 @@
             <Setter Property="FontSize"
                     Value="Large" />
         </Style>
-
-        <conv:DictionaryToValuesConverter x:Key="dictonaryToValues" />
-        <conv:OccuranceToBackgroundColorConverter x:Key="occToBackgroundColor" />
-        <conv:OccuranceToBorderThicknessConverter x:Key="occToBorderThickness" />
-        <conv:OccuranceToFontColorConverter x:Key="occToFontColor" />
 
         <x:Double x:Key="labelHeight">40</x:Double>
         
@@ -68,7 +65,7 @@
                 <RowDefinition Height="{StaticResource inputHeight}" />
 
                 <!--Summary-->
-                <RowDefinition Height="100" />
+                <RowDefinition Height="auto" />
 
                 <!--Remaining space-->
                 <RowDefinition Height="*" />
@@ -83,22 +80,37 @@
                    class="inputLbl" />
 
             <Border Grid.Row="1"
-                    BackgroundColor="{StaticResource White}"
-                    Stroke="#CCCCCC"
-                    StrokeThickness="1.5"
-                    StrokeShape="RoundRectangle 8">
-                <Border.Shadow>
-                    <Shadow Radius="20"
-                            Opacity=".2"/>
-                </Border.Shadow>
+                    ext:SelectionState.SelfKey="Title"
+                    ext:SelectionState.SelectedKey="{Binding SelectedInputKey}"
+                    Padding="10, 0, 0, 0"
+                    class="inputShadow">
                 <Entry Placeholder="Title"
-                   Text="{Binding Model.Title}"/>
+                       IsFocused="{Binding TitleIsFocused, Mode=OneWayToSource}"
+                       VerticalTextAlignment="Center"
+                       PlaceholderColor="{AppThemeBinding Light={StaticResource InputPlaceholderLight}, Dark={StaticResource InputPlaceholderDark}}"
+                       Text="{Binding Model.Title}">
+
+                    <!--<Entry.Triggers>
+                        <Trigger TargetType="Entry"
+                                 Property="IsFocused"
+                                 Value="True">
+                        </Trigger>
+                    </Entry.Triggers>-->
+                    
+                    <Entry.Behaviors>
+                        <ext:FocusCommand TriggerCommand="{Binding TitleSelectedCommand}" />
+                    </Entry.Behaviors>
+                    
+                    <!--<Entry.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TitleSelectedCommand}" />
+                    </Entry.GestureRecognizers>-->
+                </Entry>
             </Border>
 
 
             <Label Text="Chore Occurrence"
-               Grid.Row="2"
-               class="inputLbl" />
+                   Grid.Row="2"
+                   class="inputLbl" />
 
             <!--Occurrence Selection-->
 
@@ -128,30 +140,37 @@
             <Grid Grid.Row="4"
               ColumnDefinitions="*, *">
                 <Label Text="Frequency"
-                    class="inputLbl" />
+                       VerticalTextAlignment="Center"
+                       class="inputLbl" />
 
                 <Border Grid.Column="1"
-                    StrokeShape="RoundRectangle 8">
+                        ext:SelectionState.SelfKey="Frequency"
+                        ext:SelectionState.SelectedKey="{Binding SelectedInputKey}"
+                        class="inputShadow">
                     <Grid ColumnDefinitions="20, * , 20">
                         <Label Text="-" 
-                           FontAttributes="Bold"
-                           FontSize="Large"
-                           class="centered" >
+                               FontAttributes="Bold"
+                               FontSize="Large"
+                               class="centered" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding DecreaseFrequencyCommand}" />
                             </Label.GestureRecognizers>
                         </Label>
 
-                        <Entry Text="{Binding Frequency}" 
-                           HorizontalTextAlignment="Center"
-                           VerticalTextAlignment="Center"
-                           Grid.Column="1" />
+                        <Label Grid.Column="1"
+                               Text="{Binding Frequency}"
+                               class="centered" />
+                        <!--<Entry Grid.Column="1" 
+                               Text="{Binding Frequency}"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />-->
 
                         <Label Text="+"
-                           FontAttributes="Bold"
-                           FontSize="Large"
-                           class="centered" 
-                           Grid.Column="2" >
+                               FontAttributes="Bold"
+                               FontSize="Large"
+                               class="centered" 
+                               LineBreakMode="WordWrap"
+                               Grid.Column="2" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding IncreaseFrequencyCommand}" />
                             </Label.GestureRecognizers>
@@ -165,21 +184,44 @@
             <Grid Grid.Row="5"
               ColumnDefinitions="*, *" >
                 <Label Text="{Binding DateLabel}"
-                   class="inputLbl" />
+                       VerticalTextAlignment="Center"
+                       class="inputLbl" />
 
-                <DatePicker Date="{Binding DueOn}"
-                        Grid.Column="1" />
+                <Border Grid.Column="1"
+                        ext:SelectionState.SelfKey="DueOn"
+                        ext:SelectionState.SelectedKey="{Binding SelectedInputKey}"
+                        class="inputShadow">
+                    <Grid ColumnDefinitions="*">
+                        <DatePicker Grid.Column="1"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Date="{Binding DueOn}">
+                        </DatePicker>
+                    </Grid>
+                </Border>
+                
 
             </Grid>
 
             <!--Summary-->
             <Border Grid.Row="6"
-                StrokeThickness="0"
-                StrokeShape="RoundRectangle 8"
-                BackgroundColor="#E04B91F1" >
-                <Label Text="{Binding Summary}"
-                   class="centered"
-                   FontAttributes="Bold" />
+                    StrokeShape="RoundRectangle 8"
+                    Padding="15"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource SummaryBackgroundLight}, Dark={StaticResource SummaryBackgroundDark}}" >
+
+                <Grid ColumnDefinitions="24, *"
+                      ColumnSpacing="10"
+                      RowDefinitions="24, *">
+
+                    <Image Source="list" />
+
+                    <Label Grid.Column="1"
+                           Grid.RowSpan="2"
+                           MaxLines="3"
+                           LineBreakMode="WordWrap"
+                           Text="{Binding Summary}"
+                           TextColor="{StaticResource Primary}" />
+                </Grid>
             </Border>
 
 
