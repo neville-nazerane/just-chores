@@ -63,7 +63,7 @@ namespace JustChores.MobileApp.ViewModels
             var res = await _popupService.ShowPopupAsync<DatePickerPopupModel>(vm =>
             {
                 vm.Date = DateTime.Now;
-                vm.DateLabel = "Completed On";
+                vm.DateLabel = "Tap below to modify completion date";
                 vm.Message = "Mark as Complete?";
             });
 

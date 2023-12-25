@@ -6,7 +6,7 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:DataType="vm:DatePickerPopupModel"
                x:Class="JustChores.MobileApp.Components.DatePickerPopup"
-               Size="{ext:RelativeSize Height=400, WidthOffSet=30 }"
+               Size="{ext:RelativeSize Height=250, WidthOffSet=30 }"
                Color="Transparent">
 
     <!--<toolkit:Popup.Size>
@@ -16,32 +16,45 @@
     <Border StrokeShape="RoundRectangle 12"
             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}">
 
-        <Grid RowDefinitions="auto, *, 50"
-              ColumnDefinitions="*, *">
+        <Grid RowDefinitions="auto, *, 40"
+              ColumnDefinitions="*, *"
+              ColumnSpacing="20"
+              Padding="20">
 
             <Label Text="{Binding Message}"
                    FontAttributes="Bold"
                    VerticalOptions="Center" 
                    HorizontalOptions="Center"
+                   FontSize="Large"
                    Grid.ColumnSpan="2" />
 
 
-            <Grid Grid.Row="2"
-                  Grid.ColumnSpan="2"
-                  ColumnDefinitions="auto, *" >
+            <VerticalStackLayout Grid.Row="1"
+                                 Margin="0, 50, 0, 40"
+                                 Grid.ColumnSpan="2">
+                
                 <Label Text="{Binding DateLabel}"
-               FontSize="Small" />
-                <DatePicker Date="{Binding Date}"
-                    Grid.Column="1" />
-            </Grid>
+                       HorizontalTextAlignment="Center"
+                       FontSize="Small" />
+                
+                <DatePicker HorizontalOptions="Center"
+                            FontAttributes="Bold"
+                            Date="{Binding Date}" />
+            </VerticalStackLayout>
 
             <Button Text="Cancel"
-                    Grid.Row="3"
-                    Grid.Column="1"
+                    Grid.Row="2"
+                    TextColor="{StaticResource Primary}"
+                    BorderColor="{StaticResource Primary}"
+                    BorderWidth="1"
+                    BackgroundColor="Transparent"
+                    FontAttributes="Bold"
                     Clicked="CanceledClicked"/>
             
             <Button Text="Confirm"
-                    Grid.Row="3"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
                     Clicked="OkClicked" />
 
         </Grid>

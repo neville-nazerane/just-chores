@@ -206,7 +206,7 @@
             <!--Summary-->
             <Border Grid.Row="6"
                     StrokeShape="RoundRectangle 8"
-                    Padding="15"
+                    Padding="5"
                     BackgroundColor="{AppThemeBinding Light={StaticResource SummaryBackgroundLight}, Dark={StaticResource SummaryBackgroundDark}}" >
 
                 <Grid ColumnDefinitions="24, *"
