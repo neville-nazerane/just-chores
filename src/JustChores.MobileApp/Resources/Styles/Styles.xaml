@@ -4,7 +4,183 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Style TargetType="ActivityIndicator">
+    <Style TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+    </Style>
+
+    <Style ApplyToDerivedTypes="True"
+           TargetType="Page">
+        <Setter Property="Shell.NavBarIsVisible" Value="False" />
+        
+        <Setter Property="Shell.BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource LightHeader}, Dark={StaticResource DarkHeader}}" />
+        <Setter Property="Shell.TitleColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" />
+    </Style>
+
+    <Style TargetType="Border" 
+           ApplyToDerivedTypes="True"
+           Class="cardShadow">
+
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardDarkBackground}}" />
+
+        <Setter Property="Shadow">
+            <Setter.Value>
+                    <Shadow Radius="20"
+                            Opacity=".1"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ImageButton"
+           Class="backBtn">
+        <Setter Property="Source"
+                Value="{AppThemeBinding Light='back', Dark='back_light'}" />
+    </Style>
+    
+    
+
+    <!--#region For the Header -->
+    
+    <Style TargetType="Grid"
+           Class="pageLayout">
+        <Setter Property="RowDefinitions"
+                Value="50, *" />
+    </Style>
+
+    <Style TargetType="Grid"
+           Class="header">
+
+        <Setter Property="ColumnDefinitions" Value="30, *, 30" />
+
+        <Setter Property="Padding" Value="10, 0" />
+
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource LightHeader}, Dark={StaticResource DarkHeader}}" />
+    </Style>
+
+    <Style TargetType="ImageButton"
+           Class="toolBtn">
+        <Setter Property="HeightRequest" Value="20" />
+    </Style>
+
+    <Style TargetType="Label"
+           Class="headerText">
+        <Setter Property="FontAttributes" Value="Bold" />
+        
+        <Setter Property="FontSize" Value="Large" />
+
+        <Setter Property="Grid.Column" Value="1" />
+
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+    
+    <!--#endregion-->
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+
+    <Style TargetType="DatePicker">
+         <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    </Style>
+
+
+    <Style TargetType="Switch">
+        <Setter Property="OnColor" Value="{StaticResource Primary}" />
+        
+        <Setter Property="ThumbColor" 
+                Value="{AppThemeBinding Light={StaticResource DarkThumbColor}, Dark={StaticResource LightThumbColor}}" />
+    </Style>
+    
+    <Style TargetType="Label"
+           Class="centered">
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
+    </Style>
+
+
+    <!--#region Inputs -->
+    
+    <Style TargetType="Border"
+           Class="inputShadow" >
+
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardDarkBackground}}" />
+
+        <Setter Property="Stroke"
+                Value="{AppThemeBinding Light={StaticResource InputBorderLight}, Dark={StaticResource InputBorderDark}}" />
+
+        <Setter Property="StrokeThickness" Value="1.5" />
+
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Selected">
+                        <VisualState.Setters>
+
+                            <Setter Property="Shadow">
+                                <Setter.Value>
+                                    <Shadow Radius="20" 
+                                            Opacity=".2"/>
+                                </Setter.Value>
+                            </Setter>
+
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+        
+       
+        
+    </Style>
+
+    
+    
+    <!--#endregion-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--<Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>
 
@@ -400,6 +576,6 @@
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
-    </Style>
+    </Style>-->
 
 </ResourceDictionary>

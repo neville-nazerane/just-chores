@@ -25,9 +25,6 @@ namespace JustChores.MobileApp.ViewModels
         int frequency;
 
         [ObservableProperty]
-        int frequencyIndex;
-
-        [ObservableProperty]
         string summary;
 
         [ObservableProperty]
@@ -40,7 +37,19 @@ namespace JustChores.MobileApp.ViewModels
         string title;
 
         [ObservableProperty]
-        Dictionary<FrequencyType, string> listedFrequencies;
+        FrequencyType frequencyType;
+
+        [ObservableProperty]
+        string dateLabel;
+
+        [ObservableProperty]
+        string selectedInputKey;
+
+        [ObservableProperty]
+        bool titleIsFocused;
+
+        [ObservableProperty]
+        bool isInitialized;
 
         public AddChoreViewModel(MainRepository repository)
         {
@@ -55,27 +64,31 @@ namespace JustChores.MobileApp.ViewModels
 
         private void Reset()
         {
+            IsInitialized = false;
             if (ChoreId is not null)
             {
                 Title = "Update Chore";
+                DateLabel = "Starting Date";
                 SubmitText = "Update";
                 Model = _repository.GetChore(ChoreId.Value);
-                FrequencyIndex = Enum.GetValues<FrequencyType>().ToList().IndexOf(Model.FrequencyType);
                 Frequency = Model.Frequency;
+                FrequencyType = Model.FrequencyType;
                 DueOn = Model.DueOn ?? DateTime.Now.Date;
             }
             else
             {
                 Title = "Create a Chore";
+                DateLabel = "Due Date";
                 SubmitText = "Add";
                 Model = new()
                 {
                     FrequencyType = FrequencyType.Day,
                 };
                 Frequency = 1;
-                FrequencyIndex = 0;
+                FrequencyType = FrequencyType.Day;
                 DueOn = DateTime.Now;
             }
+            IsInitialized = true;
         }
 
         [RelayCommand]
@@ -94,7 +107,43 @@ namespace JustChores.MobileApp.ViewModels
         }
 
         [RelayCommand]
+        Task BackAsync() => RedirectToAsync("//chores");
+
+        [RelayCommand]
         Task ToListAsync() => RedirectToAsync("//chores");
+
+        //[RelayCommand]
+        //void SetFrequencyType(FrequencyType frequencyType)
+        //{
+        //    FrequencyType = frequencyType;
+        //    SelectedInputKey = "FrequencyType";
+        //}
+
+        [RelayCommand]
+        void IncreaseFrequency()
+        {
+            Frequency++;
+            SelectedInputKey = "Frequency";
+        }
+
+        [RelayCommand]
+        void DecreaseFrequency()
+        {
+            if (Frequency > 1) Frequency--;
+            SelectedInputKey = "Frequency";
+        }
+
+        [RelayCommand]
+        void TitleSelected() => SelectedInputKey = "Title";
+
+        [RelayCommand]
+        void DueOnSelected() => SelectedInputKey = "DueOn";
+
+        partial void OnTitleIsFocusedChanged(bool value)
+        {
+            if (value)
+                SelectedInputKey = "Title";
+        }
 
         partial void OnChoreIdChanged(int? value)
         {
@@ -105,6 +154,8 @@ namespace JustChores.MobileApp.ViewModels
         {
             Model.DueOn = value.Date;
             UpdateSummary();
+            if (IsInitialized)
+                SelectedInputKey = "DueOn";
         }
 
         partial void OnFrequencyChanged(int oldValue, int newValue)
@@ -115,28 +166,20 @@ namespace JustChores.MobileApp.ViewModels
                 return;
             }
             Model.Frequency = newValue;
-            if (true || oldValue == 1 ^ newValue == 1)
-            {
-                var oldIndex = FrequencyIndex;
-                if (newValue > 1)
-                    ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => $"{f.ToString()}s");
-                else
-                    ListedFrequencies = Enum.GetValues<FrequencyType>().ToDictionary(f => f, f => f.ToString());
-                FrequencyIndex = oldIndex;
-            }
             UpdateSummary();
         }
 
-        partial void OnFrequencyIndexChanged(int value)
+        partial void OnFrequencyTypeChanged(FrequencyType oldValue, FrequencyType newValue)
         {
-            Model.FrequencyType = ListedFrequencies.ElementAtOrDefault(value).Key;
+            Model.FrequencyType = newValue;
+            SelectedInputKey = "FrequencyType";
             UpdateSummary();
         }
 
         private void UpdateSummary()
         {
             var dueOn = Model.DueOn ?? DateTime.Now;
-
+            
             Summary = Model.FrequencyType switch
             {
                 FrequencyType.Day => $"This would be {GetFrequencyString()}{(Frequency > 1 ? " " : null)}day{(Frequency > 2 ? "s" : null)}",

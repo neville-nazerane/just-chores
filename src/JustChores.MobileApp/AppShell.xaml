@@ -4,12 +4,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:JustChores.MobileApp.Pages"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Shell.FlyoutBehavior="Disabled">
 
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{AppThemeBinding Light={StaticResource LightHeader}, Dark={StaticResource DarkHeader}}"
+                                   StatusBarStyle="{AppThemeBinding Light=DarkContent, Dark=LightContent}" />
+    </Shell.Behaviors>
+
+
+
     <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate pages:HomePage}"
-        Route="home" />-->
+      Title="Show"
+      ContentTemplate="{DataTemplate pages:BorderPage}"
+      Route="chores" />-->
 
     <ShellContent
         Title="List Chores"
@@ -17,9 +25,15 @@
         Route="chores" />
 
     <ShellContent
-        Title="Chore"
-        FlyoutItemIsVisible="False"
+        Title="Editor"
         ContentTemplate="{DataTemplate pages:AddChorePage}"
         Route="editor" />
+
+    <ShellContent
+        Title="Settings"
+        ContentTemplate="{DataTemplate pages:SettingsPage}"
+        Route="settings" />
+
+
 
 </Shell>

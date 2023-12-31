@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Maui;
+﻿using Android.Content.Res;
+using AndroidX.Core.View;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Markup;
 using JustChores.MobileApp.Components;
 using JustChores.MobileApp.Generated;
@@ -13,15 +15,24 @@ namespace JustChores.MobileApp
 {
     public static partial class MauiProgram
     {
+        private static readonly string appcenterSecret;
+
 
         public static IServiceProvider ServiceProvider { get; private set; }
 
-        private static readonly string appcenterSecret;
+        public static string AppCenterSecret => appcenterSecret;
+        
 
         public static MauiApp CreateMauiApp()
         {
+            SetupUI();
 
-            AppCenter.Start(appcenterSecret, typeof(Analytics), typeof(Crashes));
+            Entry e;
+            DatePicker d;
+
+            
+
+            //AppCenter.Start(appcenterSecret, typeof(Analytics), typeof(Crashes));
 
             var builder = MauiApp.CreateBuilder();
 
@@ -49,5 +60,25 @@ namespace JustChores.MobileApp
             ServiceProvider = app.Services;
             return app;
         }
+
+    
+        static void SetupUI()
+        {
+            Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
+            {
+#if ANDROID
+                handler.PlatformView.BackgroundTintList = ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
+#endif
+            });
+
+            Microsoft.Maui.Handlers.DatePickerHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
+            {
+#if ANDROID
+                handler.PlatformView.BackgroundTintList = ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
+#endif
+            });
+        }
+
+    
     }
 }

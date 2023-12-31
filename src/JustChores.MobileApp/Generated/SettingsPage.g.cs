@@ -3,12 +3,12 @@ using JustChores.MobileApp.ViewModels;
 
 namespace JustChores.MobileApp.Pages;
 
-public partial class HomePage 
+public partial class SettingsPage 
 {
     
-    private HomeViewModel viewModel = null;
+    private SettingsViewModel viewModel = null;
 
-    public HomeViewModel ViewModel
+    public SettingsViewModel ViewModel
     {
         get
         {
@@ -21,7 +21,7 @@ public partial class HomePage
     {
         if (viewModel is null)
         {
-            viewModel = Shell.Current.Handler.MauiContext.Services.GetService<HomeViewModel>();
+            viewModel = Shell.Current.Handler.MauiContext.Services.GetService<SettingsViewModel>();
             BindingContext = viewModel;
         }
     }

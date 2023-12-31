@@ -8,10 +8,11 @@ public static class GenerationUtils
     
    public static IServiceCollection AddGeneratedInjections(this IServiceCollection services)
         => services.AddTransient<AddChorePage>()
-                   .AddTransient<HomePage>()
+                   .AddTransient<BorderPage>()
                    .AddTransient<ListChoresPage>()
+                   .AddTransient<SettingsPage>()
                    .AddTransient<AddChoreViewModel>()
-                   .AddTransient<HomeViewModel>()
-                   .AddTransient<ListChoresViewModel>();
+                   .AddTransient<ListChoresViewModel>()
+                   .AddTransient<SettingsViewModel>();
 
 }
