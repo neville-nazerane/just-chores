@@ -68,7 +68,7 @@ namespace JustChores.MobileApp.ViewModels
             if (ChoreId is not null)
             {
                 Title = "Update Chore";
-                DateLabel = "Starting Date";
+                DateLabel = "Due Date";
                 SubmitText = "Update";
                 Model = _repository.GetChore(ChoreId.Value);
                 Frequency = Model.Frequency;
@@ -78,7 +78,7 @@ namespace JustChores.MobileApp.ViewModels
             else
             {
                 Title = "Create a Chore";
-                DateLabel = "Due Date";
+                DateLabel = "Starting Date";
                 SubmitText = "Add";
                 Model = new()
                 {
