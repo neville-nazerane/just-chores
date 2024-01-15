@@ -25,14 +25,14 @@ namespace JustChores.MobileApp.Models
         public FrequencyType FrequencyType { get; set; }
 
 
-        public string GetFrequencyTypeToDisplay()
-        {
-            var display = FrequencyType.ToString().ToLower();
-            if (Frequency > 1)
-                display += "s";
+        //public string GetFrequencyTypeToDisplay()
+        //{
+        //    var display = FrequencyType.ToString().ToLower();
+        //    if (Frequency > 1)
+        //        display += "s";
 
-            return display;
-        }
+        //    return display;
+        //}
 
         public string GetSummary()
         {
@@ -58,9 +58,9 @@ namespace JustChores.MobileApp.Models
             _ => $"every {(FrequencyType == FrequencyType.Week ? GetWithOrdinal(Frequency) : Frequency)}"
         };
 
-        private static string GetWithOrdinal(int number) => $"{number}<sup>{GetOrdinalSuffix(number)}</sup>";
+        static string GetWithOrdinal(int number) => $"{number}{GetOrdinalSuffix(number)}";
 
-        private static string GetOrdinalSuffix(int number)
+        static string GetOrdinalSuffix(int number)
         {
             if (number % 100 >= 11 && number % 100 <= 13) return "th";
 

@@ -112,12 +112,6 @@ namespace JustChores.MobileApp.ViewModels
         [RelayCommand]
         Task ToListAsync() => RedirectToAsync("//chores");
 
-        //[RelayCommand]
-        //void SetFrequencyType(FrequencyType frequencyType)
-        //{
-        //    FrequencyType = frequencyType;
-        //    SelectedInputKey = "FrequencyType";
-        //}
 
         [RelayCommand]
         void IncreaseFrequency()
@@ -178,40 +172,7 @@ namespace JustChores.MobileApp.ViewModels
 
         private void UpdateSummary()
         {
-            var dueOn = Model.DueOn ?? DateTime.Now;
-            
-            Summary = Model.FrequencyType switch
-            {
-                FrequencyType.Day => $"This would be {GetFrequencyString()}{(Frequency > 1 ? " " : null)}day{(Frequency > 2 ? "s" : null)}",
-                FrequencyType.Week => $"This would be {GetFrequencyString()} {dueOn.DayOfWeek.ToString().ToLowerInvariant()}",
-                FrequencyType.Month => $"This would be on the {GetWithOrdinal(dueOn.Day)} of {GetFrequencyString()} month{GetFrequencyPlural()}",
-                FrequencyType.Year => $"This would be on the {GetWithOrdinal(dueOn.Day)} {dueOn:MMMM} {GetFrequencyString()} year{GetFrequencyPlural()}",
-                _ => null,
-            };
-        }
-
-        string GetFrequencyString() => Frequency switch
-        {
-            1 => "every",
-            2 => "every other",
-            _ => $"every {(Model.FrequencyType == FrequencyType.Week ? GetWithOrdinal(Frequency) : Frequency)}"
-        };
-
-        string GetFrequencyPlural() => Frequency > 1 ? "s" : null;
-
-        private static string GetWithOrdinal(int number) => $"{number}<sup>{GetOrdinalSuffix(number)}</sup>";
-
-        private static string GetOrdinalSuffix(int number)
-        {
-            if (number % 100 >= 11 && number % 100 <= 13) return "th";
-
-            return (number % 10) switch
-            {
-                1 => "st",
-                2 => "nd",
-                3 => "rd",
-                _ => "th",
-            };
+            Summary = Model.GetSummary();
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
