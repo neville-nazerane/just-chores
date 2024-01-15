@@ -2,10 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:JustChores.MobileApp.ViewModels"
+             xmlns:ext="clr-namespace:JustChores.MobileApp.Extensions"
+             xmlns:m="clr-namespace:JustChores.MobileApp.Models"
+             xmlns:comp="clr-namespace:JustChores.MobileApp.Components"
              xmlns:conv="clr-namespace:JustChores.MobileApp.ValueConverters"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="JustChores.MobileApp.Pages.AddChorePage"
-             x:DataType="vm:AddChoreViewModel"
-             Title="{Binding Title}">
+             x:DataType="vm:AddChoreViewModel">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="View All"
@@ -14,42 +17,219 @@
     
     <ContentPage.Resources>
 
-        <Style TargetType="Label">
-            <Setter Property="Margin" Value="10" />
+        <Style TargetType="Label"
+               Class="inputLbl">
+            <Setter Property="FontAttributes"
+                    Value="Bold" />
+            <Setter Property="FontSize"
+                    Value="Large" />
         </Style>
 
-        <conv:DictionaryToValuesConverter x:Key="dictonaryToValues" />
+        <x:Double x:Key="labelHeight">40</x:Double>
+        
+        <x:Double x:Key="inputHeight">50</x:Double>
 
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="auto, *, 50"
-        RowSpacing="20"
-        Margin="20, 40, 20, 5">
+    <Grid class="pageLayout">
 
-        <VerticalStackLayout>
-            <Entry Placeholder="Title"
-                Text="{Binding Model.Title}" />
+        <Grid class="header">
 
-            <Entry Placeholder="Frequency"
-                Keyboard="Numeric"
-                Text="{Binding Frequency}" />
+            <ImageButton Command="{Binding BackCommand}"
+                         class="toolBtn, backBtn" />
 
-            <Picker ItemsSource="{Binding ListedFrequencies, Converter={x:StaticResource dictonaryToValues}}"
-                    SelectedIndex="{Binding FrequencyIndex}" />
+            <Label Text="{Binding Title}"
+                   class="centered, headerText" />
 
-            <Grid ColumnDefinitions="auto, *">
-                <Label Text="Due On" />
-                <DatePicker Date="{Binding DueOn}"
-                            Grid.Column="1" />
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              Margin="20, 30, 20, 0"
+              RowSpacing="20">
+            <Grid.RowDefinitions>
+
+                <!--Title label-->
+                <RowDefinition Height="{StaticResource labelHeight}" />
+                <!--Title input-->
+                <RowDefinition Height="{StaticResource inputHeight}" />
+
+                <!--Occurrence label-->
+                <RowDefinition Height="{StaticResource labelHeight}" />
+                <!--Occurrence items-->
+                <RowDefinition Height="40" />
+
+                <!--Frequency label/input-->
+                <RowDefinition Height="{StaticResource inputHeight}" />
+
+                <!--Starting date-->
+                <RowDefinition Height="{StaticResource inputHeight}" />
+
+                <!--Summary-->
+                <RowDefinition Height="auto" />
+
+                <!--Remaining space-->
+                <RowDefinition Height="*" />
+
+                <!--Save button-->
+                <RowDefinition Height="50" />
+
+            </Grid.RowDefinitions>
+
+
+            <Label Text="Chore Title"
+                   class="inputLbl" />
+
+            <Border Grid.Row="1"
+                    ext:SelectionState.SelfKey="Title"
+                    ext:SelectionState.SelectedKey="{Binding SelectedInputKey}"
+                    Padding="10, 0, 0, 0"
+                    class="inputShadow">
+                <Entry Placeholder="Title"
+                       IsFocused="{Binding TitleIsFocused, Mode=OneWayToSource}"
+                       VerticalTextAlignment="Center"
+                       PlaceholderColor="{AppThemeBinding Light={StaticResource InputPlaceholderLight}, Dark={StaticResource InputPlaceholderDark}}"
+                       Text="{Binding Model.Title}">
+
+                    <!--<Entry.Triggers>
+                        <Trigger TargetType="Entry"
+                                 Property="IsFocused"
+                                 Value="True">
+                        </Trigger>
+                    </Entry.Triggers>-->
+                    
+                    <Entry.Behaviors>
+                        <ext:FocusCommand TriggerCommand="{Binding TitleSelectedCommand}" />
+                    </Entry.Behaviors>
+                    
+                    <!--<Entry.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TitleSelectedCommand}" />
+                    </Entry.GestureRecognizers>-->
+                </Entry>
+            </Border>
+
+
+            <Label Text="Chore Occurrence"
+                   Grid.Row="2"
+                   class="inputLbl" />
+
+            <!--Occurrence Selection-->
+
+            <Grid Grid.Row="3"
+                  ColumnDefinitions="*, *, *, *"
+                  ColumnSpacing="4">
+
+                <comp:FrequencySelectionComponent SelfFrequency="Day"
+                                                  SelectedFrequency="{Binding FrequencyType}" />
+
+                <comp:FrequencySelectionComponent Grid.Column="1"
+                                                  SelfFrequency="Week"
+                                                  SelectedFrequency="{Binding FrequencyType}" />
+
+                <comp:FrequencySelectionComponent Grid.Column="2"
+                                                  SelfFrequency="Month"
+                                                  SelectedFrequency="{Binding FrequencyType}" />
+
+                <comp:FrequencySelectionComponent Grid.Column="3"
+                                                  SelfFrequency="Year"
+                                                  SelectedFrequency="{Binding FrequencyType}" />
+
             </Grid>
 
-            <Label Text="{Binding Summary}"
-                   TextType="Html" />
 
-        </VerticalStackLayout>
+            <!--Frequency-->
+            <Grid Grid.Row="4"
+              ColumnDefinitions="*, *">
+                <Label Text="Frequency"
+                       VerticalTextAlignment="Center"
+                       class="inputLbl" />
 
-        <Button Text="{Binding SubmitText}"
-                Command="{Binding SubmitCommand}"
-                Grid.Row="2" />
+                <Border Grid.Column="1"
+                        ext:SelectionState.SelfKey="Frequency"
+                        ext:SelectionState.SelectedKey="{Binding SelectedInputKey}"
+                        class="inputShadow">
+                    <Grid ColumnDefinitions="20, * , 20">
+                        <Label Text="-" 
+                               FontAttributes="Bold"
+                               FontSize="Large"
+                               class="centered" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding DecreaseFrequencyCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label Grid.Column="1"
+                               Text="{Binding Frequency}"
+                               class="centered" />
+                        <!--<Entry Grid.Column="1" 
+                               Text="{Binding Frequency}"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />-->
+
+                        <Label Text="+"
+                               FontAttributes="Bold"
+                               FontSize="Large"
+                               class="centered" 
+                               LineBreakMode="WordWrap"
+                               Grid.Column="2" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IncreaseFrequencyCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Border>
+            </Grid>
+
+
+            <!--Date-->
+            <Grid Grid.Row="5"
+              ColumnDefinitions="*, *" >
+                <Label Text="{Binding DateLabel}"
+                       VerticalTextAlignment="Center"
+                       class="inputLbl" />
+
+                <Border Grid.Column="1"
+                        ext:SelectionState.SelfKey="DueOn"
+                        ext:SelectionState.SelectedKey="{Binding SelectedInputKey}"
+                        class="inputShadow">
+                    <Grid ColumnDefinitions="*">
+                        <DatePicker Grid.Column="1"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Date="{Binding DueOn}">
+                        </DatePicker>
+                    </Grid>
+                </Border>
+                
+
+            </Grid>
+
+            <!--Summary-->
+            <Border Grid.Row="6"
+                    StrokeShape="RoundRectangle 8"
+                    Padding="5"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource SummaryBackgroundLight}, Dark={StaticResource SummaryBackgroundDark}}" >
+
+                <Grid ColumnDefinitions="24, *"
+                      ColumnSpacing="10"
+                      RowDefinitions="24, *">
+
+                    <Image Source="list" />
+
+                    <Label Grid.Column="1"
+                           Grid.RowSpan="2"
+                           MaxLines="3"
+                           LineBreakMode="WordWrap"
+                           Text="{Binding Summary}"
+                           TextColor="{StaticResource Primary}" />
+                </Grid>
+            </Border>
+
+
+            <Button Grid.Row="8" 
+                Text="{Binding SubmitText}"
+                Command="{Binding SubmitCommand}" />
+
+        </Grid>
     </Grid>
+    
 </ContentPage>

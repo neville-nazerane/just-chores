@@ -1,11 +1,9 @@
 namespace JustChores.MobileApp.Pages;
 
-public partial class HomePage : ContentPage
+public partial class BorderPage : ContentPage
 {
-	public HomePage()
+	public BorderPage()
 	{
 		InitializeComponent();
-		
 	}
-
 }

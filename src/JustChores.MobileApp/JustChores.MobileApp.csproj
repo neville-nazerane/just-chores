@@ -38,7 +38,7 @@
 		<!--<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />-->
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Maui.Markup" Version="4.0.0" />
 		<PackageReference Include="LiteDB" Version="5.0.17" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
@@ -50,11 +50,34 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#FFFFFF" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#FFFFFF" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#4B91F1" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+		<MauiImage Update="Resources\Images\calendar.svg" BaseSize="14,14" />
+		<MauiImage Update="Resources\Images\setting.svg" BaseSize="24,24" />
+		<MauiImage Update="Resources\Images\delete.svg" BaseSize="14,15.77" />
+		<MauiImage Update="Resources\Images\privacy.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\diagnostic.svg" BaseSize="28,28" />
+    
+		<MauiImage Update="Resources\Images\next_arrow.svg" BaseSize="14.51,7.64" />
+		<MauiImage Update="Resources\Images\next_arrow_light.svg" BaseSize="14.51,7.64" />
+    
+		<MauiImage Update="Resources\Images\back.svg" BaseSize="12.1,21.72" />
+		<MauiImage Update="Resources\Images\back_light.svg" BaseSize="12.1,21.72" />
+
+    <MauiImage Update="Resources\Images\auto_sun_dark.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\auto_sun_light.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\auto_sun_selected.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\sun_dark.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\sun_light.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\sun_selected.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\moon_dark.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\moon_light.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\moon_selected.svg" BaseSize="20,20" />
+    
+		<MauiImage Update="Resources\Images\list.svg" BaseSize="24,24" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -71,13 +94,22 @@
 	  <MauiXaml Update="Components\DatePickerPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Components\FrequencySelectionComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\ThemeButtonComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\AddChorePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\HomePage.xaml">
+	  <MauiXaml Update="Pages\BorderPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ListChoresPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

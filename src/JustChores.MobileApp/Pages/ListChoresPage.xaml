@@ -6,111 +6,195 @@
              xmlns:m="clr-namespace:JustChores.MobileApp.Models"
              x:Class="JustChores.MobileApp.Pages.ListChoresPage"
              x:DataType="vm:ListChoresViewModel"
-             Title="ListChoresPage">
+             Title="Chores">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" 
-                     Command="{Binding AddCommand}" />
-        <ToolbarItem Text="Backup" 
-                     Command="{Binding BackupCommand}" />
+        <ToolbarItem IconImageSource="setting.svg" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
 
         <conv:DueDateToBoolConverter x:Key="due" />
+        <conv:ChoreToSummaryConverter x:Key="summary" />
 
     </ContentPage.Resources>
 
-    <RefreshView Command="{Binding RefreshCommand}"
-                 IsRefreshing="{Binding IsRefreshing}">
-        <CollectionView ItemsSource="{Binding Chores}">
+    <Grid class="pageLayout">
 
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical"
+        <Grid class="header"
+              Padding="10, 0">
+
+            <Label class="headerText, centered"
+                   Text="Chores" />
+
+            <ImageButton Grid.Column="2"
+                         Source="setting"
+                         class="toolBtn"
+                         Command="{Binding GoToSettingsCommand}" />
+
+        </Grid>
+
+        <RefreshView Grid.Row="1" 
+                     Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Chores}"
+                        Header="{Binding .}" >
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
                             VerticalItemSpacing="10"
                             Span="{OnIdiom Phone=1, Tablet=2}" />
-            </CollectionView.ItemsLayout>
+                </CollectionView.ItemsLayout>
 
-            <CollectionView.EmptyViewTemplate>
-                <DataTemplate>
-                    <Label Text="You have no chores for you" />
-                </DataTemplate>
-            </CollectionView.EmptyViewTemplate>
+                <CollectionView.EmptyViewTemplate>
+                    <DataTemplate>
+                        <Label Text="You have no chores for you" />
+                    </DataTemplate>
+                </CollectionView.EmptyViewTemplate>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="m:Chore">
-                    <Grid BackgroundColor="LightGray"
-                        RowDefinitions="auto, 50, 30, 40"
-                        Padding="5"
-                        Margin="5"
-                        ColumnDefinitions="*" >
+                <CollectionView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="5*, 2*"
+                              Margin="10, 10, 10, 5" >
 
-                        <Label Text="{Binding Title}" 
-                            FontAttributes="Bold"
-                            FontSize="Large" />
+                            <Label Text="Your Chores"
+                                   FontSize="Large"
+                                   FontAttributes="Bold" />
 
-                        <Label Grid.Row="1" >
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <FormattedString.Spans>
-                                        <Span Text="{Binding Frequency}" />
-                                        <Span Text=" " />
-                                        <Span Text="{Binding FrequencyType}" />
-                                    </FormattedString.Spans>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                            <!--Add Button-->
 
-                        <Grid Grid.Row="2"
-                              ColumnDefinitions="auto, *, 80"
-                              ColumnSpacing="2">
-                            <Label Text="{Binding DueOn, StringFormat='Due on: {0:dd-MM-yy}'}" />
-                            <Label Text="Due" 
-                                    IsVisible="{Binding DueOn, Converter={x:StaticResource due}, ConverterParameter= 'due'}"
-                                    HorizontalTextAlignment="Center"
-                                    VerticalTextAlignment="Center"
-                                    TextColor="White"
-                                    BackgroundColor="OrangeRed"
-                                    Grid.Column="2" />
-                            <Label Text="Overdue" 
-                                    IsVisible="{Binding DueOn, Converter={x:StaticResource due}, ConverterParameter= 'overdue'}"
-                                    HorizontalTextAlignment="Center"
-                                    VerticalTextAlignment="Center"
-                                    TextColor="White"
-                                    BackgroundColor="Red"
-                                    Grid.Column="2" />
+                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" 
+                                    Stroke="{StaticResource Primary}"
+                                    StrokeShape="RoundRectangle 4"
+                                    Grid.Column="1" >
+
+                                <Grid Padding="10, 8, 4, 8"
+                                      ColumnDefinitions="20, *"
+                                      BackgroundColor="Transparent" >
+
+                                    <!--<RoundRectangle Stroke="{StaticResource Primary}"
+                                  Grid.ColumnSpan="2"
+                                  CornerRadius="4" />-->
+
+                                    <Grid HeightRequest="20">
+                                        <Ellipse Fill="{StaticResource Primary}" />
+                                        <Label Text="+"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center"
+                                               TextColor="{StaticResource White}" />
+                                    </Grid>
+
+                                    <Label Text="Add"
+                                         Grid.Column="1"
+                                         VerticalTextAlignment="Center"
+                                         HorizontalTextAlignment="Center"
+                                         TextColor="{StaticResource Primary}" />
+
+
+
+                                </Grid>
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddCommand}" />
+                                </Border.GestureRecognizers>
+
+                            </Border>
+
                         </Grid>
+                    </DataTemplate>
+                </CollectionView.HeaderTemplate>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Chore">
+
+                        <Grid Padding="10, 5">
+                            <Border StrokeShape="RoundRectangle 6"
+                                class="cardShadow">
+                                <Border.Shadow>
+                                    <Shadow Radius="30"
+                                            Opacity=".1"/>   
+                                </Border.Shadow>
+                                <Grid Padding="12, 15"
+                                      RowSpacing="12"
+                                      RowDefinitions="auto, 40, auto, 35"
+                                      ColumnDefinitions="auto, *, 35">
+
+                                    <Label Text="{Binding Title}"
+                                            FontAttributes="Bold"
+                                            Grid.ColumnSpan="2"
+                                            FontSize="Large" />
+
+                                    <Grid ColumnDefinitions="30, auto, auto"
+                                            ColumnSpacing="12"
+                                            Grid.ColumnSpan="2"
+                                            Grid.Row="1">
+                                        <Image Source="calendar.svg" />
+
+                                        <Label Text="{Binding DueOn, StringFormat='{0:ddd, MMMM dd}'}"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center"
+                                                Grid.Column="1"/>
+
+                                        <Border Grid.Column="2"
+                                                IsVisible="{Binding DueOn, Converter={StaticResource due}, ConverterParameter='due'}"
+                                                BackgroundColor="{StaticResource ButtonBackground}"
+                                                Padding="15, 5"
+                                                StrokeShape="RoundRectangle 40">
+                                            <Label Text="Due" 
+                                                    TextColor="{StaticResource SelectionLightBackground}"
+                                                    HorizontalTextAlignment="Center"
+                                                    VerticalTextAlignment="Center" />
+                                        </Border>
+
+                                        <Border Grid.Column="2"
+                                                IsVisible="{Binding DueOn, Converter={StaticResource due}, ConverterParameter='overdue'}"
+                                                BackgroundColor="{StaticResource DangerBackgroud}"
+                                                Padding="15, 5"
+                                                StrokeShape="RoundRectangle 40">
+                                            <Label Text="Overdue"
+                                                    TextColor="{StaticResource Danger}"
+                                                    HorizontalTextAlignment="Center"
+                                                    VerticalTextAlignment="Center" />
+                                        </Border>
+
+                                    </Grid>
+
+                                    <Label Text="{Binding ., Converter={StaticResource summary}}"
+                                            Grid.Row="2"
+                                            Grid.ColumnSpan="2"/>
 
 
-                        <Grid Grid.Row="3"
-                                ColumnDefinitions="*, *, *"
-                                RowSpacing="6">
-                            <Button Text="Delete"
-                                BackgroundColor="IndianRed"
-                                Command="{Binding DeleteCommand, 
-                                                    Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
-                                CommandParameter="{Binding Id}"  />
+                                    <!--Bottom column-->
+                                    <Button Text="Complete"
+                                            CornerRadius="30"
+                                            Command="{Binding CompleteCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                            CommandParameter="{Binding Id}"
+                                            Grid.Row="3" />
 
-                            <Button Text="Edit"
-                                    Grid.Column="1"
-                                BackgroundColor="YellowGreen"
-                                Command="{Binding EditCommand, 
-                                                    Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
-                                CommandParameter="{Binding Id}"  />
+                                    <ImageButton Source="delete.svg"
+                                                 Padding="3, 3"
+                                                 CornerRadius="4"
+                                                 BackgroundColor="{StaticResource DangerBackgroud}"
+                                                 Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                                 CommandParameter="{Binding Id}"
+                                                 Grid.Row="3" 
+                                                 Grid.Column="2" />
 
-                            <Button Text="Complete"
-                                    Grid.Column="2"
-                                    BackgroundColor="ForestGreen"
-                                    Command="{Binding CompleteCommand, 
-                                                        Source={x:RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}" 
-                                    CommandParameter="{Binding Id}" />
+                                </Grid>
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding EditCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
+                                                    CommandParameter="{Binding Id}" />
+                                </Border.GestureRecognizers>
+
+                            </Border>
                         </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-
-        </CollectionView>
-    </RefreshView>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
 
 </ContentPage>

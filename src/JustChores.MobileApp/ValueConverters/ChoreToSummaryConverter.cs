@@ -15,12 +15,10 @@ namespace JustChores.MobileApp.ValueConverters
                     return string.Empty;
                 }
 
-                return chore.GetSummary();
+                string suffix = GetOrdinalSuffix(chore.Frequency);
+                string frequencyTypeString = chore.GetFrequencyTypeToDisplay();
 
-                //string suffix = GetOrdinalSuffix(chore.Frequency);
-                //string frequencyTypeString = chore.GetFrequencyTypeToDisplay();
-
-                //return $"this will execute every {chore.Frequency}{suffix} {frequencyTypeString}";
+                return $"every {chore.Frequency}{suffix} {frequencyTypeString}";
             }
 
             return null;

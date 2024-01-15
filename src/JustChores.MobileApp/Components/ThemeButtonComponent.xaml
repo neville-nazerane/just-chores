@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Border xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JustChores.MobileApp.Components.ThemeButtonComponent"
+             Stroke="#4B91F1"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardDarkBackground}}"
+             StrokeThickness="1"
+             StrokeShape="RoundRectangle 4"
+             Padding="12, 0"
+             class="cardShadow"
+             x:Name="border">
+
+    <!--<Border.Shadow>
+        <Shadow Radius="40"
+                Opacity="1"/>
+    </Border.Shadow>-->
+
+    <Grid ColumnDefinitions="22, auto"
+          ColumnSpacing="8"
+          Padding="0">
+
+        <Image x:Name="icon"  />
+        
+        <Label Grid.Column="1" 
+               BackgroundColor="Transparent"
+               class="centered"
+               x:Name="titleLbl" />
+
+    </Grid>
+
+    <Border.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Tapped" />
+    </Border.GestureRecognizers>
+    
+</Border>

@@ -63,7 +63,7 @@ namespace JustChores.MobileApp.ViewModels
             var res = await _popupService.ShowPopupAsync<DatePickerPopupModel>(vm =>
             {
                 vm.Date = DateTime.Now;
-                vm.DateLabel = "Completed On";
+                vm.DateLabel = "Tap below to modify completion date";
                 vm.Message = "Mark as Complete?";
             });
 
@@ -80,7 +80,7 @@ namespace JustChores.MobileApp.ViewModels
         Task AddAsync() => RedirectToAsync($"//editor?id=null");
 
         [RelayCommand]
-        Task BackupAsync() => _repository.BackupAsync();
+        Task GoToSettingsAsync() => RedirectToAsync("//settings");
 
         public override void OnNavigatedTo()
         {

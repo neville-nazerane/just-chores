@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:JustChores.MobileApp.ViewModels"
+             xmlns:comp="clr-namespace:JustChores.MobileApp.Components"
+             x:Class="JustChores.MobileApp.Pages.SettingsPage"
+             x:DataType="vm:SettingsViewModel"
+             Title="Settings">
+
+    <ContentPage.Resources>
+
+        <Style TargetType="Border"
+               Class="panel">
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardDarkBackground}}" />
+
+            <Setter Property="Padding" Value="15, 5" />
+
+            <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+
+        </Style>
+
+    </ContentPage.Resources>
+
+
+    <Grid class="pageLayout">
+
+        <Grid class="header">
+
+            <ImageButton class="toolBtn, backBtn"
+                         Command="{Binding BackCommand}" />
+
+            <Label Text="Settings"
+                   class="centered, headerText" />
+
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Padding="12, 30"
+              RowSpacing="24">
+
+            <Grid.RowDefinitions>
+                <!--Theme Height-->
+                <RowDefinition Height="35" />
+
+                <!--Diagonistics-->
+                <RowDefinition Height="50" />
+
+                <!--Privacy Policy-->
+                <RowDefinition Height="50" />
+
+                <!--Create Backup-->
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <Grid ColumnDefinitions="*, auto">
+
+                <Label Text="Theme"
+                       class="centered"/>
+
+                <Grid Grid.Column="1" 
+                      ColumnSpacing="2"
+                      ColumnDefinitions="*, *, *">
+
+                    <comp:ThemeButtonComponent Grid.Column="0"
+                                               IconImage="sun"
+                                               Text="Light"
+                                               SelectedTheme="{Binding CurrentTheme}"
+                                               SelfTheme="Light" />
+
+                    <comp:ThemeButtonComponent Grid.Column="1" 
+                                               IconImage="moon"
+                                               Text="Dark"
+                                               SelectedTheme="{Binding CurrentTheme}"
+                                               SelfTheme="Dark" />
+                    
+                    <comp:ThemeButtonComponent Grid.Column="2"
+                                               IconImage="auto_sun"
+                                               Text="Auto"
+                                               SelectedTheme="{Binding CurrentTheme}"
+                                               SelfTheme="Unspecified" />
+
+                </Grid>
+            </Grid>
+
+
+            <!--diagnostic-->
+            <Border Grid.Row="1"
+                    class="panel, cardShadow">
+
+                <Grid ColumnDefinitions="30, *, 20"
+                    ColumnSpacing="10">
+                    <Image Source="diagnostic" />
+
+                    <Label Text="Diagnostics"
+                    Grid.Column="1"
+                    VerticalTextAlignment="Center" />
+
+                    <Switch Grid.Column="2"
+                            IsEnabled="False"
+                            IsToggled="{Binding IsDiagnosticsEnabled, Mode=OneWay}" />
+
+                </Grid>
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SwitchDiagnosticsEnabledCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <!--Privacy policy-->
+
+            <Border Grid.Row="2"
+                    class="panel, cardShadow">
+                <!--<Border.Shadow>
+                    <Shadow Opacity=".1"
+                            Offset="-5, 10" />
+                </Border.Shadow>-->
+
+
+                <Grid ColumnDefinitions="30, *, 20"
+                      ColumnSpacing="10">
+                    <Image Source="privacy" />
+
+                    <Label Text="Privacy policy"
+                       Grid.Column="1"
+                       VerticalTextAlignment="Center" />
+
+                    <Image Grid.Column="2"
+                           HeightRequest="15"
+                           Source="{AppThemeBinding Light='next_arrow', Dark='next_arrow_light'}" />
+
+                </Grid>
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToPrivacyPolicyCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+
+
+
+            <AbsoluteLayout Grid.Row="3">
+                <Button Text="Create Backup"
+                        CornerRadius="40"
+                        Command="{Binding BackupCommand}"
+                        AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds=".5, 1, .55, 1" />
+            </AbsoluteLayout>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>
