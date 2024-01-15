@@ -219,7 +219,7 @@
                            Grid.RowSpan="2"
                            MaxLines="3"
                            LineBreakMode="WordWrap"
-                           Text="{Binding Summary}"
+                           Text="{Binding Summary, StringFormat='This will be {0}'}"
                            TextColor="{StaticResource Primary}" />
                 </Grid>
             </Border>

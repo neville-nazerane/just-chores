@@ -58,12 +58,12 @@ namespace JustChores.MobileApp.ViewModels
         }
 
         [RelayCommand]
-        async Task Complete(int id)
+        async Task CompleteAsync(int id)
         {
             var res = await _popupService.ShowPopupAsync<DatePickerPopupModel>(vm =>
             {
                 vm.Date = DateTime.Now;
-                vm.DateLabel = "Tap below to modify completion date";
+                vm.DateLabel = "Click the date below to change completion date";
                 vm.Message = "Mark as Complete?";
             });
 

@@ -11,14 +11,14 @@ namespace JustChores.MobileApp.ValueConverters
             if (value is Chore chore)
             {
                 if (chore.Frequency <= 0)
-                {
                     return string.Empty;
-                }
 
-                string suffix = GetOrdinalSuffix(chore.Frequency);
-                string frequencyTypeString = chore.GetFrequencyTypeToDisplay();
+                return chore.GetSummary();
 
-                return $"every {chore.Frequency}{suffix} {frequencyTypeString}";
+                //string suffix = GetOrdinalSuffix(chore.Frequency);
+                //string frequencyTypeString = chore.GetFrequencyTypeToDisplay();
+
+                //return $"every {chore.Frequency}{suffix} {frequencyTypeString}";
             }
 
             return null;
