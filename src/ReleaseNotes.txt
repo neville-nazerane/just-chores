@@ -1,1 +1,2 @@
-Layout upgraded
+- Dates sorted
+- Common Summary

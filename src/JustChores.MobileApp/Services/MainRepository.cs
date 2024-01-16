@@ -35,7 +35,10 @@ namespace JustChores.MobileApp.Services
         public IEnumerable<Chore> GetChores()
         {
             using var db = GetConnection();
-            return db.GetCollection<Chore>().FindAll().ToArray();
+            return db.GetCollection<Chore>()
+                                .FindAll()
+                                .OrderByDescending(c => c.DueOn)
+                                .ToArray();
         }
 
         public Chore GetChore(int id)
