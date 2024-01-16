@@ -12,22 +12,16 @@ using System.Threading.Tasks;
 
 namespace JustChores.MobileApp.ViewModels
 {
-    public partial class ListChoresViewModel : ViewModelBase
+    public partial class ListChoresViewModel(MainRepository repository,
+                               IPopupService popupService) : ViewModelBase
     {
-        private readonly MainRepository _repository;
-        private readonly IPopupService _popupService;
+        private readonly MainRepository _repository = repository;
+        private readonly IPopupService _popupService = popupService;
         [ObservableProperty]
         IEnumerable<Chore> chores = Array.Empty<Chore>();
 
         [ObservableProperty]
         bool isRefreshing;
-
-        public ListChoresViewModel(MainRepository repository,
-                                   IPopupService popupService)
-        {
-            _repository = repository;
-            _popupService = popupService;
-        }
 
         [RelayCommand]
         void Refresh()
