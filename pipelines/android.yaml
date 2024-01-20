@@ -1,6 +1,6 @@
 
 pool:
-  vmImage: ubuntu-22.04
+  vmImage: macOS-latest
   
 pr: none
 
