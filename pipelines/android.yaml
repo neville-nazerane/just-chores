@@ -61,7 +61,7 @@ stages:
                       }
                   }
               }
-              "@ | Out-File -FilePath "$(projectPath)\MauiProgram.configs.cs"
+              "@ | Out-File -FilePath "MauiProgram.configs.cs"
             displayName: Setting up configs
             workingDirectory: $(projectPath)
 
