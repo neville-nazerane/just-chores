@@ -1,6 +1,6 @@
 
 pool:
-  vmImage: macOS-latest
+  vmImage: windows-latest
   
 pr: none
 
@@ -49,19 +49,22 @@ stages:
               versionName: $(Build.BuildNumber)
               printFile: true
 
-          - script: |
-              cat <<EOL > MauiProgram.configs.cs
-              namespace $(projectName);
-              public static partial class MauiProgram
-                {
-                  static MauiProgram()
+          - powershell: |
+              @"
+              namespace $(projectName)
+              {
+                  public static partial class MauiProgram
                   {
-                      appcenterSecret = "$(appcenterSecret)";
+                      static MauiProgram()
+                      {
+                          appcenterSecret = "$(appcenterSecret)";
+                      }
                   }
-                }
-              EOL
+              }
+              "@ | Out-File -FilePath "$(projectPath)\MauiProgram.configs.cs"
             displayName: Setting up configs
             workingDirectory: $(projectPath)
+
 
           - script: dotnet publish -c release -f net8.0-android -o $(compileLocation)
             displayName: Compile MAUI android
