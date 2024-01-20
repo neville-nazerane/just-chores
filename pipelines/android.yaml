@@ -99,9 +99,10 @@ stages:
 
           - download: current
 
-          - script: |
-              mapfile notes < $(Pipeline.Workspace)/text/ReleaseNotes.txt
-              echo "##vso[task.setvariable variable=releaseNotes;]$notes"
+          - powershell: |
+              $notes = Get-Content "$(Pipeline.Workspace)/text/ReleaseNotes.txt" -Raw
+              echo "##vso[task.setvariable variable=releaseNotes]$notes"
+            displayName: 'Set Release Notes Variable'
 
           - task: AppCenterDistribute@3
             inputs:
