@@ -1,6 +1,6 @@
 
 pool:
-  vmImage: 'ubuntu-windows'
+  vmImage: 'windows-latest'
   
 pr: none
 
