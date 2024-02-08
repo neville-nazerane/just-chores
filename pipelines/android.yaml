@@ -48,19 +48,17 @@ stages:
               versionName: $(Build.BuildNumber)
               printFile: true
 
-          - powershell: |
-              @"
-              namespace $(projectName)
-              {
-                  public static partial class MauiProgram
+          - script: |
+              cat <<EOL > MauiProgram.configs.cs
+              namespace $(projectName);
+              public static partial class MauiProgram
+                {
+                  static MauiProgram()
                   {
-                      static MauiProgram()
-                      {
-                          appcenterSecret = "$(appcenterSecret)";
-                      }
+                      appcenterSecret = "$(appcenterSecret)";
                   }
-              }
-              "@ | Out-File -FilePath "MauiProgram.configs.cs"
+                }
+              EOL
             displayName: Setting up configs
             workingDirectory: $(projectPath)
 
