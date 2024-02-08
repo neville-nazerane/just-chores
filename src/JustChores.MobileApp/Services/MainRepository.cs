@@ -37,7 +37,7 @@ namespace JustChores.MobileApp.Services
             using var db = GetConnection();
             return db.GetCollection<Chore>()
                                 .FindAll()
-                                .OrderByDescending(c => c.DueOn)
+                                .OrderBy(c => c.DueOn)
                                 .ToArray();
         }
 
