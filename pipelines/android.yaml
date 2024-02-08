@@ -1,6 +1,5 @@
 
-pool:
-  vmImage: windows-latest
+pool: hosted-linux
   
 pr: none
 
