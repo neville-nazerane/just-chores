@@ -63,7 +63,7 @@ stages:
             workingDirectory: $(projectPath)
 
 
-          - script: dotnet publish -c release -f net8.0-android -o $(compileLocation)
+          - script: dotnet publish -c release -f net8.0-android -o $(compileLocation) /p:PublishTrimmed=false /p:RunAOTCompilation=false
             displayName: Compile MAUI android
             workingDirectory: $(projectPath)
           
