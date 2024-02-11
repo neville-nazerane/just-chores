@@ -98,7 +98,7 @@ stages:
 
           - download: current
 
-          - script: |
+          - powershell: |
               $notes = Get-Content "$(Pipeline.Workspace)/text/ReleaseNotes.txt" -Raw
               echo "##vso[task.setvariable variable=releaseNotes]$notes"
             displayName: 'Set Release Notes Variable'
