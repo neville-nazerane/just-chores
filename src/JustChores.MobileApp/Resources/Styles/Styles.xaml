@@ -22,6 +22,20 @@
                 Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkBackground}}" />
     </Style>
 
+    <Style TargetType="VisualElement"
+           ApplyToDerivedTypes="True"
+           Class="dangerBackground" >
+        <Setter Property="BackgroundColor" 
+                Value="{AppThemeBinding Light={StaticResource DangerBackgroud}, Dark={StaticResource DangerBackgroudDark}}" />
+    </Style>
+    
+    <Style TargetType="VisualElement"
+           ApplyToDerivedTypes="True"
+           Class="secondaryBackground" >
+        <Setter Property="BackgroundColor" 
+                Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
+    </Style>
+
     <Style TargetType="Border" 
            ApplyToDerivedTypes="True"
            Class="cardShadow">

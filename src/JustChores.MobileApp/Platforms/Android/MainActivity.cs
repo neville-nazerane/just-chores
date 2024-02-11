@@ -34,15 +34,11 @@ namespace JustChores.MobileApp
             if (data != null)
             {
                 // Obtain a stream to the file data
-                using (var stream = ContentResolver.OpenInputStream(data))
-                {
+                using var stream = ContentResolver.OpenInputStream(data);
 
-                    var repo = MauiProgram.ServiceProvider.GetService<MainRepository>();
+                var repo = MauiProgram.ServiceProvider.GetService<MainRepository>();
 
-                    await repo.RestoreAsync(stream);
-                    // Now you have a stream of the file's data which you can read from.
-                    // ...
-                }
+                await repo.RestoreAsync(stream);
             }
         }
 
