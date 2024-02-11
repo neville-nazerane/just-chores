@@ -38,7 +38,7 @@
                      Command="{Binding RefreshCommand}"
                      IsRefreshing="{Binding IsRefreshing}">
             <CollectionView ItemsSource="{Binding Chores}"
-                        Header="{Binding .}" >
+                            Header="{Binding .}" >
 
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
@@ -138,8 +138,8 @@
 
                                         <Border Grid.Column="2"
                                                 IsVisible="{Binding DueOn, Converter={StaticResource due}, ConverterParameter='due'}"
-                                                BackgroundColor="{StaticResource ButtonBackground}"
-                                                Padding="15, 5"
+                                                class="secondaryBackground"
+                                                Padding="18, 5"
                                                 StrokeShape="RoundRectangle 40">
                                             <Label Text="Due" 
                                                     TextColor="{StaticResource SelectionLightBackground}"
@@ -149,7 +149,7 @@
 
                                         <Border Grid.Column="2"
                                                 IsVisible="{Binding DueOn, Converter={StaticResource due}, ConverterParameter='overdue'}"
-                                                BackgroundColor="{StaticResource DangerBackgroud}"
+                                                class="dangerBackground"
                                                 Padding="15, 5"
                                                 StrokeShape="RoundRectangle 40">
                                             <Label Text="Overdue"
@@ -175,7 +175,7 @@
                                     <ImageButton Source="delete.svg"
                                                  Padding="3, 3"
                                                  CornerRadius="4"
-                                                 BackgroundColor="{StaticResource DangerBackgroud}"
+                                                 class="dangerBackground"
                                                  Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type vm:ListChoresViewModel}}}"
                                                  CommandParameter="{Binding Id}"
                                                  Grid.Row="3" 
