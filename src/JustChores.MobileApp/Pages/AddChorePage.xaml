@@ -206,20 +206,23 @@
             <!--Summary-->
             <Border Grid.Row="6"
                     StrokeShape="RoundRectangle 8"
-                    Padding="5"
+                    Padding="15, 10, 25, 10"
+                    Margin="0, 15, 0, 0"
                     BackgroundColor="{AppThemeBinding Light={StaticResource SummaryBackgroundLight}, Dark={StaticResource SummaryBackgroundDark}}" >
 
-                <Grid ColumnDefinitions="24, *"
-                      ColumnSpacing="10"
-                      RowDefinitions="24, *">
+                <Grid ColumnDefinitions="28, *"
+                      RowDefinitions="28, *"
+                      ColumnSpacing="10" >
 
                     <Image Source="list" />
 
                     <Label Grid.Column="1"
                            Grid.RowSpan="2"
-                           MaxLines="3"
+                           VerticalTextAlignment="Center"
+                           VerticalOptions="CenterAndExpand"
                            LineBreakMode="WordWrap"
-                           Text="{Binding Summary, StringFormat='This will be {0}'}"
+                           FontSize="Medium"
+                           Text="{Binding Summary}"
                            TextColor="{StaticResource Primary}" />
                 </Grid>
             </Border>

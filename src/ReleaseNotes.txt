@@ -1,2 +1,3 @@
 - Aligned add button
-- fixed up settings layout
+- Fixed up settings layout
+- Fixed layout of summary on editing chore
