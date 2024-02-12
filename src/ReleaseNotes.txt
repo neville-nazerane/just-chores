@@ -1,3 +1,4 @@
 - Aligned add button
 - Fixed up settings layout
 - Fixed layout of summary on editing chore
+- Changed text on completion popup to increase click area
