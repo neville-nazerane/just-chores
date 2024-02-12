@@ -83,12 +83,14 @@ namespace JustChores.MobileApp.ViewModels
                 Model = new()
                 {
                     FrequencyType = FrequencyType.Day,
+                    Frequency = 1
                 };
                 Frequency = 1;
                 FrequencyType = FrequencyType.Day;
                 DueOn = DateTime.Now;
             }
             IsInitialized = true;
+            UpdateSummary();
         }
 
         [RelayCommand]
@@ -154,12 +156,8 @@ namespace JustChores.MobileApp.ViewModels
 
         partial void OnFrequencyChanged(int oldValue, int newValue)
         {
-            if (newValue < 1)
-            {
-                Frequency = 1;
-                return;
-            }
-            Model.Frequency = newValue;
+            if (newValue < 1) Frequency = 1;
+            Model.Frequency = Frequency;
             UpdateSummary();
         }
 
@@ -172,7 +170,10 @@ namespace JustChores.MobileApp.ViewModels
 
         private void UpdateSummary()
         {
-            Summary = Model.GetSummary();
+            var summary = $"This will be {Model.GetSummary()}";
+            if (ChoreId is null)
+                summary += $" starting {Model.DueOn:MMM d, yyyy}";
+            Summary = summary;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
