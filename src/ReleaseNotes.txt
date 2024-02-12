@@ -1,1 +1,2 @@
 - Aligned add button
+- fixed up settings layout

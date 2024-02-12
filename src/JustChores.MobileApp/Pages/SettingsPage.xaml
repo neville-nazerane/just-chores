@@ -41,7 +41,7 @@
 
             <Grid.RowDefinitions>
                 <!--Theme Height-->
-                <RowDefinition Height="35" />
+                <RowDefinition Height="40" />
 
                 <!--Diagonistics-->
                 <RowDefinition Height="50" />
@@ -53,13 +53,15 @@
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
-            <Grid ColumnDefinitions="*, auto">
+            <Grid ColumnDefinitions="*, auto"
+                  Padding="10, 0, 0, 0" >
 
                 <Label Text="Theme"
-                       class="centered"/>
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Start" />
 
                 <Grid Grid.Column="1" 
-                      ColumnSpacing="2"
+                      ColumnSpacing="10"
                       ColumnDefinitions="*, *, *">
 
                     <comp:ThemeButtonComponent Grid.Column="0"
