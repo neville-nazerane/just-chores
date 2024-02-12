@@ -44,7 +44,7 @@
         </Grid>
 
         <Grid Grid.Row="1" 
-              Margin="20, 30, 20, 0"
+              Margin="20, 30, 20, 20"
               RowSpacing="20">
             <Grid.RowDefinitions>
 
@@ -226,8 +226,8 @@
 
 
             <Button Grid.Row="8" 
-                Text="{Binding SubmitText}"
-                Command="{Binding SubmitCommand}" />
+                    Text="{Binding SubmitText}"
+                    Command="{Binding SubmitCommand}" />
 
         </Grid>
     </Grid>

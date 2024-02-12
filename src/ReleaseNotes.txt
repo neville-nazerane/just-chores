@@ -1,1 +1,1 @@
-- Chores page: dark theme fixed
+- Aligned add button
