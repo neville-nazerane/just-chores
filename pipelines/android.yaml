@@ -21,7 +21,8 @@ variables:
   projectPath: src/JustChores.MobileApp
   projectName: JustChores.MobileApp
   apkName: com.justchores.app-Signed.apk
-  keyStoreFile: internet.jks
+  keyStoreFile: justChores.keystore
+  keyAlias: justChores
   appCenterSlug: live.neville-live.com/Just-Chores
   appCenterGroup: 2e886b21-d6c9-46e7-bfde-b9ed1af77ae3
   artifactName: androidApp
@@ -75,7 +76,7 @@ stages:
               apkFiles: $(compileLocation)/$(apkName)
               apksignerKeystoreFile: $(keyStoreFile)
               apksignerKeystorePassword: $(keystore.password)
-              apksignerKeystoreAlias: key0
+              apksignerKeystoreAlias: $(keyAlias)
               apksignerKeyPassword: $(key.password)
 
 
