@@ -25,6 +25,14 @@
                     Value="Large" />
         </Style>
 
+        <Style TargetType="Label"
+               Class="frequencyBtn">
+            <Setter Property="FontAttributes"
+                    Value="Bold" />
+            <Setter Property="FontSize"
+                    Value="Large" />
+        </Style>
+
         <x:Double x:Key="labelHeight">40</x:Double>
         
         <x:Double x:Key="inputHeight">50</x:Double>
@@ -147,11 +155,9 @@
                         ext:SelectionState.SelfKey="Frequency"
                         ext:SelectionState.SelectedKey="{Binding SelectedInputKey}"
                         class="inputShadow">
-                    <Grid ColumnDefinitions="20, * , 20">
+                    <Grid ColumnDefinitions="40, * , 40">
                         <Label Text="-" 
-                               FontAttributes="Bold"
-                               FontSize="Large"
-                               class="centered" >
+                               class="centered,frequencyBtn" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding DecreaseFrequencyCommand}" />
                             </Label.GestureRecognizers>
@@ -166,10 +172,7 @@
                                VerticalTextAlignment="Center" />-->
 
                         <Label Text="+"
-                               FontAttributes="Bold"
-                               FontSize="Large"
-                               class="centered" 
-                               LineBreakMode="WordWrap"
+                               class="centered,frequencyBtn" 
                                Grid.Column="2" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding IncreaseFrequencyCommand}" />
