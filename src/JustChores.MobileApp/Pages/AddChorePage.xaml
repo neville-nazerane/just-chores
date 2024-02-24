@@ -147,25 +147,37 @@
                         ext:SelectionState.SelfKey="Frequency"
                         ext:SelectionState.SelectedKey="{Binding SelectedInputKey}"
                         class="inputShadow">
-                    <Grid ColumnDefinitions="20, * , 20">
-                        <Label Text="-" 
+                    <Grid ColumnDefinitions="40, * , 40">
+                        <!--<Label Text="-" 
                                FontAttributes="Bold"
                                FontSize="Large"
                                class="centered" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding DecreaseFrequencyCommand}" />
                             </Label.GestureRecognizers>
-                        </Label>
+                        </Label>-->
+
+                        <Grid Padding="12">
+                            <comp:Minus />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding DecreaseFrequencyCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
 
                         <Label Grid.Column="1"
                                Text="{Binding Frequency}"
                                class="centered" />
-                        <!--<Entry Grid.Column="1" 
-                               Text="{Binding Frequency}"
-                               HorizontalTextAlignment="Center"
-                               VerticalTextAlignment="Center" />-->
 
-                        <Label Text="+"
+
+                        <Grid Grid.Column="2"
+                              Padding="10, 14" >
+                            <comp:Plus />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IncreaseFrequencyCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+
+                        <!--<Label Text="+"
                                FontAttributes="Bold"
                                FontSize="Large"
                                class="centered" 
@@ -174,7 +186,7 @@
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding IncreaseFrequencyCommand}" />
                             </Label.GestureRecognizers>
-                        </Label>
+                        </Label>-->
                     </Grid>
                 </Border>
             </Grid>

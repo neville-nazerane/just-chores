@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JustChores.MobileApp.Components.Plus">
+
+    <Line x:Name="vertical"
+          StrokeThickness="1"
+          Stroke="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    <Line x:Name="horizontal"
+          StrokeThickness="1"
+          Stroke="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+    
+</Grid>
