@@ -147,25 +147,26 @@
                         ext:SelectionState.SelfKey="Frequency"
                         ext:SelectionState.SelectedKey="{Binding SelectedInputKey}"
                         class="inputShadow">
-                    <Grid ColumnDefinitions="20, * , 20">
-                        <Label Text="-" 
+                    <Grid ColumnDefinitions="40, * , 40">
+                        <!--<Label Text="-" 
                                FontAttributes="Bold"
                                FontSize="Large"
                                class="centered" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding DecreaseFrequencyCommand}" />
                             </Label.GestureRecognizers>
-                        </Label>
+                        </Label>-->
+
+                        <comp:Minus BackgroundColor="Blue" />
 
                         <Label Grid.Column="1"
                                Text="{Binding Frequency}"
                                class="centered" />
-                        <!--<Entry Grid.Column="1" 
-                               Text="{Binding Frequency}"
-                               HorizontalTextAlignment="Center"
-                               VerticalTextAlignment="Center" />-->
 
-                        <Label Text="+"
+
+                        <comp:Plus BackgroundColor="Green" Grid.Column="2" />
+                        
+                        <!--<Label Text="+"
                                FontAttributes="Bold"
                                FontSize="Large"
                                class="centered" 
@@ -174,7 +175,7 @@
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding IncreaseFrequencyCommand}" />
                             </Label.GestureRecognizers>
-                        </Label>
+                        </Label>-->
                     </Grid>
                 </Border>
             </Grid>
