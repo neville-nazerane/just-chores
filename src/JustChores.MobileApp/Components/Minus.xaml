@@ -4,7 +4,7 @@
              x:Class="JustChores.MobileApp.Components.Minus">
 
     <Line x:Name="line"
-          StrokeThickness="2"
+          StrokeThickness="1"
           Stroke="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
 
 </Grid>
