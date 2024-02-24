@@ -4,8 +4,10 @@
              x:Class="JustChores.MobileApp.Components.Plus">
 
     <Line x:Name="vertical"
-          Fill="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+          StrokeThickness="2"
+          Stroke="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
     <Line x:Name="horizontal"
-          Fill="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+          StrokeThickness="2"
+          Stroke="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
     
 </Grid>

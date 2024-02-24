@@ -157,15 +157,26 @@
                             </Label.GestureRecognizers>
                         </Label>-->
 
-                        <comp:Minus BackgroundColor="Blue" />
+                        <Grid Padding="12">
+                            <comp:Minus />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding DecreaseFrequencyCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
 
                         <Label Grid.Column="1"
                                Text="{Binding Frequency}"
                                class="centered" />
 
 
-                        <comp:Plus BackgroundColor="Green" Grid.Column="2" />
-                        
+                        <Grid Grid.Column="2"
+                              Padding="10, 14" >
+                            <comp:Plus />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IncreaseFrequencyCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+
                         <!--<Label Text="+"
                                FontAttributes="Bold"
                                FontSize="Large"
