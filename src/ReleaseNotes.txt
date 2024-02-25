@@ -1,2 +1,2 @@
-- aligned "theme" label
+- aligned 'theme' label
 - aligned 'completed on label'
