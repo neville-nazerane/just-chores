@@ -47,7 +47,17 @@
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.EmptyView>
-                    <Image Source="{AppThemeBinding Light='empty_light', Dark='empty_dark'}" />
+                    <Grid RowDefinitions="30, *"
+                          Margin="20" >
+
+                        <Label Text="You have no chores yet"
+                               class="centered"
+                               FontAttributes="Bold" />
+
+                        <Image Grid.Row="1"
+                               Source="{AppThemeBinding Light='empty_light', Dark='empty_dark'}" />
+
+                    </Grid>
                 </CollectionView.EmptyView>
 
                 <CollectionView.HeaderTemplate>
