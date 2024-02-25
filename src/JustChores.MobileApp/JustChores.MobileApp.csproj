@@ -60,14 +60,14 @@
 		<MauiImage Update="Resources\Images\delete.svg" BaseSize="14,15.77" />
 		<MauiImage Update="Resources\Images\privacy.svg" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\diagnostic.svg" BaseSize="28,28" />
-    
+
 		<MauiImage Update="Resources\Images\next_arrow.svg" BaseSize="14.51,7.64" />
 		<MauiImage Update="Resources\Images\next_arrow_light.svg" BaseSize="14.51,7.64" />
-    
+
 		<MauiImage Update="Resources\Images\back.svg" BaseSize="12.1,21.72" />
 		<MauiImage Update="Resources\Images\back_light.svg" BaseSize="12.1,21.72" />
 
-    <MauiImage Update="Resources\Images\auto_sun_dark.svg" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\auto_sun_dark.svg" BaseSize="20,20" />
 		<MauiImage Update="Resources\Images\auto_sun_light.svg" BaseSize="20,20" />
 		<MauiImage Update="Resources\Images\auto_sun_selected.svg" BaseSize="20,20" />
 		<MauiImage Update="Resources\Images\sun_dark.svg" BaseSize="20,20" />
@@ -76,8 +76,11 @@
 		<MauiImage Update="Resources\Images\moon_dark.svg" BaseSize="20,20" />
 		<MauiImage Update="Resources\Images\moon_light.svg" BaseSize="20,20" />
 		<MauiImage Update="Resources\Images\moon_selected.svg" BaseSize="20,20" />
-    
+
 		<MauiImage Update="Resources\Images\list.svg" BaseSize="24,24" />
+
+		<MauiImage Update="Resources\Images\empty_dark.png" BaseSize="200,200" />
+		<MauiImage Update="Resources\Images\empty_light.png" BaseSize="200,200" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -91,43 +94,43 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Components\DatePickerPopup.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\FrequencySelectionComponent.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Minus.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Plus.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\ThemeButtonComponent.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\AddChorePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\BorderPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\ListChoresPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\SettingsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Components\DatePickerPopup.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\FrequencySelectionComponent.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Minus.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Plus.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\ThemeButtonComponent.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\AddChorePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\BorderPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\ListChoresPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\SettingsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-	  <Exec Command="dotnet run --project ../JustChores.CodeGenerator" />
+		<Exec Command="dotnet run --project ../JustChores.CodeGenerator" />
 	</Target>
 
 
 	<ItemGroup>
-	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
+		<PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
 	</ItemGroup>
 
 </Project>
