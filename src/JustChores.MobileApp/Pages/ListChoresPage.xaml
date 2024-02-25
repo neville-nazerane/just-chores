@@ -46,11 +46,9 @@
                             Span="{OnIdiom Phone=1, Tablet=2}" />
                 </CollectionView.ItemsLayout>
 
-                <CollectionView.EmptyViewTemplate>
-                    <DataTemplate>
-                        <Label Text="You have no chores for you" />
-                    </DataTemplate>
-                </CollectionView.EmptyViewTemplate>
+                <CollectionView.EmptyView>
+                    <Image Source="{AppThemeBinding Light='empty_light', Dark='empty_dark'}" />
+                </CollectionView.EmptyView>
 
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
@@ -113,7 +111,7 @@
                                 class="cardShadow">
                                 <Border.Shadow>
                                     <Shadow Radius="30"
-                                            Opacity=".1"/>   
+                                            Opacity=".1"/>
                                 </Border.Shadow>
                                 <Grid Padding="12, 15"
                                       RowSpacing="12"

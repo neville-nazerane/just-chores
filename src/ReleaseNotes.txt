@@ -1,2 +1,3 @@
 - aligned 'theme' label
 - aligned 'completed on label'
+- empty image
