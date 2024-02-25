@@ -32,11 +32,11 @@
             <VerticalStackLayout Grid.Row="1"
                                  Margin="0, 50, 0, 40"
                                  Grid.ColumnSpan="2">
-                
+
                 <Label Text="{Binding DateLabel}"
-                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="CenterAndExpand"
                        FontSize="Small" />
-                
+
                 <DatePicker HorizontalOptions="Center"
                             FontAttributes="Bold"
                             Date="{Binding Date}" />
@@ -50,7 +50,7 @@
                     BackgroundColor="Transparent"
                     FontAttributes="Bold"
                     Clicked="CanceledClicked"/>
-            
+
             <Button Text="Confirm"
                     Grid.Row="2"
                     Grid.Column="1"
@@ -59,34 +59,5 @@
 
         </Grid>
         
-        <!--<Grid RowDefinitions="30, *, 50, 40"
-          ColumnDefinitions="*, *" >
-
-            <Label Text="{Binding Message}"
-                   FontAttributes="Bold"
-                   VerticalOptions="Center" 
-                   HorizontalOptions="Center"
-                   Grid.ColumnSpan="2" />
-
-            <Grid Grid.Row="2"
-              Grid.ColumnSpan="2"
-              ColumnDefinitions="auto, *" >
-                <Label Text="{Binding DateLabel}"
-                   FontSize="Small" />
-                <DatePicker Date="{Binding Date}"
-                        Grid.Column="1" />
-            </Grid>
-
-            <Button Text="Ok"
-                Grid.Row="3"
-                Clicked="OkClicked" />
-
-
-            <Button Text="Cancel"
-                Grid.Row="3"
-                Grid.Column="1"
-                Clicked="CanceledClicked"/>
-
-        </Grid>-->
     </Border>
 </toolkit:Popup>
