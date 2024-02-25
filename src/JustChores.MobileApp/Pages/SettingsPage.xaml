@@ -54,14 +54,15 @@
             </Grid.RowDefinitions>
 
             <Grid ColumnDefinitions="*, auto"
-                  Padding="10, 0, 0, 0" >
+                  Padding="20, 0, 0, 0" >
 
                 <Label Text="Theme"
                        FontAttributes="Bold"
-                       HorizontalTextAlignment="Start" />
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center" />
 
                 <Grid Grid.Column="1" 
-                      ColumnSpacing="10"
+                      ColumnSpacing="5"
                       ColumnDefinitions="*, *, *">
 
                     <comp:ThemeButtonComponent Grid.Column="0"

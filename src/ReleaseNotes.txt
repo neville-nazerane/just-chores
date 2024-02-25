@@ -1,1 +1,2 @@
-- Fixed add buttons layout
+- aligned 'theme' label
+- aligned 'completed on label'
